@@ -12,7 +12,7 @@
     "rimraf": "^2.5.4"
   },
   "scripts": {
-    "build": "concurrently \"cd client && REACT_APP_NODE_ENV=production REACT_APP_PORT=5000 yarn build\" \"cd server && NODE_ENV=production PORT=5000 yarn build\"",
+    "build": "concurrently \"cd client && REACT_APP_NODE_ENV=production REACT_APP_PORT=5000 yarn build\" \"cd server && yarn build\"",
     "clean": "concurrently \"rimraf node_modules\" \"cd client && rimraf node_modules build\" \"cd server && rimraf node_modules build\"",
     "heroku-postbuild": "yarn build",
     "install": "(cd client && yarn) && (cd server && yarn)",
