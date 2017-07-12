@@ -8,11 +8,16 @@ import {
   createNetworkInterface,
 } from 'react-apollo';
 
-const port = process.env.REACT_APP_PORT || 5000;
-console.log('port', port);
+console.log('process.env.REACT_APP_NODE_ENV', process.env.REACT_APP_NODE_ENV);
+console.log('process.env.REACT_APP_PORT', process.env.REACT_APP_PORT);
+const isNotProduction = process.env.REACT_APP_NODE_ENV !== 'production';
+const clientPort = isNotProduction ? 3000 : (process.env.REACT_APP_PORT || 5000);
+const serverPort = isNotProduction ? 3001 : (process.env.REACT_APP_PORT || 5000);
+console.log('clientPort', clientPort);
+console.log('serverPort', serverPort);
 
 const networkInterface = createNetworkInterface({
-  uri: `http://localhost:${port}/graphql`,
+  uri: `http://localhost:${serverPort}/graphql`,
 });
 
 const client = new ApolloClient({
@@ -33,6 +38,48 @@ class App extends Component {
 }
 
 export default App;
+
+/*
+import React, { Component } from 'react';
+import './App.css';
+import ChannelsListWithData from './components/ChannelsListWithData';
+
+import {
+  ApolloClient,
+  ApolloProvider,
+  createNetworkInterface,
+} from 'react-apollo';
+
+const isNotProduction = process.env.REACT_APP_NODE_ENV !== 'production';
+const serverPort = isNotProduction ? 3001 : (process.env.REACT_APP_PORT || 5000);
+console.log('process.env.REACT_APP_PORT', process.env.REACT_APP_PORT);
+console.log('serverPort', serverPort);
+console.log('process.env.REACT_APP_NODE_ENV', process.env.REACT_APP_NODE_ENV);
+
+const networkInterface = createNetworkInterface({
+  uri: `http://localhost:${serverPort}/graphql`,
+});
+
+const client = new ApolloClient({
+  networkInterface,
+});
+
+class App extends Component {
+  render() {
+    return (
+      <ApolloProvider client={client}>
+        <div className="App">
+          <div className="navbar">React + GraphQL Tutorial</div>
+          <ChannelsListWithData />
+        </div>
+      </ApolloProvider>
+    );
+  }
+}
+
+export default App;
+*/
+
 
 /* import React, { Component } from 'react';
 import logo from './logo.svg';

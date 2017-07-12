@@ -7,9 +7,21 @@ import schema from './src/schema';
 
 const server = express();
 
+console.log('process.env.NODE_ENV', process.env.NODE_ENV);
+console.log('process.env.PORT', process.env.PORT);
+const isNotProduction = process.env.NODE_ENV !== 'production';
+const clientPort = isNotProduction ? 3000 : (process.env.PORT || 5000);
+const serverPort = isNotProduction ? 3001 : (process.env.PORT || 5000);
+console.log('clientPort', clientPort);
+console.log('serverPort', serverPort);
+
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: false }));
-server.use('*', cors({ origin: 'http://localhost:3000' }));
+
+if (isNotProduction) {
+  server.use('*', cors({ origin: `http://localhost:${clientPort}` }));
+}
+
 
 const router = express.Router()
 
@@ -38,7 +50,7 @@ server.use(router)
 
 server.use('/*', staticFiles)
 
-server.set('port', (process.env.PORT || 3001))
+server.set('port', serverPort)
 server.listen(server.get('port'), () => {
   console.log(`Listening on ${server.get('port')}`)
 })

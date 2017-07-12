@@ -4,7 +4,7 @@
 3. yarn install
 4. run the app locally: yarn start
 5. yarn build
-6. run the app locally in production mode: heroku local
+6. test the app locally in production mode as it was running on heroku: NODE_ENV=production heroku local
 7. heroku login
 8. heroku create my-app-name
 9. heroku buildpacks:set https://github.com/heroku/heroku-buildpack-nodejs#yarn
