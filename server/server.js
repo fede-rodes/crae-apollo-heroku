@@ -1,16 +1,19 @@
-import bodyParser from 'body-parser'
-import express from 'express'
-import path from 'path'
-const app = express()
+import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
+import bodyParser from 'body-parser';
+import express from 'express';
+import path from 'path';
+import schema from './src/schema';
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: false}))
+const server = express()
+
+server.use(bodyParser.json())
+server.use(bodyParser.urlencoded({extended: false}))
 
 const router = express.Router()
 
 const staticFiles = express.static(path.join(__dirname, '../../client/build'))
 
-app.use(staticFiles)
+server.use(staticFiles)
 
 router.get('/cities', (req, res) => {
   const cities = [
@@ -19,13 +22,21 @@ router.get('/cities', (req, res) => {
     {name: 'Chicago',       population: 2695598}
   ]
   res.json(cities)
-})
+});
 
-app.use(router)
+server.use('/graphql', bodyParser.json(), graphqlExpress({
+  schema
+}));
 
-app.use('/*', staticFiles)
+server.use('/graphiql', graphiqlExpress({
+  endpointURL: '/graphql'
+}));
 
-app.set('port', (process.env.PORT || 3001))
-app.listen(app.get('port'), () => {
-  console.log(`Listening on ${app.get('port')}`)
+server.use(router)
+
+server.use('/*', staticFiles)
+
+server.set('port', (process.env.PORT || 3001))
+server.listen(server.get('port'), () => {
+  console.log(`Listening on ${server.get('port')}`)
 })
