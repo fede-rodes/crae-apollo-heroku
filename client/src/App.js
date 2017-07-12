@@ -11,18 +11,13 @@ import {
 console.log('process.env.REACT_APP_NODE_ENV', process.env.REACT_APP_NODE_ENV);
 console.log('process.env.REACT_APP_PORT', process.env.REACT_APP_PORT);
 const isNotProduction = process.env.REACT_APP_NODE_ENV !== 'production';
-/* const clientPort = isNotProduction ? 3000 : (process.env.REACT_APP_PORT || 5000);
-const serverPort = isNotProduction ? 3001 : (process.env.REACT_APP_PORT || 5000);
-console.log('clientPort', clientPort);
-console.log('serverPort', serverPort); */
 
-const networkInterface = createNetworkInterface({
-  uri: isNotProduction ? 'http://localhost:3001/graphql' : 'https://fefon-2.herokuapp.com/graphql',
-});
+const uri = isNotProduction ? 'http://localhost:3001/graphql' : 'https://fefon-2.herokuapp.com/graphql';
+const networkInterface = createNetworkInterface({ uri });
 
-const client = new ApolloClient({
-  networkInterface,
-});
+// TODO: need config to pass domain name as an argument for deployed app
+
+const client = new ApolloClient({ networkInterface });
 
 class App extends Component {
   render() {
