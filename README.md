@@ -20,4 +20,6 @@ Every time you make a change to the code, run:
 5. git commit -m "something new"
 6. git push heroku master
 
-SOURCE: https://originmaster.com/running-create-react-app-and-express-crae-on-heroku-c39a39fe7851
+SOURCE:
+1. https://originmaster.com/running-create-react-app-and-express-crae-on-heroku-c39a39fe7851
+2. https://dev-blog.apollodata.com/full-stack-react-graphql-tutorial-582ac8d24e3b
