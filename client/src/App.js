@@ -17,7 +17,7 @@ console.log('clientPort', clientPort);
 console.log('serverPort', serverPort); */
 
 const networkInterface = createNetworkInterface({
-  uri: isNotProduction ? 'http://localhost:3001/graphql' : '/graphql',
+  uri: isNotProduction ? 'http://localhost:3001/graphql' : 'https://fefon-2.herokuapp.com/graphql',
 });
 
 const client = new ApolloClient({
