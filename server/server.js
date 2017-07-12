@@ -2,12 +2,14 @@ import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import bodyParser from 'body-parser';
 import express from 'express';
 import path from 'path';
+import cors from 'cors';
 import schema from './src/schema';
 
-const server = express()
+const server = express();
 
-server.use(bodyParser.json())
-server.use(bodyParser.urlencoded({extended: false}))
+server.use(bodyParser.json());
+server.use(bodyParser.urlencoded({ extended: false }));
+server.use('*', cors({ origin: 'http://localhost:3000' }));
 
 const router = express.Router()
 
