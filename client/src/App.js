@@ -12,7 +12,7 @@ console.log('process.env.REACT_APP_NODE_ENV', process.env.REACT_APP_NODE_ENV);
 console.log('process.env.REACT_APP_PORT', process.env.REACT_APP_PORT);
 const isNotProduction = process.env.REACT_APP_NODE_ENV !== 'production';
 
-const uri = isNotProduction ? 'http://localhost:3001/graphql' : 'https://fefon-2.herokuapp.com/graphql';
+const uri = isNotProduction ? 'http://localhost:3001/graphql' : 'https://crae-app.herokuapp.com/graphql';
 const networkInterface = createNetworkInterface({ uri });
 
 // TODO: need config to pass domain name as an argument for deployed app
