@@ -9,19 +9,13 @@ import {
 import './App.css';
 import ChannelsListWithData from './components/ChannelsListWithData';
 
-console.log('process.env.REACT_APP_NODE_ENV', process.env.REACT_APP_NODE_ENV);
+console.log('process.env.NODE_ENV', process.env.NODE_ENV);
 console.log('process.env.REACT_APP_GRAPHQL_URI', process.env.REACT_APP_GRAPHQL_URI);
-const isNotProduction = process.env.REACT_APP_NODE_ENV !== 'production';
+const isNotProduction = process.env.NODE_ENV !== 'production';
 
-// const uri = isNotProduction ? 'http://localhost:3001/graphql' : 'https://crae-app.herokuapp.com/graphql';
 const uri = isNotProduction ? 'http://localhost:3001/graphql' : process.env.REACT_APP_GRAPHQL_URI;
-// console.log('GRAPTHQL_URI', uri);
-// const uri = process.env.REACT_APP_GRAPTHQL_URI || 'http://localhost:3001/graphql';
 console.log('GRAPHQL_URI', uri);
 const networkInterface = createNetworkInterface({ uri });
-
-// TODO: need config to pass domain name as an argument for deployed app
-
 const client = new ApolloClient({ networkInterface });
 
 class App extends Component {
