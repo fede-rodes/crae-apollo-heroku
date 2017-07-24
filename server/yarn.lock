@@ -24,8 +24,8 @@
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-1.3.1.tgz#2cf42972d0931c1060c7d5fa6627fce6bd876f2f"
 
 "@types/node@*":
-  version "8.0.14"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.14.tgz#4a19dc6bb61d16c01cbadc7b30ac23518fff176b"
+  version "8.0.15"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.15.tgz#8f23f8a4642ced357704d048010876fc0c7f179a"
 
 "@types/serve-static@*":
   version "1.7.31"
@@ -73,19 +73,19 @@ apollo-server-core@^1.0.2:
   optionalDependencies:
     "@types/graphql" "^0.9.0"
 
-apollo-server-express@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/apollo-server-express/-/apollo-server-express-1.0.2.tgz#99a85d9145453bd6980239f8ab21aa1255698b2a"
+apollo-server-express@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/apollo-server-express/-/apollo-server-express-1.0.4.tgz#fad6045493d818b09ad4610faa389768386a68b6"
   dependencies:
     apollo-server-core "^1.0.2"
-    apollo-server-module-graphiql "^1.0.2"
+    apollo-server-module-graphiql "^1.0.4"
   optionalDependencies:
     "@types/express" "^4.0.35"
     "@types/graphql" "^0.9.1"
 
-apollo-server-module-graphiql@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/apollo-server-module-graphiql/-/apollo-server-module-graphiql-1.0.2.tgz#cf5746821a96415a36cb418239bb66c7c5d0ff32"
+apollo-server-module-graphiql@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/apollo-server-module-graphiql/-/apollo-server-module-graphiql-1.0.4.tgz#d6db21a8c60f052649124da5cde1d88dab702319"
 
 aproba@^1.0.3:
   version "1.1.2"
@@ -797,8 +797,8 @@ bcrypt-pbkdf@^1.0.0:
     tweetnacl "^0.14.3"
 
 binary-extensions@^1.0.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-1.8.0.tgz#48ec8d16df4377eae5fa5884682480af4d95c774"
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-1.9.0.tgz#66506c16ce6f4d6928a5b3cd6a33ca41e941e37b"
 
 block-stream@*:
   version "0.0.9"
@@ -1290,10 +1290,10 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.4:
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
 
 graphql-server-express@^1.0.0:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/graphql-server-express/-/graphql-server-express-1.0.2.tgz#6c18ac6f9997ad121018de306286a3d712ae6726"
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/graphql-server-express/-/graphql-server-express-1.0.4.tgz#09acd722c8be2a240262d40b43bcb2675ba1bad5"
   dependencies:
-    apollo-server-express "^1.0.2"
+    apollo-server-express "^1.0.4"
 
 graphql-tools@^1.1.0:
   version "1.1.0"
@@ -2118,8 +2118,8 @@ semver-diff@^2.0.0:
     semver "^5.0.3"
 
 semver@^5.0.3, semver@^5.3.0:
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/semver/-/semver-5.3.0.tgz#9b2ce5d3de02d17c6012ad326aa6b4d0cf54f94f"
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-5.4.0.tgz#4b753f9bc8dc4c0b30cf460124ed17ae65444ae8"
 
 send@0.15.3:
   version "0.15.3"
