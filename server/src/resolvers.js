@@ -8,9 +8,7 @@ const channels = [{
 
 const resolvers = {
   Query: {
-    channels: () => {
-      return channels;
-    },
+    channels: () => channels,
   },
 };
 
