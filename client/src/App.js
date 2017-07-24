@@ -1,4 +1,41 @@
 import React, { Component } from 'react';
+
+import {
+  ApolloClient,
+  ApolloProvider,
+  createNetworkInterface,
+} from 'react-apollo';
+
+import './App.css';
+import ChannelsListWithData from './components/ChannelsListWithData';
+
+console.log('process.env.NODE_ENV', process.env.NODE_ENV);
+console.log('process.env.REACT_APP_GRAPHQL_URI', process.env.REACT_APP_GRAPHQL_URI);
+const isNotProduction = process.env.NODE_ENV !== 'production';
+
+const uri = isNotProduction ? 'http://localhost:3001/graphql' : process.env.REACT_APP_GRAPHQL_URI;
+console.log('GRAPHQL_URI', uri);
+const networkInterface = createNetworkInterface({ uri });
+const client = new ApolloClient({ networkInterface });
+
+class App extends Component {
+  render() {
+    return (
+      <ApolloProvider client={client}>
+        <div className="App">
+          <div className="navbar">React + GraphQL Tutorial</div>
+          <ChannelsListWithData />
+        </div>
+      </ApolloProvider>
+    );
+  }
+}
+
+export default App;
+
+
+/*
+import React, { Component } from 'react';
 import './App.css';
 import ChannelsListWithData from './components/ChannelsListWithData';
 
@@ -12,7 +49,7 @@ console.log('process.env.REACT_APP_NODE_ENV', process.env.REACT_APP_NODE_ENV);
 console.log('process.env.REACT_APP_PORT', process.env.REACT_APP_PORT);
 const isNotProduction = process.env.REACT_APP_NODE_ENV !== 'production';
 
-const uri = isNotProduction ? 'http://localhost:3001/graphql' : 'https://fefon-2.herokuapp.com/graphql';
+const uri = isNotProduction ? 'http://localhost:3001/graphql' : 'https://crae-app.herokuapp.com/graphql';
 const networkInterface = createNetworkInterface({ uri });
 
 // TODO: need config to pass domain name as an argument for deployed app
@@ -33,6 +70,8 @@ class App extends Component {
 }
 
 export default App;
+*/
+
 
 /*
 import React, { Component } from 'react';

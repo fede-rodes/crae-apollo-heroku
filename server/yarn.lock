@@ -16,16 +16,16 @@
     "@types/serve-static" "*"
 
 "@types/graphql@^0.9.0", "@types/graphql@^0.9.1":
-  version "0.9.3"
-  resolved "https://registry.yarnpkg.com/@types/graphql/-/graphql-0.9.3.tgz#4a2a888e110c796eb7671bf8f9ecef229ad67749"
+  version "0.9.4"
+  resolved "https://registry.yarnpkg.com/@types/graphql/-/graphql-0.9.4.tgz#cdeb6bcbef9b6c584374b81aa7f48ecf3da404fa"
 
 "@types/mime@*":
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-1.3.1.tgz#2cf42972d0931c1060c7d5fa6627fce6bd876f2f"
 
 "@types/node@*":
-  version "8.0.10"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.10.tgz#12efec9183b072d5f951cf86395a4c780f868a17"
+  version "8.0.14"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.14.tgz#4a19dc6bb61d16c01cbadc7b30ac23518fff176b"
 
 "@types/serve-static@*":
   version "1.7.31"
@@ -66,6 +66,26 @@ anymatch@^1.3.0:
   dependencies:
     arrify "^1.0.0"
     micromatch "^2.1.5"
+
+apollo-server-core@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/apollo-server-core/-/apollo-server-core-1.0.2.tgz#6860a6b5680c42c8727153c524eefc84fb91e500"
+  optionalDependencies:
+    "@types/graphql" "^0.9.0"
+
+apollo-server-express@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/apollo-server-express/-/apollo-server-express-1.0.2.tgz#99a85d9145453bd6980239f8ab21aa1255698b2a"
+  dependencies:
+    apollo-server-core "^1.0.2"
+    apollo-server-module-graphiql "^1.0.2"
+  optionalDependencies:
+    "@types/express" "^4.0.35"
+    "@types/graphql" "^0.9.1"
+
+apollo-server-module-graphiql@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/apollo-server-module-graphiql/-/apollo-server-module-graphiql-1.0.2.tgz#cf5746821a96415a36cb418239bb66c7c5d0ff32"
 
 aproba@^1.0.3:
   version "1.1.2"
@@ -923,8 +943,8 @@ core-util-is@~1.0.0:
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
 
 cors@^2.8.3:
-  version "2.8.3"
-  resolved "https://registry.yarnpkg.com/cors/-/cors-2.8.3.tgz#4cf78e1d23329a7496b2fc2225b77ca5bb5eb802"
+  version "2.8.4"
+  resolved "https://registry.yarnpkg.com/cors/-/cors-2.8.4.tgz#2bd381f2eb201020105cd50ea59da63090694686"
   dependencies:
     object-assign "^4"
     vary "^1"
@@ -1269,25 +1289,11 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.4:
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
 
-graphql-server-core@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/graphql-server-core/-/graphql-server-core-1.0.0.tgz#25d92b6279a81263f0714136636a54910c1fafe0"
-  optionalDependencies:
-    "@types/graphql" "^0.9.0"
-
 graphql-server-express@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/graphql-server-express/-/graphql-server-express-1.0.0.tgz#038b73552255f6180c51a73bee8d7f9d68c5e201"
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/graphql-server-express/-/graphql-server-express-1.0.2.tgz#6c18ac6f9997ad121018de306286a3d712ae6726"
   dependencies:
-    graphql-server-core "^1.0.0"
-    graphql-server-module-graphiql "^1.0.0"
-  optionalDependencies:
-    "@types/express" "^4.0.35"
-    "@types/graphql" "^0.9.1"
-
-graphql-server-module-graphiql@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/graphql-server-module-graphiql/-/graphql-server-module-graphiql-1.0.0.tgz#1b302481423f83b3c0f43cb30bfdc30bfe3d0a82"
+    apollo-server-express "^1.0.2"
 
 graphql-tools@^1.1.0:
   version "1.1.0"
@@ -1300,8 +1306,8 @@ graphql-tools@^1.1.0:
     "@types/graphql" "^0.9.0"
 
 graphql@^0.10.3:
-  version "0.10.3"
-  resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.10.3.tgz#c313afd5518e673351bee18fb63e2a0e487407ab"
+  version "0.10.5"
+  resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.10.5.tgz#c9be17ca2bdfdbd134077ffd9bbaa48b8becd298"
   dependencies:
     iterall "^1.1.0"
 
