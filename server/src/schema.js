@@ -2,15 +2,24 @@ import { makeExecutableSchema } from 'graphql-tools';
 import resolvers from './resolvers';
 
 const typeDefs = `
-  type Channel {
+  type Author {
     id: ID! # "!" denotes a required field
-    name: String
+    firstName: String
+    lastName: String
+    posts: [Post] # we'll need to define a resolver func for this field since it's not default type
   }
 
-  # This type specifies the entry points into our API. In this case
-  # there is only one - "channels" - which returns a list of channels.
+  type Post {
+    id: ID!
+    title: String
+    text: String
+    author: Author # we'll need to define a resolver func for this field since it's not default type
+  }
+
+  # This type specifies the entry points into our API.
   type Query {
-    channels: [Channel] # "[]" means this is a list of channels
+    authors: [Author]
+    author(id: ID, firstName: String, lastName: String): Author
   }
 `;
 

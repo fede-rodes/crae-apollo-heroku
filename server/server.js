@@ -14,7 +14,7 @@ console.log('process.env.PORT', process.env.PORT);
 const server = express();
 server.set('port', (process.env.PORT || 3001));
 
-// Enable the server to receive requests from the  React app when running locally.
+// Enable the server to receive requests from the React app when running locally.
 const isNotProduction = process.env.NODE_ENV !== 'production';
 if (isNotProduction) {
   server.use('*', cors({ origin: 'http://localhost:3000' }));
@@ -42,7 +42,7 @@ server.use(
 
 // The "catchall" handler: for any request that doesn't match one above, send
 // back React's index.html file.
-server.use('/*', staticFiles);
+server.use('*', staticFiles);
 
 server.listen(server.get('port'), () => {
   console.log(`Listening on ${server.get('port')}`);
