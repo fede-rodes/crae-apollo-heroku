@@ -6,7 +6,7 @@ This project is the result of putting together the following really nice article
 3. https://dev-blog.apollodata.com/react-graphql-tutorial-part-2-server-99d0528c7928
 4. https://dev-blog.apollodata.com/react-graphql-tutorial-mutations-764d7ec23c15
 
-This helped me to setup a dead-simple create-react-app + apollo + express boilerplate and deploy it to heroku.
+This helped me to setup a dead-simple create-react-app + apollo + express boilerplate and deploy it to heroku: https://crae-apollo-heroku.herokuapp.com/
 
 ### Getting started, run the app locally in dev mode
 Clone the project, install dependencies and run the app locally.
