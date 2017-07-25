@@ -9,21 +9,18 @@ import schema from './src/schema';
 console.log('process.env.NODE_ENV', process.env.NODE_ENV);
 console.log('process.env.PORT', process.env.PORT);
 
+// Initialize Express server. Port is set by Heroku when the app is deployed or
+// when running locally using the 'heroku local' command.
 const server = express();
-
-// Port is set by heroku when the app is deployed or when running locally using
-// the 'heroku local' command.
 server.set('port', (process.env.PORT || 3001));
 
+// Enable the server to receive requests from the  React app when running locally.
 const isNotProduction = process.env.NODE_ENV !== 'production';
-
-// Enable the server to receive requests from the create-react-app when running
-// locally.
 if (isNotProduction) {
   server.use('*', cors({ origin: 'http://localhost:3000' }));
 }
 
-// Serve create-react-app as a static asset when possible.
+// Serve static files from the React app
 const staticFiles = express.static(path.join(__dirname, '../../client/build'));
 server.use(staticFiles);
 
@@ -42,6 +39,10 @@ server.use(
   '/graphiql',
   graphiqlExpress({ endpointURL: '/graphql' })
 );
+
+// The "catchall" handler: for any request that doesn't match one above, send
+// back React's index.html file.
+server.use('/*', staticFiles);
 
 server.listen(server.get('port'), () => {
   console.log(`Listening on ${server.get('port')}`);
