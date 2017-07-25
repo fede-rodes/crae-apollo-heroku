@@ -1,9 +1,12 @@
-## Create-React-App-Apollo-Express boilerplate app ready to be deploy to Heroku
-This project is the result of putting together the following really nice articles (thanks!). This helped me setup a super simple create-react-app + apollo + express boilerplate app and deploy it to heroku:
+## Create-React-App-Apollo-Express boilerplate ready to be deploy to Heroku
+This project is the result of putting together the following really nice articles (thanks!):
+
 1. https://originmaster.com/running-create-react-app-and-express-crae-on-heroku-c39a39fe7851
 2. https://dev-blog.apollodata.com/full-stack-react-graphql-tutorial-582ac8d24e3b
 3. https://dev-blog.apollodata.com/react-graphql-tutorial-part-2-server-99d0528c7928
 4. https://dev-blog.apollodata.com/react-graphql-tutorial-mutations-764d7ec23c15
+
+This helped me to setup a dead-simple create-react-app + apollo + express boilerplate and deploy it to heroku.
 
 ### Getting started, run the app locally in dev mode
 Clone the project, install dependencies and run the app locally.
