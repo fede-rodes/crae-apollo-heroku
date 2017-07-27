@@ -17,6 +17,7 @@
     "graphql-server-express": "^1.0.0",
     "graphql-tools": "^1.1.0",
     "lodash": "^4.17.4",
+    "mongoose": "^4.11.4",
     "sequelize": "^4.4.2",
     "sqlite": "^2.8.0"
   },
@@ -25,8 +26,8 @@
     "nodemon": "^1.11.0"
   },
   "scripts": {
-    "start": "nodemon -r babel-register server.js",
+    "start": "nodemon -r dotenv/config -r babel-register server.js",
     "build": "babel . --ignore node_modules,build --out-dir build",
-    "start:prod": "node build/server.js"
+    "start:prod": "node -r dotenv/config -r build/server.js"
   }
 }
