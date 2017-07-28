@@ -16,7 +16,7 @@ const resolvers = {
         return null;
       }
       console.log('query', query);
-      return Author.findOne({ query });
+      return Author.findOne(query);
     },
   },
   // We need to tell graphql how to resolve the 'posts' field inside the Author
