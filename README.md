@@ -5,9 +5,16 @@ This project is the result of putting together the following really nice article
 2. https://dev-blog.apollodata.com/full-stack-react-graphql-tutorial-582ac8d24e3b
 3. https://dev-blog.apollodata.com/react-graphql-tutorial-part-2-server-99d0528c7928
 4. https://dev-blog.apollodata.com/react-graphql-tutorial-mutations-764d7ec23c15
-5. https://dev-blog.apollodata.com/tutorial-building-a-graphql-server-cddaa023c035
 
 This helped me to setup a dead-simple create-react-app + apollo + express boilerplate and deploy it to heroku: https://crae-apollo-heroku.herokuapp.com/
+
+### Updates of the mongo branch
+The master branch of this project contains the simplest version of this app with the features described in the articles above. For the current branch, mongo, we added MongoDB as our database using mongoose plus split the schema definition using .graphql file extension.
+
+Please, read the following articles to understand the changes:
+1. https://dev-blog.apollodata.com/tutorial-building-a-graphql-server-cddaa023c035
+2. https://caveofcode.com/2016/10/apollo-server-using-the-graphql-schema-language/
+3. https://caveofcode.com/2016/11/the-connector-and-model-layer-in-your-graphql-apollo-server/
 
 ### Getting started, run the app locally in dev mode
 Clone the project, install dependencies and run the app locally.
