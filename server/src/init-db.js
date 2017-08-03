@@ -2,6 +2,12 @@ import casual from 'casual';
 import _ from 'lodash';
 import { Author, Post } from './models';
 
+// Clear DB
+const clearAll = async () => {
+  await Author.remove({});
+  await Post.remove({});
+};
+
 // Populate DB.
 const fixtures = () => {
   casual.seed(11);
@@ -20,4 +26,12 @@ const fixtures = () => {
   ));
 };
 
-export default fixtures;
+const initDB = async () => {
+  // Clear Author and Post collections
+  await clearAll();
+
+  // Set some initial data
+  await fixtures();
+};
+
+export default initDB;

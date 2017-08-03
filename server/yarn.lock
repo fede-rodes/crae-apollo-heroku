@@ -24,8 +24,8 @@
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-1.3.1.tgz#2cf42972d0931c1060c7d5fa6627fce6bd876f2f"
 
 "@types/node@*":
-  version "8.0.17"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.17.tgz#677bc8c118cfb76013febb62ede1f31d2c7222a1"
+  version "8.0.19"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.19.tgz#e46e2b0243de7d03f15b26b45c59ebb84f657a4e"
 
 "@types/serve-static@*":
   version "1.7.31"
@@ -73,19 +73,19 @@ apollo-server-core@^1.0.2:
   optionalDependencies:
     "@types/graphql" "^0.9.0"
 
-apollo-server-express@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/apollo-server-express/-/apollo-server-express-1.0.4.tgz#fad6045493d818b09ad4610faa389768386a68b6"
+apollo-server-express@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/apollo-server-express/-/apollo-server-express-1.0.5.tgz#4475684462a9f530f1d2630112ed45295e98dcf1"
   dependencies:
     apollo-server-core "^1.0.2"
-    apollo-server-module-graphiql "^1.0.4"
+    apollo-server-module-graphiql "^1.0.5"
   optionalDependencies:
     "@types/express" "^4.0.35"
     "@types/graphql" "^0.9.1"
 
-apollo-server-module-graphiql@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/apollo-server-module-graphiql/-/apollo-server-module-graphiql-1.0.4.tgz#d6db21a8c60f052649124da5cde1d88dab702319"
+apollo-server-module-graphiql@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/apollo-server-module-graphiql/-/apollo-server-module-graphiql-1.0.5.tgz#31639acb1dc4bd7e2edb334cf619f84ebff600a6"
 
 aproba@^1.0.3:
   version "1.1.2"
@@ -1033,7 +1033,7 @@ core-js@^2.4.0:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.4.1.tgz#4de911e667b0eae9124e34254b53aea6fc618d3e"
 
-core-util-is@~1.0.0:
+core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
 
@@ -1111,10 +1111,10 @@ duplexer@~0.1.1:
   resolved "https://registry.yarnpkg.com/duplexer/-/duplexer-0.1.1.tgz#ace6ff808c1ce66b57d1ebf97977acb02334cfc1"
 
 duplexify@^3.2.0:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/duplexify/-/duplexify-3.5.0.tgz#1aa773002e1578457e9d9d4a50b0ccaaebcbd604"
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/duplexify/-/duplexify-3.5.1.tgz#4e1516be68838bc90a49994f0b39a6e5960befcd"
   dependencies:
-    end-of-stream "1.0.0"
+    end-of-stream "^1.0.0"
     inherits "^2.0.1"
     readable-stream "^2.0.0"
     stream-shift "^1.0.0"
@@ -1133,11 +1133,11 @@ encodeurl@~1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/encodeurl/-/encodeurl-1.0.1.tgz#79e3d58655346909fe6f0f45a5de68103b294d20"
 
-end-of-stream@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/end-of-stream/-/end-of-stream-1.0.0.tgz#d4596e702734a93e40e9af864319eabd99ff2f0e"
+end-of-stream@^1.0.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/end-of-stream/-/end-of-stream-1.4.0.tgz#7a90d833efda6cfa6eac0f4949dbb0fad3a63206"
   dependencies:
-    once "~1.3.0"
+    once "^1.4.0"
 
 es6-promise@3.2.1:
   version "3.2.1"
@@ -1230,9 +1230,9 @@ extglob@^0.3.1:
   dependencies:
     is-extglob "^1.0.0"
 
-extsprintf@1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.0.2.tgz#e1080e0658e300b06294990cc70e1502235fd550"
+extsprintf@1.3.0, extsprintf@^1.2.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.3.0.tgz#96918440e3041a7a414f8c52e3c574eb3c3e1e05"
 
 filename-regex@^2.0.0:
   version "2.0.1"
@@ -1393,10 +1393,10 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.4:
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
 
 graphql-server-express@^1.0.0:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/graphql-server-express/-/graphql-server-express-1.0.4.tgz#09acd722c8be2a240262d40b43bcb2675ba1bad5"
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/graphql-server-express/-/graphql-server-express-1.0.5.tgz#4714e85eecde986dcf38eb3cde6816b9ceba94c4"
   dependencies:
-    apollo-server-express "^1.0.4"
+    apollo-server-express "^1.0.5"
 
 graphql-tools@^1.1.0:
   version "1.1.0"
@@ -1656,13 +1656,13 @@ jsonify@~0.0.0:
   resolved "https://registry.yarnpkg.com/jsonify/-/jsonify-0.0.0.tgz#2c74b6ee41d93ca51b7b5aaee8f503631d252a73"
 
 jsprim@^1.2.2:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/jsprim/-/jsprim-1.4.0.tgz#a3b87e40298d8c380552d8cc7628a0bb95a22918"
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/jsprim/-/jsprim-1.4.1.tgz#313e66bc1e5cc06e438bc1b7499c2e5c56acb6a2"
   dependencies:
     assert-plus "1.0.0"
-    extsprintf "1.0.2"
+    extsprintf "1.3.0"
     json-schema "0.2.3"
-    verror "1.3.6"
+    verror "1.10.0"
 
 kareem@1.5.0:
   version "1.5.0"
@@ -1858,8 +1858,8 @@ mongodb@2.2.27:
     readable-stream "2.2.7"
 
 mongoose@^4.11.4:
-  version "4.11.4"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-4.11.4.tgz#3d74111105ee8b619eb1c1d790e7bfc4e8cba7bb"
+  version "4.11.5"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-4.11.5.tgz#59e4a1d84dcd36cc51f3e639b771cb8359f539aa"
   dependencies:
     async "2.1.4"
     bson "~1.0.4"
@@ -1999,15 +1999,9 @@ on-finished@~2.3.0:
   dependencies:
     ee-first "1.1.1"
 
-once@^1.3.0, once@^1.3.3:
+once@^1.3.0, once@^1.3.3, once@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/once/-/once-1.4.0.tgz#583b1aa775961d4b113ac17d9c50baef9dd76bd1"
-  dependencies:
-    wrappy "1"
-
-once@~1.3.0:
-  version "1.3.3"
-  resolved "https://registry.yarnpkg.com/once/-/once-1.3.3.tgz#b2e261557ce4c314ec8304f3fa82663e4297ca20"
   dependencies:
     wrappy "1"
 
@@ -2597,11 +2591,13 @@ vary@^1, vary@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.1.tgz#67535ebb694c1d52257457984665323f587e8d37"
 
-verror@1.3.6:
-  version "1.3.6"
-  resolved "https://registry.yarnpkg.com/verror/-/verror-1.3.6.tgz#cff5df12946d297d2baaefaa2689e25be01c005c"
+verror@1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/verror/-/verror-1.10.0.tgz#3a105ca17053af55d6e270c1f8288682e18da400"
   dependencies:
-    extsprintf "1.0.2"
+    assert-plus "^1.0.0"
+    core-util-is "1.0.2"
+    extsprintf "^1.2.0"
 
 wide-align@^1.1.0:
   version "1.1.2"

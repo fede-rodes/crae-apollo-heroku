@@ -52,8 +52,8 @@ class App extends Component {
         <div className="App">
           <h3>CRAE-Apollo-Heroku</h3>
           <Authors />
+          <h3>{'Enter author\'s name to get his/her posts:'}</h3>
           <form>
-            <p>{'Enter author\'s name to get his/her posts:'}</p>
             <input
               name="firstName"
               type="text"

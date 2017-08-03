@@ -7,7 +7,7 @@ import cors from 'cors';
 import { makeExecutableSchema } from 'graphql-tools';
 import schema from './src/schema';
 import resolvers from './src/resolvers';
-import fixtures from './src/fixtures';
+import initDB from './src/init-db';
 
 //------------------------------------------------------------------------------
 // LOGS
@@ -44,7 +44,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', console.log.bind(console, `Database connected to ${MONGO_URL}`));
 
 // Populate DB
-fixtures();
+initDB();
 
 //------------------------------------------------------------------------------
 // ENABLE CORS ON DEV MODE
