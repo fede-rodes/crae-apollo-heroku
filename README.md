@@ -8,6 +8,8 @@ This project is the result of putting together the following really nice article
 
 This helped me to setup a dead-simple create-react-app + apollo + express boilerplate and deploy it to heroku: https://crae-apollo-heroku.herokuapp.com/
 
+UPDATE (03-08-2017): we added a 'mongo' branch to the project, where we extend the code in the master branch by adding MongoDB support using mongoose for easier collection manipulation.
+
 ### Getting started, run the app locally in dev mode
 Clone the project, install dependencies and run the app locally.
 ```
@@ -41,3 +43,6 @@ heroku open
 
 ### Last comments
 Be aware that, sometimes, you need to refresh the page after you deploy some changes; there must be some caching problem somewhere!
+
+### TODO
+1. Add authentication using [passport.js](http://passportjs.org/).
