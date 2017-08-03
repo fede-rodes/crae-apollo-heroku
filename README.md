@@ -1,4 +1,4 @@
-## Create-React-App-Apollo-Express-MongoDB boilerplate ready to be deploy to Heroku
+## Create-React-App-Apollo-Express-MongoDB boilerplate ready to be deployed to Heroku
 The current branch, mongo, is an extension of the master branch that incorporates MongoDB support using mongoose for easier collection manipulation. Additionally, we split the schema definition using .graphql file extension.
 
 Please, read the following articles to understand the new code:
