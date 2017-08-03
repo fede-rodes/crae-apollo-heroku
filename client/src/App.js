@@ -78,7 +78,7 @@ class App extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            https://github.com/fede-rodes/crae-apollo-heroku
+            https://github.com/fede-rodes/crae-apollo-heroku/tree/mongo
           </a>
         </div>
       </ApolloProvider>

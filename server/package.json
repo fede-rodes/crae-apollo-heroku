@@ -28,6 +28,6 @@
   "scripts": {
     "start": "nodemon -r dotenv/config -r babel-register server.js",
     "build": "babel . --ignore node_modules,build --out-dir build",
-    "start:prod": "node -r dotenv/config -r build/server.js"
+    "start:prod": "node -r dotenv/config build/server.js"
   }
 }
