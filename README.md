@@ -1,4 +1,4 @@
-## Create-React-App-Apollo-Express boilerplate ready to be deploy to Heroku
+## Create-React-App-Apollo-Express boilerplate ready to be deployed to Heroku
 This project is the result of putting together the following really nice articles (thanks!):
 
 1. https://originmaster.com/running-create-react-app-and-express-crae-on-heroku-c39a39fe7851
