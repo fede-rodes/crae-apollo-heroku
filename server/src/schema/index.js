@@ -8,4 +8,11 @@ import Query from './query.graphql';
 import Author from './author.graphql';
 import Post from './post.graphql';
 
-export default [SchemaDefinition, Query, Author, Post];
+const schema = [
+  SchemaDefinition,
+  Query,
+  Author,
+  Post,
+];
+
+export default schema;
