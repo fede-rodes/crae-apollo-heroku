@@ -74,7 +74,7 @@ class App extends Component {
             lastName={this.state.lastName}
           />
           <a
-            href="https://github.com/fede-rodes/crae-apollo-heroku"
+            href="https://github.com/fede-rodes/crae-apollo-heroku/tree/mongo"
             target="_blank"
             rel="noopener noreferrer"
           >
