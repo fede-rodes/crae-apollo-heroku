@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const schema = mongoose.Schema({
   firstName: String,
@@ -7,4 +7,4 @@ const schema = mongoose.Schema({
 
 const Author = mongoose.model('Author', schema);
 
-export default Author;
+module.exports = Author;

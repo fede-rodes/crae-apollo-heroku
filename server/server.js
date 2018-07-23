@@ -1,22 +1,23 @@
-import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
-import bodyParser from 'body-parser';
-import express from 'express';
-import mongoose from 'mongoose';
-import path from 'path';
-import cors from 'cors';
-import { makeExecutableSchema } from 'graphql-tools';
-import schema from './src/schema';
-import resolvers from './src/resolvers';
-import initDB from './src/init-db';
+const express = require('express');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const { graphqlExpress, graphiqlExpress } = require('graphql-server-express');
+const path = require('path');
+const cors = require('cors');
+const schema = require('./src/graphql/exec-schema');
+const initDB = require('./src/init-db');
 
 //------------------------------------------------------------------------------
 // LOGS
 //------------------------------------------------------------------------------
 // Log env vars
-console.log('process.env.NODE_ENV', process.env.NODE_ENV);
-console.log('process.env.PORT', process.env.PORT);
-console.log('process.env.MONGO_URL', process.env.MONGO_URL);
+const { NODE_ENV, PORT, MONGO_URL } = process.env;
 
+console.log(
+  'process.env.NODE_ENV', NODE_ENV,
+  'process.env.PORT', PORT,
+  'process.env.MONGO_URL', MONGO_URL,
+);
 //------------------------------------------------------------------------------
 // INIT EXPRESS SERVER
 //------------------------------------------------------------------------------
@@ -35,7 +36,6 @@ server.use(bodyParser.json());
 //------------------------------------------------------------------------------
 // MONGO CONNECTION
 //------------------------------------------------------------------------------
-const MONGO_URL = process.env.MONGO_URL;
 mongoose.connect(MONGO_URL);
 mongoose.Promise = global.Promise;
 
@@ -50,7 +50,7 @@ initDB();
 // ENABLE CORS ON DEV MODE
 //------------------------------------------------------------------------------
 // Enable the server to receive requests from the React app when running locally.
-const isNotProduction = process.env.NODE_ENV !== 'production';
+const isNotProduction = NODE_ENV !== 'production';
 if (isNotProduction) {
   server.use('*', cors({ origin: 'http://localhost:3000' }));
 }
@@ -65,15 +65,10 @@ server.use(staticFiles);
 //------------------------------------------------------------------------------
 // GRAPHQL ENDPOINT
 //------------------------------------------------------------------------------
-const executableSchema = makeExecutableSchema({
-  typeDefs: schema,
-  resolvers,
-});
-
 server.use(
   '/graphql',
   // bodyParser.json(), // middleware: parses incoming requests into JSON format.
-  graphqlExpress({ schema: executableSchema })
+  graphqlExpress({ schema }),
 );
 
 //------------------------------------------------------------------------------
@@ -81,7 +76,7 @@ server.use(
 //------------------------------------------------------------------------------
 server.use(
   '/graphiql',
-  graphiqlExpress({ endpointURL: '/graphql' })
+  graphiqlExpress({ endpointURL: '/graphql' }),
 );
 
 //------------------------------------------------------------------------------

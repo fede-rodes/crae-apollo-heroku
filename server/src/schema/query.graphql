@@ -1,5 +1,0 @@
-# This type specifies the entry points into our API.
-type Query {
-  authors: [Author]
-  author(id: ID, firstName: String, lastName: String): Author
-}

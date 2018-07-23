@@ -1,6 +1,0 @@
-type Author {
-  id: ID! # "!" denotes a required field
-  firstName: String
-  lastName: String
-  posts: [Post] # we'll need to define a resolver func for this field since it's not default type
-}

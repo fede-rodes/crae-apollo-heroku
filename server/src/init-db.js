@@ -1,6 +1,6 @@
-import casual from 'casual';
-import _ from 'lodash';
-import { Author, Post } from './models';
+const casual = require('casual');
+const _ = require('lodash');
+const { Author, Post } = require('./models');
 
 // Clear DB
 const clearAll = async () => {
@@ -34,4 +34,4 @@ const initDB = async () => {
   await fixtures();
 };
 
-export default initDB;
+module.exports = initDB;

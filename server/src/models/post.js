@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const schema = mongoose.Schema({
   authorId: String,
@@ -8,4 +8,4 @@ const schema = mongoose.Schema({
 
 const Post = mongoose.model('Post', schema);
 
-export default Post;
+module.exports = Post;
