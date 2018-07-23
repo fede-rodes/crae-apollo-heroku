@@ -22,7 +22,7 @@ Once we have our mongoDB provider, these are the next steps we need to follow to
 ```
 git clone https://github.com/fede-rodes/crae-apollo-heroku.git crae-apollo-mongo-heroku --branch mongo --single-branch
 cd crae-apollo-mongo-heroku
-got to /server/.env and set the MONGO_URL env var to connect to your mongoDB instance. In case you are using mLab, remember to use your credentials! In case your are running mongo locally, you can use the default value for MONGO_URL.
+got to /server/.env and set the MONGO_URL env var to connect to your mongoDB instance. In case you are using mLab, remember to use your credentials! In case your are running mongo locally, you can use the default value for MONGO_URL (remember to start your mongo service: `sudo service mongod start`!).
 yarn install && yarn start
 ```
 When running the app locally, there will be two servers running simultaneously: one for serving the create-react-app (CRA) and another one for the express app. The CRA app should be accessible via http://localhost:3000/, and the express app via http://localhost:3001/. Graphiql should be running on http://localhost:3001/graphiql (only accessible in dev mode).
