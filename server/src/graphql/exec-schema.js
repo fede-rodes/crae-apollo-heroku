@@ -9,9 +9,9 @@ const APIs = {
   Post,
 };
 
-// Filter out those APIs for which 'schema' and 'resolvers' are defined. In the
-// end we'll get something like the following:
-// const allSchemas = [Base.typeDefs, User.typeDefs, ...];
+// Filter out those APIs for which 'typeDefs' and 'resolvers' are defined. In
+// the end we'll get something like the following:
+// const allTypeDefs = [Base.typeDefs, User.typeDefs, ...];
 // const allResolvers = [Base.resolvers, User.resolvers, ...];
 const allTypeDefs = [];
 const allResolvers = [];

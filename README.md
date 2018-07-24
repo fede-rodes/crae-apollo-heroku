@@ -25,7 +25,7 @@ cd crae-apollo-mongo-heroku
 got to /server/.env and set the MONGO_URL env var to connect to your mongoDB instance. In case you are using mLab, remember to use your credentials! In case your are running mongo locally, you can use the default value for MONGO_URL (remember to start your mongo service: `sudo service mongod start`!).
 yarn install && yarn start
 ```
-When running the app locally, there will be two servers running simultaneously: one for serving the create-react-app (CRA) and another one for the express app. The CRA app should be accessible via http://localhost:3000/, and the express app via http://localhost:3001/. Graphiql should be running on http://localhost:3001/graphiql (only accessible in dev mode).
+When running the app locally, there will be two servers running simultaneously: one for serving the create-react-app (CRA) and another one for the express app. The CRA app should be accessible via http://localhost:3000/, and the express app via http://localhost:3001/. The graphql playground (former graphiql) should be running on http://localhost:3001/graphql (only accessible in dev mode).
 
 ### Run the app locally in production mode
 Clone the 'mongo' branch from this project, set your MONGO_URL env var to connect the app with the MongoDB instance, install dependencies, build the project and run the 'heroku local' command. This will launch the app on http://localhost:5000 (the port is set by heroku and, as far as I understand, it can't be changed). During the build process the CRA is converted into a static asset and injected into the express app, in this way, there will be only one server running (the one hosting the express app).

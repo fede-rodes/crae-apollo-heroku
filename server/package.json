@@ -9,12 +9,12 @@
     "start:prod": "node -r dotenv/config build/server.js"
   },
   "dependencies": {
+    "apollo-server-express": "^2.0.0",
     "casual": "^1.5.19",
     "cors": "^2.8.4",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
-    "graphql": "^0.10.3",
-    "graphql-server-express": "^1.0.0",
+    "graphql": "^0.13.2",
     "graphql-tools": "^3.0.5",
     "lodash": "^4.17.10",
     "merge-graphql-schemas": "^1.5.3",

@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const { graphqlExpress, graphiqlExpress } = require('graphql-server-express');
+const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 const cors = require('cors');
 const schema = require('./src/graphql/exec-schema');
@@ -11,11 +11,12 @@ const initDB = require('./src/init-db');
 //------------------------------------------------------------------------------
 // Log env vars
 const { NODE_ENV, PORT, MONGO_URL } = process.env;
+const isNotProduction = NODE_ENV !== 'production';
 
 console.log(
-  'process.env.NODE_ENV', NODE_ENV,
-  'process.env.PORT', PORT,
-  'process.env.MONGO_URL', MONGO_URL,
+  '\nprocess.env.NODE_ENV', NODE_ENV,
+  '\nprocess.env.PORT', PORT,
+  '\nprocess.env.MONGO_URL', MONGO_URL,
 );
 
 //------------------------------------------------------------------------------
@@ -23,15 +24,19 @@ console.log(
 //------------------------------------------------------------------------------
 // Initialize Express server. Port is set by Heroku when the app is deployed or
 // when running locally using the 'heroku local' command.
-const server = express();
-server.set('port', (process.env.PORT || 3001));
+const app = express();
+app.set('port', (PORT || 3001));
 
 //------------------------------------------------------------------------------
 // MIDDLEWARES
 //------------------------------------------------------------------------------
 // Apply middleware to parse incoming body requests into JSON format.
-server.use(express.json());
-server.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+// Enable the app to receive requests from the React app when running locally.
+if (isNotProduction) {
+  app.use('*', cors({ origin: 'http://localhost:3000' }));
+}
 
 //------------------------------------------------------------------------------
 // MONGO CONNECTION
@@ -47,37 +52,35 @@ db.once('open', console.log.bind(console, `Database connected to ${MONGO_URL}`))
 initDB();
 
 //------------------------------------------------------------------------------
-// ENABLE CORS ON DEV MODE
-//------------------------------------------------------------------------------
-// Enable the server to receive requests from the React app when running locally.
-const isNotProduction = NODE_ENV !== 'production';
-if (isNotProduction) {
-  server.use('*', cors({ origin: 'http://localhost:3000' }));
-}
-
-//------------------------------------------------------------------------------
 // SERVER STATIC FILE
 //------------------------------------------------------------------------------
 // Serve static files from the React app
 const staticFiles = express.static(path.join(__dirname, '../../client/build'));
-server.use(staticFiles);
+app.use(staticFiles);
 
 //------------------------------------------------------------------------------
-// ENDPOINTS
+// ROUTES
 //------------------------------------------------------------------------------
-server.use('/graphql', graphqlExpress({ schema }));
-server.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
+const server = new ApolloServer({
+  schema,
+  playground: {
+    settings: {
+      'editor.theme': 'light',
+    },
+  },
+});
+server.applyMiddleware({ app, path: '/graphql' });
 
 //------------------------------------------------------------------------------
 // CATCH ALL
 //------------------------------------------------------------------------------
 // The "catchall" handler: for any request that doesn't match one above, send
 // back React's index.html file.
-server.use('*', staticFiles);
+app.use('*', staticFiles);
 
 //------------------------------------------------------------------------------
 // LISTEN
 //------------------------------------------------------------------------------
-server.listen(server.get('port'), () => {
-  console.log(`Listening on ${server.get('port')}`);
+app.listen(app.get('port'), () => {
+  console.log(`Apollo server listening on http://localhost:${app.get('port')}/graphql`);
 });
