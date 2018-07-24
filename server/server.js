@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const { graphqlExpress, graphiqlExpress } = require('graphql-server-express');
 const path = require('path');
@@ -18,6 +17,7 @@ console.log(
   'process.env.PORT', PORT,
   'process.env.MONGO_URL', MONGO_URL,
 );
+
 //------------------------------------------------------------------------------
 // INIT EXPRESS SERVER
 //------------------------------------------------------------------------------
@@ -30,8 +30,8 @@ server.set('port', (process.env.PORT || 3001));
 // MIDDLEWARES
 //------------------------------------------------------------------------------
 // Apply middleware to parse incoming body requests into JSON format.
-server.use(bodyParser.urlencoded({ extended: true }));
-server.use(bodyParser.json());
+server.use(express.json());
+server.use(express.urlencoded({ extended: true }));
 
 //------------------------------------------------------------------------------
 // MONGO CONNECTION
@@ -43,7 +43,7 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', console.log.bind(console, `Database connected to ${MONGO_URL}`));
 
-// Populate DB
+// Clean and populate DB
 initDB();
 
 //------------------------------------------------------------------------------
@@ -63,21 +63,10 @@ const staticFiles = express.static(path.join(__dirname, '../../client/build'));
 server.use(staticFiles);
 
 //------------------------------------------------------------------------------
-// GRAPHQL ENDPOINT
+// ENDPOINTS
 //------------------------------------------------------------------------------
-server.use(
-  '/graphql',
-  // bodyParser.json(), // middleware: parses incoming requests into JSON format.
-  graphqlExpress({ schema }),
-);
-
-//------------------------------------------------------------------------------
-// GRAPHIQL ENDPOINT
-//------------------------------------------------------------------------------
-server.use(
-  '/graphiql',
-  graphiqlExpress({ endpointURL: '/graphql' }),
-);
+server.use('/graphql', graphqlExpress({ schema }));
+server.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
 //------------------------------------------------------------------------------
 // CATCH ALL

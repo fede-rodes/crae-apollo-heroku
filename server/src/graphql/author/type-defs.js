@@ -8,7 +8,7 @@ const typeDefs = `
 
   type Query {
     authors: [Author]!
-    author(id: ID, firstName: String, lastName: String): Author!
+    author(id: ID, firstName: String, lastName: String): Author
   }
 `;
 
