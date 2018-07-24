@@ -8,11 +8,6 @@
     "node": "8.9.4",
     "npm": "5.6.x"
   },
-  "dependencies": {
-    "concurrently": "^3.1.0",
-    "react-scripts": "1.1.4",
-    "rimraf": "^2.5.4"
-  },
   "scripts": {
     "build": "concurrently \"cd client && yarn build\" \"cd server && yarn build\"",
     "clean": "concurrently \"rimraf node_modules yarn.lock\" \"cd client && rimraf node_modules build yarn.lock\" \"cd server && rimraf node_modules build yarn.lock\"",
@@ -20,6 +15,10 @@
     "install": "(cd client && yarn) && (cd server && yarn)",
     "start": "concurrently \"cd client && yarn start\" \"cd server && yarn start\"",
     "start:prod": "cd server && yarn start:prod"
+  },
+  "dependencies": {
+    "concurrently": "^3.6.1",
+    "rimraf": "^2.6.2"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
