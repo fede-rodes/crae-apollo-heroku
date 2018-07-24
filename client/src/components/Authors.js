@@ -1,21 +1,30 @@
 import React from 'react';
-import { gql, graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+import { graphql } from 'react-apollo';
 
-const Authors = (props) => {
-  console.log(props);
-  const { loading, error, authors } = props.data;
+const Authors = ({ data }) => {
+  const { loading, error, authors } = data;
   if (loading) {
-    return <p>Loading ...</p>;
+    return (
+      <p>
+        Loading ...
+      </p>
+    );
   }
   if (error) {
-    return <p>{error.message}</p>;
+    return (
+      <p>
+        {error.message}
+      </p>
+    );
   }
 
   return (
     <div>
       {authors.map(author => (
         <div key={author.id}>
-          {author.firstName}, {author.lastName}
+          {author.firstName},
+          {author.lastName}
         </div>
       ))}
     </div>

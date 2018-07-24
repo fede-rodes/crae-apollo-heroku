@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon -r dotenv/config server.js",
     "build": "babel . --ignore node_modules,build --out-dir build",
-    "start:prod": "node -r dotenv/config build/server.js"
+    "start:prod": "node -r dotenv/config build/server.js",
+    "lint": "eslint ."
   },
   "dependencies": {
     "apollo-server-express": "^2.0.0",
@@ -21,6 +22,11 @@
     "mongoose": "^5.2.5"
   },
   "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "17.0.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.9.1",
     "nodemon": "^1.18.3"
   }
 }

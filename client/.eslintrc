@@ -1,4 +1,8 @@
-"rules": {
-  "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-  "indent": ["error", 2]
+{
+  "extends": "airbnb",
+  "rules": {
+    "no-console": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "indent": ["error", 2]
+  }
 }

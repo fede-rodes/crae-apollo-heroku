@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
-
-import {
-  ApolloClient,
-  ApolloProvider,
-  createNetworkInterface,
-} from 'react-apollo';
+import React from 'react';
+import { ApolloClient } from 'apollo-client';
+import { createHttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { ApolloProvider } from 'react-apollo';
 
 import './App.css';
 import Authors from './components/Authors';
@@ -15,17 +13,22 @@ import AuthorAndPosts from './components/AuthorAndPosts';
 // https://YOUR-APP-NAME.herokuapp.com/graphql (this will have precedence over
 // the default value provided in the .env file). See the .env file on how to do
 // this.
-const isNotProduction = process.env.NODE_ENV !== 'production';
-const uri = isNotProduction ? 'http://localhost:3001/graphql' : process.env.REACT_APP_GRAPHQL_URI;
+const { NODE_ENV, REACT_APP_GRAPHQL_URI } = process.env;
+const isNotProduction = NODE_ENV !== 'production';
+const uri = isNotProduction ? 'http://localhost:3001/graphql' : REACT_APP_GRAPHQL_URI;
 
 // Log
-console.log('process.env.NODE_ENV', process.env.NODE_ENV);
+console.log('process.env.NODE_ENV', NODE_ENV);
 console.log('GRAPHQL_URI', uri);
 
-const networkInterface = createNetworkInterface({ uri });
-const client = new ApolloClient({ networkInterface });
+// const networkInterface = createNetworkInterface({ uri });
+// const client = new ApolloClient({ networkInterface });
+const client = new ApolloClient({
+  link: createHttpLink({ uri }),
+  cache: new InMemoryCache(),
+});
 
-class App extends Component {
+class App extends React.Component {
   // See ES6 Classes section at: https://facebook.github.io/react/docs/reusable-components.html
   constructor(props) {
     super(props);
@@ -36,23 +39,22 @@ class App extends Component {
     };
   }
 
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: value,
-    });
+  handleInputChange({ target }) {
+    const { value, name } = target;
+    this.setState({ [name]: value });
   }
 
   render() {
     return (
       <ApolloProvider client={client}>
         <div className="App">
-          <h3>CRAE-Apollo-Heroku</h3>
+          <h3>
+            CRAE-Apollo-Heroku
+          </h3>
           <Authors />
-          <h3>{'Enter author\'s name to get his/her posts:'}</h3>
+          <h3>
+            Enter author&apos;s name to get his/her posts:
+          </h3>
           <form>
             <input
               name="firstName"
