@@ -1,10 +1,13 @@
 import React from 'react';
-import gql from 'graphql-tag';
+import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
+import { propType } from 'graphql-anywhere';
+import authorFragment from '../graphql/author/fragment/author';
+import authorQuery from '../graphql/author/query/author';
 
-const AuthorAndPosts = (props) => {
-  console.log(props);
-  const { loading, error, author } = props.data;
+const AuthorAndPosts = ({ authorData }) => {
+  const { loading, error, author } = authorData;
+
   if (loading) {
     return <p>Loading ...</p>;
   }
@@ -21,7 +24,7 @@ const AuthorAndPosts = (props) => {
       <p>{author.firstName}</p>
       <p>{author.lastName}</p>
       {author.posts.map(post => (
-        <div key={post.id}>
+        <div key={post._id}>
           <p>{post.title}</p>
           <p>{post.text}</p>
         </div>
@@ -30,26 +33,20 @@ const AuthorAndPosts = (props) => {
   );
 };
 
-const authorAndPostsQuery = gql`
-  query AuthorAndPostsQuery($firstName: String, $lastName: String) {
-    author(firstName: $firstName, lastName: $lastName) {
-      id
-      firstName
-      lastName
-      posts {
-        id
-        title
-        text
-      }
-    }
-  }
-`;
+AuthorAndPosts.propTypes = {
+  authorData: PropTypes.shape({
+    error: PropTypes.object,
+    loading: PropTypes.bool.isRequired,
+    author: propType(authorFragment),
+    refetch: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
-export default graphql(authorAndPostsQuery, {
-  options: props => ({
-    variables: {
-      firstName: props.firstName,
-      lastName: props.lastName,
-    },
+const withData = graphql(authorQuery, {
+  name: 'authorData',
+  options: ({ firstName, lastName }) => ({
+    variables: { firstName, lastName },
   }),
-})(AuthorAndPosts);
+});
+
+export default withData(AuthorAndPosts);

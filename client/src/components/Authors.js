@@ -1,9 +1,13 @@
 import React from 'react';
-import gql from 'graphql-tag';
+import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
+import { propType } from 'graphql-anywhere';
+import authorFragment from '../graphql/author/fragment/author';
+import authorsQuery from '../graphql/author/query/authors';
 
-const Authors = ({ data }) => {
-  const { loading, error, authors } = data;
+const Authors = ({ authorsData }) => {
+  const { loading, error, authors } = authorsData;
+
   if (loading) {
     return <p>Loading ...</p>;
   }
@@ -14,7 +18,7 @@ const Authors = ({ data }) => {
   return (
     <div>
       {authors.map(author => (
-        <div key={author.id}>
+        <div key={author._id}>
           {author.firstName}, {author.lastName}
         </div>
       ))}
@@ -22,19 +26,15 @@ const Authors = ({ data }) => {
   );
 };
 
-const authorsQuery = gql`
-  query AuthorsQuery {
-    authors {
-      id
-      firstName
-      lastName
-      posts {
-        id
-        title
-        text
-      }
-    }
-  }
-`;
+Authors.propTypes = {
+  authorsData: PropTypes.shape({
+    error: PropTypes.object,
+    loading: PropTypes.bool.isRequired,
+    authors: PropTypes.arrayOf(propType(authorFragment)),
+    refetch: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
-export default graphql(authorsQuery)(Authors);
+const withData = graphql(authorsQuery, { name: 'authorsData' });
+
+export default withData(Authors);

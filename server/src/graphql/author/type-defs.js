@@ -1,6 +1,6 @@
 const typeDefs = `
   type Author {
-    id: ID!
+    _id: ID!
     firstName: String
     lastName: String
     posts: [Post]
@@ -8,7 +8,7 @@ const typeDefs = `
 
   type Query {
     authors: [Author]!
-    author(id: ID, firstName: String, lastName: String): Author
+    author(firstName: String, lastName: String): Author
   }
 `;
 

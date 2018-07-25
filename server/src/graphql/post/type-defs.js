@@ -1,6 +1,6 @@
 const typeDefs = `
   type Post {
-    id: ID!
+    _id: ID!
     title: String
     text: String
     author: Author
