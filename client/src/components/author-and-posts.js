@@ -34,6 +34,11 @@ const AuthorAndPosts = ({ authorData }) => {
 };
 
 AuthorAndPosts.propTypes = {
+  // eslint-disable-next-line
+  author: PropTypes.shape({
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+  }),
   authorData: PropTypes.shape({
     error: PropTypes.object,
     loading: PropTypes.bool.isRequired,
@@ -42,10 +47,17 @@ AuthorAndPosts.propTypes = {
   }).isRequired,
 };
 
+AuthorAndPosts.defaultProps = {
+  author: null,
+};
+
 const withData = graphql(authorQuery, {
   name: 'authorData',
-  options: ({ firstName, lastName }) => ({
-    variables: { firstName, lastName },
+  options: ({ author }) => ({
+    variables: {
+      firstName: (author && author.firstName) || '',
+      lastName: (author && author.lastName) || '',
+    },
   }),
 });
 
