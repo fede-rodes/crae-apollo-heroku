@@ -22,6 +22,7 @@ class HomePage extends React.PureComponent {
       <div>
         <Title>Enter author&apos;s name to get his/her posts:</Title>
         <Authors />
+        <div className="mb1" />
         <AuthorForm onSubmit={this.handleSubmit} />
         <AuthorAndPosts author={author} />
       </div>
