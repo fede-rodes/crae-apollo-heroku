@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
 
 class AuthorForm extends React.Component {
   state = {
     firstName: '',
     lastName: '',
+    // TODO: add errors field
   }
 
   handleChange = ({ target }) => {
@@ -42,11 +44,14 @@ class AuthorForm extends React.Component {
           value={lastName}
           onChange={this.handleChange}
         />
-        <button
+        {/* Material-UI example usage */}
+        <Button
           type="submit"
+          variant="contained"
+          color="primary"
         >
           Submit
-        </button>
+        </Button>
       </form>
     );
   }
