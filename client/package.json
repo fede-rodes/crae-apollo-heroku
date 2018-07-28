@@ -3,21 +3,37 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:3001",
-  "dependencies": {
-    "apollo-client": "^1.8.0",
-    "apollo-test-utils": "^0.3.2",
-    "graphql": "^0.10.3",
-    "graphql-tag": "^2.4.2",
-    "graphql-tools": "^1.1.0",
-    "react": "^15.6.1",
-    "react-apollo": "^1.4.3",
-    "react-dom": "^15.6.1",
-    "react-scripts": "1.0.10"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@material-ui/core": "^1.4.1",
+    "@material-ui/icons": "^2.0.0",
+    "apollo-cache-inmemory": "^1.2.5",
+    "apollo-client": "^2.3.5",
+    "apollo-link-http": "^1.5.4",
+    "graphql": "^0.13.2",
+    "graphql-anywhere": "^4.1.15",
+    "graphql-tag": "^2.9.2",
+    "history": "^4.7.2",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.1",
+    "react-apollo": "^2.1.9",
+    "react-dom": "^16.4.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "1.1.0",
+    "styled-components": "^3.3.3",
+    "unfetch": "^3.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "17.0.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.9.1"
   }
 }
