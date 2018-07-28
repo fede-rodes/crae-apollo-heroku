@@ -3,6 +3,17 @@
 This project is the result of putting together some really nice articles ([see](#further-reading)) to create a dead simple Node - Express - Mongoose - GraphQL (Apollo) - Create React App boilerplate. The app is deployed to Heroku:
 [https://crae-apollo-heroku.herokuapp.com/](https://crae-apollo-heroku.herokuapp.com/)
 
+This project includes the following libraries/functionality
+- Express
+- Apollo 2
+- React 16
+- ES6 syntax
+- material-ui
+- styled components
+- jest
+- basscss
+- service workers
+
 ## Setup MongoDB provider
 Before doing anything, we need to setup a Mongo provider to hold our database for us. I'll describe two ways of doing this; choose the one you like the most.
 
@@ -47,7 +58,7 @@ Please notice, when running the app locally, there will be two servers running s
 
 5. Install dependencies and run the app locally in production mode.
 ```
->> yarn install
+>> yarn install && yarn build
 >> heroku local
 ```
 This should launch the app on port 5000 --> http://localhost:5000. As far as I understand, the port (process.env.PORT) is setup by heroku and can't be changed.
@@ -93,3 +104,4 @@ Please notice, similar to the previous case, when the app is deployed to heroku,
 5. https://dev-blog.apollodata.com/tutorial-building-a-graphql-server-cddaa023c035
 6. https://caveofcode.com/2016/10/apollo-server-using-the-graphql-schema-language/
 7. https://caveofcode.com/2016/11/the-connector-and-model-layer-in-your-graphql-apollo-server/
+8. https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/deployment
