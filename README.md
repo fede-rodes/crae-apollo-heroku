@@ -94,6 +94,11 @@ TODO: we should been able to define .env.production and make Heroku to pick the 
 >> git push heroku master
 ```
 
+Comment: if you want to deploy from a branch different than master run:
+```
+>> git push heroku <BRANCH_NAME>:master
+```
+
 Please notice, similar to the previous case, when the app is deployed to heroku, the CRA is converted into a static asset during the build process and injected into the Express app, ie, there will be only one server running; the port is randomly chosen by heroku and, as far as I understand, this behavior cannot be changed.
 
 ## Further reading
