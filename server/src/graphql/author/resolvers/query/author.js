@@ -1,19 +1,29 @@
-const each = require('lodash/each');
-const extend = require('lodash/extend');
 const isEmpty = require('lodash/isEmpty');
 const { Author } = require('../../../../models');
 
-const author = (root, args) => {
+const author = async (root, args) => {
+  const fields = ['firstName', 'lastName'];
+
   // In case firstName or lastName is '', just remove field from the query
   // in order to avoid empty results.
   const query = {};
-  each(['firstName', 'lastName'], (fieldName) => {
-    if (args[fieldName] && args[fieldName].trim().length > 0) {
-      extend(query, { [fieldName]: args[fieldName].trim() });
+  fields.forEach((fieldName) => {
+    const fieldValue = args[fieldName] ? args[fieldName].trim() : '';
+    if (fieldValue.length > 0) {
+      query[fieldName] = fieldValue;
     }
   });
 
-  return !isEmpty(query) ? Author.findOne(query) : null;
+  if (isEmpty(query)) {
+    return null;
+  }
+
+  try {
+    return await Author.findOne(query);
+  } catch (exc) {
+    console.log(exc);
+    return null;
+  }
 };
 
 module.exports = author;
