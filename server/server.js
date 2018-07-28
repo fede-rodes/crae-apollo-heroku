@@ -41,11 +41,11 @@ if (isNotProduction) {
 //------------------------------------------------------------------------------
 // MONGO CONNECTION
 //------------------------------------------------------------------------------
-mongoose.connect(MONGO_URL);
+mongoose.connect(MONGO_URL, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 
 const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
+db.on('error', console.error.bind(console, 'Connection error:'));
 db.once('open', console.log.bind(console, `Database connected to ${MONGO_URL}`));
 
 // Clean and populate DB
