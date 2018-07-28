@@ -1,8 +1,9 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const { ApolloServer } = require('apollo-server-express');
+const helmet = require('helmet');
 const path = require('path');
 const cors = require('cors');
+const mongoose = require('mongoose');
+const { ApolloServer } = require('apollo-server-express');
 const schema = require('./src/graphql/exec-schema');
 const initDB = require('./src/init-db');
 
@@ -31,6 +32,7 @@ app.set('port', (PORT || 3001));
 // MIDDLEWARES
 //------------------------------------------------------------------------------
 // Apply middleware to parse incoming body requests into JSON format.
+app.use(helmet());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // Enable the app to receive requests from the React app when running locally.
