@@ -1,57 +1,95 @@
-## Create-React-App-Apollo-Express-MongoDB boilerplate ready to be deployed to Heroku
-The current branch, mongo, is an extension of the master branch that incorporates MongoDB support using mongoose for easier collection manipulation. Additionally, we split the schema definition using .graphql file extension.
+# Node - Express - Mongoose - GraphQL (Apollo) - Create React App boilerplate ready to be deployed to Heroku
 
-Please, read the following articles to understand the new code:
-1. https://dev-blog.apollodata.com/tutorial-building-a-graphql-server-cddaa023c035
-2. https://caveofcode.com/2016/10/apollo-server-using-the-graphql-schema-language/
-3. https://caveofcode.com/2016/11/the-connector-and-model-layer-in-your-graphql-apollo-server/
+This project is the result of putting together some really nice articles ([see](#further-reading)) to create a dead simple Node - Express - Mongoose - GraphQL (Apollo) - Create React App boilerplate. The app is deployed to Heroku:
+[https://crae-apollo-heroku.herokuapp.com/](https://crae-apollo-heroku.herokuapp.com/)
 
-Here you can find the mongo-branch-app deployed to heroku: https://crae-apollo-mongo-heroku.herokuapp.com/
+## Setup MongoDB provider
+Before doing anything, we need to setup a Mongo provider to hold our database for us. I'll describe two ways of doing this; choose the one you like the most.
 
-### Getting started, run the app locally in dev mode
-Before cloning the project, we need to setup our MongoDB provider. I'll describe two alternatives for doing this. The first approach is to install mongo in your local machine and run the application using a local instance of mongo. The second option is to create a free instance in mLab and connect your application to a remote instance.
+### Install Mongo locally
+The first approach is to install Mongo locally. In order to so, go to [https://docs.mongodb.com/manual/administration/install-community/](https://docs.mongodb.com/manual/administration/install-community/) and follow the instructions based on your operating system. After that, open a new terminal and start the mongo service; in my case, I'm on Ubuntu, so I run ```sudo service mongod start```. This will start the Mongo service in the background on port 27017.
 
-Install mongo locally:
-In order to install mongo locally go to [this](https://docs.mongodb.com/manual/administration/install-community/) link and follow the instructions to install MongoDB for your particular operating system.
-Then, open a new terminal and start the mongo service. In my case (I'm on Ubuntu) I run 'sudo service mongod start', this will start the mongo service in the background on port 27017.
+### Get a Sandbox Mongo instance on mLab
+The second option is to create a FREE database hosted on mLab and then connect your application to the remote instance. To do so, go to [mLab](http://mlab.com/) and create a sandbox Mongo instance. Then, go to the Users tab in your mLab-sandbox-MongoDB-instance-dashboard and click on the 'add a database user' button; setup username and password. Remember those values, we'll need them shortly!
 
-Create a remote sandbox MongoDB instance on mLab:
-Go to [mLab](http://mlab.com/) and create a sandbox MongoDB instance (it's FREE). Then go to the Users tab in your mLab-sandbox-MongoDB-instance-dashboard and click on the 'add a database user' button; set username and password. Remember those values, we'll need them in a few minutes!
+## Running the app locally in dev mode
+Once we have our Mongo provider, these are the next steps that we need to follow to run the app locally in dev mode:
 
-Once we have our mongoDB provider, these are the next steps we need to follow to run the app in dev mode: clone the 'mongo' branch from this project, set your MONGO_URL env var to connect the app with your recently created MongoDB instance, install project dependencies, and run the app locally.
+1. Clone the project and move to the project's folder
 ```
-git clone https://github.com/fede-rodes/crae-apollo-heroku.git crae-apollo-mongo-heroku --branch mongo --single-branch
-cd crae-apollo-mongo-heroku
-got to /server/.env and set the MONGO_URL env var to connect to your mongoDB instance. In case you are using mLab, remember to use your credentials! In case your are running mongo locally, you can use the default value for MONGO_URL (remember to start your mongo service: `sudo service mongod start`!).
-yarn install && yarn start
-```
-When running the app locally, there will be two servers running simultaneously: one for serving the create-react-app (CRA) and another one for the express app. The CRA app should be accessible via http://localhost:3000/, and the express app via http://localhost:3001/. The graphql playground (former graphiql) should be running on http://localhost:3001/graphql (only accessible in dev mode).
-
-### Run the app locally in production mode
-Clone the 'mongo' branch from this project, set your MONGO_URL env var to connect the app with the MongoDB instance, install dependencies, build the project and run the 'heroku local' command. This will launch the app on http://localhost:5000 (the port is set by heroku and, as far as I understand, it can't be changed). During the build process the CRA is converted into a static asset and injected into the express app, in this way, there will be only one server running (the one hosting the express app).
-```
-git clone https://github.com/fede-rodes/crae-apollo-heroku.git crae-apollo-mongo-heroku --branch mongo --single-branch
-cd crae-apollo-mongo-heroku
-got to /server/.env and set the MONGO_URL env var to connect to your mongoDB instance. In case you are using mLab, remember to use your credentials! In case your are running mongo locally, you can use the default value for MONGO_URL.
-yarn install && yarn build
-heroku local
+>> git clone https://github.com/fede-rodes/crae-apollo-heroku.git
+>> cd crae-apollo-heroku
 ```
 
-### Deploy to heroku
-Clone the 'mongo' branch from this project, open the heroku command line tool and choose a name for your app, set MONGO_URL env variable connect to an external mLab-MongoDB-sandbox-instance, set your REACT_APP_GRAPHQL_URI env variable (this is the location of the GraphQL endpoint that depends on you app's name), and deploy the code to heroku.
+2. Setup your MONGO_URL env variable to connect the app with your recently created Mongo instance. In order to do so, first create a .env file in your root directory by copying the content of the provided .sample.env file. Then, setup the MONGO_URL env variable to connect to your mongoDB instance. In case you are using mLab, remember to use your credentials. In case your are running mongo locally, you can use the default value for MONGO_URL.
 
-Similar to the previous case, when the app is deployed to heroku, the CRA is converted into a static asset during the build process and injected into the express app, ie, there will be only one server running; the port is randomly chosen by heroku and, as far as I understand, this behavior cannot be changed.
+3. Install project dependencies, and run the app locally.
 ```
-git clone https://github.com/fede-rodes/crae-apollo-heroku.git crae-apollo-mongo-heroku --branch mongo --single-branch
-cd crae-apollo-mongo-heroku
-heroku login (enter your credentials)
-heroku create <YOUR_APP_NAME>
+>> yarn install
+>> yarn start
+```
+The app should be running on port 3000 --> http://localhost:3000
+
+Please notice, when running the app locally, there will be two servers running simultaneously: one for serving the create-react-app (CRA) and another one for the Express app. The CRA should be accessible via [http://localhost:3000/](http://localhost:3000/), and the Express app via [http://localhost:3001/](http://localhost:3001/). The GraphQL playground should be running on [http://localhost:3001/graphql](http://localhost:3001/graphql) (only accessible in dev mode).
+
+## Running the app locally in production mode
+1. Follow the steps above to setup your Mongo service.
+
+2. Install heroku cli: [https://devcenter.heroku.com/articles/heroku-cli](https://devcenter.heroku.com/articles/heroku-cli)
+
+3. Clone the project and move to the project's folder
+```
+>> git clone https://github.com/fede-rodes/crae-apollo-heroku.git
+>> cd crae-apollo-heroku
+```
+
+4. Setup your MONGO_URL env variable as describe above.
+
+5. Install dependencies and run the app locally in production mode.
+```
+>> yarn install
+>> heroku local
+```
+This should launch the app on port 5000 --> http://localhost:5000. As far as I understand, the port (process.env.PORT) is setup by heroku and can't be changed.
+
+Please notice, during the build process the CRA is converted into a static asset and injected into the Express app, in this way, there will be only one server running (the one hosting the Express app).
+
+## Deploy to heroku
+1. Follow the steps above to setup a Mongo service on mLab.
+
+2. Install heroku cli: [https://devcenter.heroku.com/articles/heroku-cli](https://devcenter.heroku.com/articles/heroku-cli)
+
+3. Clone the project and move to the project's folder
+```
+>> git clone https://github.com/fede-rodes/crae-apollo-heroku.git
+>> cd crae-apollo-heroku
+```
+
+4. Initiate Heroku cli and create a new app
+```
+>> heroku login (enter your credentials)
+>> heroku create <YOUR_APP_NAME>
+```
+
+5. Install buildpacks (probably not necessary if you don't use yarn) and set MONGO_URL env variable.
+```
 heroku buildpacks:set https://github.com/heroku/heroku-buildpack-nodejs#yarn
 heroku config:set MONGO_URL=mongodb://<dbuser>:<dbpassword>@<something>.mlab.com:<port>/<dbname>
-heroku config:set REACT_APP_GRAPHQL_URI=https://<YOUR_APP_NAME>.herokuapp.com/graphql
-git push heroku mongo:master
-heroku open
+```
+TODO: we should been able to define .env.production and make Heroku to pick the env variables from there.
+
+6. Push the code to Heroku.
+```
+>> git push heroku master
 ```
 
-### Last comments
-Be aware that, sometimes, you need to refresh the page after you deploy some changes; there must be some caching problem somewhere!
+Please notice, similar to the previous case, when the app is deployed to heroku, the CRA is converted into a static asset during the build process and injected into the Express app, ie, there will be only one server running; the port is randomly chosen by heroku and, as far as I understand, this behavior cannot be changed.
+
+## Further reading
+1. https://originmaster.com/running-create-react-app-and-express-crae-on-heroku-c39a39fe7851
+2. https://dev-blog.apollodata.com/full-stack-react-graphql-tutorial-582ac8d24e3b
+3. https://dev-blog.apollodata.com/react-graphql-tutorial-part-2-server-99d0528c7928
+4. https://dev-blog.apollodata.com/react-graphql-tutorial-mutations-764d7ec23c15
+5. https://dev-blog.apollodata.com/tutorial-building-a-graphql-server-cddaa023c035
+6. https://caveofcode.com/2016/10/apollo-server-using-the-graphql-schema-language/
+7. https://caveofcode.com/2016/11/the-connector-and-model-layer-in-your-graphql-apollo-server/
