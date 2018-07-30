@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 class AuthorForm extends React.Component {
@@ -29,26 +30,31 @@ class AuthorForm extends React.Component {
     const { firstName, lastName } = this.state;
 
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input
+      <form onSubmit={this.handleSubmit} autoComplete="off">
+        {/* Material-UI example usage */}
+        <TextField
           name="firstName"
           type="text"
-          placeholder="First name"
+          label="First name"
           value={firstName}
           onChange={this.handleChange}
+          margin="normal"
+          fullWidth
         />
-        <input
+        <TextField
           name="lastName"
           type="text"
-          placeholder="Last name"
+          label="Last name"
           value={lastName}
           onChange={this.handleChange}
+          margin="normal"
+          fullWidth
         />
-        {/* Material-UI example usage */}
         <Button
           type="submit"
           variant="contained"
           color="primary"
+          fullWidth
         >
           Submit
         </Button>

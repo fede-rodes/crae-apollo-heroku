@@ -21,7 +21,7 @@ class HomePage extends React.PureComponent {
 
     return (
       <div>
-        <Title>Enter author&apos;s name to get his/her posts:</Title>
+        <Title>Enter author&apos;s first name and/or last name to get his/her posts:</Title>
         <Authors />
         {/* Basscss example usage */}
         <div className="mb1" />
