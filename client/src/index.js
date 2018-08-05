@@ -5,7 +5,8 @@ import ReactDOM from 'react-dom';
 import './basscss.min.css';
 import './index.css';
 import App from './app';
+import Routes from './routes';
 import registerServiceWorker from './register-service-worker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App component={Routes} />, document.getElementById('root'));
 registerServiceWorker();
