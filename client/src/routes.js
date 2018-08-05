@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-// import { propType } from 'graphql-anywhere';
-// import userFragment from './apollo-client/user/fragment/user';
+import { propType } from 'graphql-anywhere';
+import userFragment from './graphql/user/fragment/user';
 import {
   ScrollToTop,
   RouteWithProps,
@@ -28,12 +28,12 @@ const Routes = props => (
   </ScrollToTop>
 );
 
-/* Routes.propTypes = {
+Routes.propTypes = {
   curUser: propType(userFragment), // eslint-disable-line
 };
 
 Routes.defaultProps = {
   curUser: null,
-}; */
+};
 
 export default Routes;
