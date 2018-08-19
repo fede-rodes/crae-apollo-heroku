@@ -4,6 +4,7 @@ const userFragment = gql`
   fragment userFragment on User {
     _id
     createdAt
+    email
   }
 `;
 

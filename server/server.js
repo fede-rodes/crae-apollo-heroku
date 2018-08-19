@@ -4,14 +4,27 @@ const path = require('path');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const { ApolloServer } = require('apollo-server-express');
+const Joi = require('joi');
+const jwt = require('jsonwebtoken');
+const pick = require('lodash/pick');
 const schema = require('./src/graphql/exec-schema');
+const login = require('./src/routes/login');
 const initDB = require('./src/init-db');
+
+// Extend Joi validator by adding objectId type
+Joi.objectId = require('joi-objectid')(Joi);
 
 //------------------------------------------------------------------------------
 // LOGS
 //------------------------------------------------------------------------------
 // Log env vars
-const { NODE_ENV, PORT, MONGO_URL } = process.env;
+const {
+  NODE_ENV,
+  PORT,
+  MONGO_URL,
+  JWT_PRIVATE_KEY,
+} = process.env;
+
 const isNotProduction = NODE_ENV !== 'production';
 
 console.log(
@@ -19,6 +32,11 @@ console.log(
   '\nprocess.env.PORT', PORT,
   '\nprocess.env.MONGO_URL', MONGO_URL,
 );
+
+if (!JWT_PRIVATE_KEY || JWT_PRIVATE_KEY.length === 0) {
+  console.error('FATAL ERROR: JWT_PRIVATE_KEY env var missing');
+  process.exit(1);
+}
 
 //------------------------------------------------------------------------------
 // INIT EXPRESS SERVER
@@ -61,10 +79,31 @@ const staticFiles = express.static(path.join(__dirname, '../../client/build'));
 app.use(staticFiles);
 
 //------------------------------------------------------------------------------
-// ROUTES
+// APOLLO SERVER
 //------------------------------------------------------------------------------
+const getUser = async (req) => {
+  const token = req && req.headers && req.headers.authorization;
+  // console.log('req.headers', req && req.headers);
+  // console.log('req.headers', req && req.headers && req.headers.authorization);
+
+  if (!token) {
+    return null;
+  }
+
+  try {
+    const json = await jwt.verify(token, JWT_PRIVATE_KEY);
+    return pick(json, '_id');
+  } catch (exc) {
+    console.error('Not authorized');
+    return null;
+  }
+};
+
 const server = new ApolloServer({
   schema,
+  context: async ({ req }) => ({
+    user: await getUser(req),
+  }),
   playground: {
     settings: {
       'editor.theme': 'light',
@@ -72,6 +111,12 @@ const server = new ApolloServer({
   },
 });
 server.applyMiddleware({ app, path: '/graphql' });
+
+//------------------------------------------------------------------------------
+// ROUTES
+//------------------------------------------------------------------------------
+app.use('/api/login', login);
+
 
 //------------------------------------------------------------------------------
 // CATCH ALL

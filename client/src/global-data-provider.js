@@ -21,9 +21,6 @@ const GlobalDataProvider = ({ userData, children }) => {
   if (error) {
     return <p>{error.message}</p>;
   }
-  if (!user) {
-    return <p>No user</p>;
-  }
 
   const api = {
     curUser: user,

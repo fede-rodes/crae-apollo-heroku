@@ -4,6 +4,7 @@ const { User, Author, Post } = require('./models');
 
 // Clear DB
 const clearAll = async () => {
+  await User.remove({});
   await Author.remove({});
   await Post.remove({});
 };
@@ -65,7 +66,7 @@ const initDB = async () => {
   // Clear Author and Post collections
   await clearAll();
   // Insert current user
-  await initUser();
+  // await initUser();
   // Set some initial data
   await fixtures();
 };
