@@ -14,16 +14,26 @@ This project includes the following libraries/functionality
 - basscss
 - service workers
 
-## Setup MongoDB provider
+## Step by step guide to get started with this boilerplate
+
+### 1. Setup MongoDB provider
 Before doing anything, we need to setup a Mongo provider to hold our database for us. I'll describe two ways of doing this; choose the one you like the most.
 
-### Install Mongo locally
+#### Install Mongo locally
 The first approach is to install Mongo locally. In order to so, go to [https://docs.mongodb.com/manual/administration/install-community/](https://docs.mongodb.com/manual/administration/install-community/) and follow the instructions based on your operating system. After that, open a new terminal and start the mongo service; in my case, I'm on Ubuntu, so I run ```sudo service mongod start```. This will start the Mongo service in the background on port 27017.
 
-### Get a Sandbox Mongo instance on mLab
+#### Get a Sandbox Mongo instance on mLab
 The second option is to create a FREE database hosted on mLab and then connect your application to the remote instance. To do so, go to [mLab](http://mlab.com/) and create a sandbox Mongo instance. Then, go to the Users tab in your mLab-sandbox-MongoDB-instance-dashboard and click on the 'add a database user' button; setup username and password. Remember those values, we'll need them shortly!
 
-## Running the app locally in dev mode
+### 2. Create your .env files:
+Inside both 'server' and 'client' folders there is a .sample.env file. Create a new file called ```.env``` based on the provided ```.sample.env```.
+
+### 3. Register the app on Mailgun:
+Mailgun allows you to send emails from your app.
+
+In order to get started, first access your [Mailgun](https://www.mailgun.com/) account. Then, grab your sandbox domain smtp username and password and copy said values into your /server/.env file. Finally, add your email address to the list of [Auhtorized Recipients](https://help.mailgun.com/hc/en-us/articles/217531258-Authorized-Recipients).
+
+### 4. Running the app locally in dev mode
 Once we have our Mongo provider, these are the next steps that we need to follow to run the app locally in dev mode:
 
 1. Clone the project and move to the project's folder
@@ -32,7 +42,7 @@ Once we have our Mongo provider, these are the next steps that we need to follow
 >> cd crae-apollo-heroku
 ```
 
-2. Setup your MONGO_URL env variable to connect the app with your recently created Mongo instance. In order to do so, first create a .env file in your root directory by copying the content of the provided .sample.env file. Then, setup the MONGO_URL env variable to connect to your mongoDB instance. In case you are using mLab, remember to use your credentials. In case your are running mongo locally, you can use the default value for MONGO_URL.
+2. Setup your MONGO_URL env variable inside /server/.env to connect the app with your recently created Mongo instance. In case you are using mLab, remember to use your credentials. In case your are running mongo locally, you can use the default value for MONGO_URL.
 
 3. Install project dependencies, and run the app locally.
 ```
@@ -43,7 +53,7 @@ The app should be running on port 3000 --> http://localhost:3000
 
 Please notice, when running the app locally, there will be two servers running simultaneously: one for serving the create-react-app (CRA) and another one for the Express app. The CRA should be accessible via [http://localhost:3000/](http://localhost:3000/), and the Express app via [http://localhost:3001/](http://localhost:3001/). The GraphQL playground should be running on [http://localhost:3001/graphql](http://localhost:3001/graphql) (only accessible in dev mode).
 
-## Running the app locally in production mode
+### 5. Running the app locally in production mode
 1. Follow the steps above to setup your Mongo service.
 
 2. Install heroku cli: [https://devcenter.heroku.com/articles/heroku-cli](https://devcenter.heroku.com/articles/heroku-cli)
@@ -65,7 +75,7 @@ This should launch the app on port 5000 --> http://localhost:5000. As far as I u
 
 Please notice, during the build process the CRA is converted into a static asset and injected into the Express app, in this way, there will be only one server running (the one hosting the Express app).
 
-## Deploy to heroku
+### 6. Deploy to heroku
 1. Follow the steps above to setup a Mongo service on mLab.
 
 2. Install heroku cli: [https://devcenter.heroku.com/articles/heroku-cli](https://devcenter.heroku.com/articles/heroku-cli)
