@@ -1,11 +1,11 @@
 // const User = require('./user');
 const Query = require('./query');
-// const Mutation = require('./mutation');
+const Mutation = require('./mutation');
 
 const resolvers = {
   // User,
   Query,
-  // Mutation,
+  Mutation,
 };
 
 module.exports = resolvers;

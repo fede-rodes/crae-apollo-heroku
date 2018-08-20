@@ -1,5 +1,6 @@
 import { ApolloClient } from 'apollo-client';
 import { createHttpLink } from 'apollo-link-http';
+import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
 // REACT_APP_GRAPHQL_URI is defined in .env file. When the app is deployed to
@@ -18,8 +19,23 @@ console.log(
   '\nGRAPHQL_URI', uri,
 );
 
+const httpLink = createHttpLink({ uri });
+
+const authLink = setContext((_, { headers }) => {
+  // Get the authentication token from local storage if it exists
+  const token = localStorage.getItem('x-auth-token');
+  // Return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      // authorization: token ? `Bearer ${token}` : '',
+      authorization: token || '',
+    },
+  };
+});
+
 const client = new ApolloClient({
-  link: createHttpLink({ uri }),
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
