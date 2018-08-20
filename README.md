@@ -7,10 +7,11 @@ This project includes the following libraries/functionality
 - Express
 - Apollo 2
 - React 16
+- Authentication: passwordless via JWT
 - ES6 syntax
 - material-ui
 - styled components
-- jest
+- jest-enzyme
 - basscss
 - service workers
 
