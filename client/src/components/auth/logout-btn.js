@@ -2,36 +2,39 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withApollo } from 'react-apollo';
 import Button from '@material-ui/core/Button';
+import ButtonLink from '../common/button-link';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const LogoutBtn = ({ client, btnType, disabled, onLogoutHook }) => {
+const LogoutBtn = ({
+  client,
+  btnType,
+  disabled,
+  underline,
+  onLogoutHook,
+}) => {
   // Logout user and clear store afterwards
   const handleLogout = (evt) => {
     if (evt) { evt.preventDefault(); }
-    // Meteor.logout(() => {
-      // Clear apollo store.
-      client.resetStore();
-      // Pass event up to parent component.
-      onLogoutHook();
-    // });
+    // Remove auth token from localStorage
+    localStorage.removeItem('x-auth-token');
+    // Clear apollo store
+    client.resetStore();
+    // Pass event up to parent component
+    onLogoutHook();
   };
 
-  if (btnType === 'link') {
-    return disabled
-      ? <span>Logout</span>
-      : (
-        <a href="" onClick={handleLogout}>
-          Log out
-        </a>
-      );
-  }
+  const ButtonComp = btnType === 'link' ? ButtonLink : Button;
 
   return (
-    <Button disabled={disabled} onClick={handleLogout}>
+    <ButtonComp
+      disabled={disabled}
+      underline={underline}
+      onClick={handleLogout}
+    >
       Log out
-    </Button>
+    </ButtonComp>
   );
 };
 
@@ -41,12 +44,14 @@ LogoutBtn.propTypes = {
   }).isRequired,
   btnType: PropTypes.oneOf(['button', 'link']),
   disabled: PropTypes.bool,
+  underline: PropTypes.bool,
   onLogoutHook: PropTypes.func,
 };
 
 LogoutBtn.defaultProps = {
   btnType: 'button',
   disabled: false,
+  underline: true,
   onLogoutHook: () => {},
 };
 

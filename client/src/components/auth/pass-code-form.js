@@ -1,24 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { graphql } from 'react-apollo';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import ErrorHandling from 'error-handling-utils';
-import isEmail from 'validator/lib/isEmail';
-import sendPassCodeMutation from '../../graphql/user/mutation/send-pass-code';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-class EmailAuthView extends React.Component {
+class PassCodeForm extends React.Component {
   state = {
-    email: '',
-    errors: { email: [] },
+    passCode: '',
+    errors: { passCode: [] },
   }
 
   handleChange = ({ target }) => {
-    const { id: field, value } = target;
     const { errors } = this.state;
+    const { id: field, value } = target;
 
     // Update value and clear errors for the given field
     this.setState({
@@ -27,46 +24,38 @@ class EmailAuthView extends React.Component {
     });
   }
 
-  validateFields = ({ email }) => {
+  validateFields = ({ passCode }) => {
     // Initialize errors
     const errors = {
-      email: [],
+      passCode: [],
     };
 
-    const MAX_CHARS = 155;
+    const PASS_CODE_LENGTH = 6;
 
     // Sanitize input
-    const _email = email && email.trim(); // eslint-disable-line no-underscore-dangle
+    const _passCode = passCode && passCode.trim(); // eslint-disable-line no-underscore-dangle
 
-    if (!_email) {
-      errors.email.push('Email is required!');
-    } else if (!isEmail(_email)) {
-      errors.email.push('Please, provide a valid email address!');
-    } else if (_email.length > MAX_CHARS) {
-      errors.email.push(`Must be no more than ${MAX_CHARS} characters!`);
+    if (!_passCode) {
+      errors.passCode.push('Pass code is required!');
+    } else if (_passCode.length !== PASS_CODE_LENGTH) {
+      errors.passCode.push(`Pass code must be ${PASS_CODE_LENGTH} characters long`);
     }
 
     return errors;
   }
 
   clearFields = () => {
-    this.setState({ email: '' });
+    this.setState({ passCode: '' });
   }
 
   clearErrors = () => {
-    this.setState({ errors: { email: [] } });
+    this.setState({ errors: { passCode: [] } });
   }
 
   handleSubmit = async (evt) => {
     evt.preventDefault();
 
-    const {
-      onBeforeHook,
-      onClientErrorHook,
-      onServerErrorHook,
-      onSuccessHook,
-      sendPassCode,
-    } = this.props;
+    const { onBeforeHook, onClientErrorHook, onSuccessHook } = this.props;
 
     // Run before logic if provided and return on error
     try {
@@ -76,36 +65,30 @@ class EmailAuthView extends React.Component {
     }
 
     // Get field values
-    const { email } = this.state;
+    const { passCode } = this.state;
 
     // Clear previous errors if any
     this.clearErrors();
 
     // Validate fields
-    const err1 = this.validateFields({ email });
+    const errors = this.validateFields({ passCode });
 
     // In case of errors, display on UI and return handler to parent component
-    if (ErrorHandling.hasErrors(err1)) {
-      this.setState({ errors: err1 });
-      onClientErrorHook(err1);
+    if (ErrorHandling.hasErrors(errors)) {
+      this.setState({ errors });
+      onClientErrorHook(errors);
       return;
     }
 
-    try {
-      await sendPassCode({ variables: { email } });
-      this.clearFields();
-      onSuccessHook({ email });
-    } catch (exc) {
-      console.log(exc);
-      onServerErrorHook(exc);
-    }
+    // Pass event up to parent component
+    onSuccessHook({ passCode });
   }
 
   render() {
     const { btnLabel, disabled } = this.props;
-    const { email, errors } = this.state;
+    const { passCode, errors } = this.state;
 
-    const emailErrors = ErrorHandling.getFieldErrors(errors, 'email');
+    const passCodeErrors = ErrorHandling.getFieldErrors(errors, 'passCode');
 
     return (
       <form
@@ -114,15 +97,15 @@ class EmailAuthView extends React.Component {
         autoComplete="off"
       >
         <TextField
-          id="email"
-          type="email"
-          label="Email"
-          value={email}
+          id="passCode"
+          type="text"
+          label="Pass Code"
+          value={passCode}
           onChange={this.handleChange}
           margin="normal"
           fullWidth
-          error={emailErrors.length > 0}
-          helperText={emailErrors || ''}
+          error={passCodeErrors.length > 0}
+          helperText={passCodeErrors || ''}
         />
         <div className="mb2" />
         <Button
@@ -139,26 +122,20 @@ class EmailAuthView extends React.Component {
   }
 }
 
-EmailAuthView.propTypes = {
+PassCodeForm.propTypes = {
   btnLabel: PropTypes.string,
   disabled: PropTypes.bool,
   onBeforeHook: PropTypes.func,
   onClientErrorHook: PropTypes.func,
-  onServerErrorHook: PropTypes.func,
   onSuccessHook: PropTypes.func,
-  sendPassCode: PropTypes.func.isRequired,
 };
 
-EmailAuthView.defaultProps = {
+PassCodeForm.defaultProps = {
   btnLabel: 'Submit',
   disabled: false,
   onBeforeHook: () => {},
   onClientErrorHook: () => {},
-  onServerErrorHook: () => {},
   onSuccessHook: () => {},
 };
 
-// Apollo integration
-const withMutation = graphql(sendPassCodeMutation, { name: 'sendPassCode' });
-
-export default withMutation(EmailAuthView);
+export default PassCodeForm;

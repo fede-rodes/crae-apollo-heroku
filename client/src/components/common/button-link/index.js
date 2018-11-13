@@ -8,34 +8,32 @@ import styled from 'styled-components';
 const Button = styled.button`
   /* reset button style */
   background: none !important;
-  color: inherit;
   border: none; 
   padding: 0 !important;
-  font: inherit;
-  color: ${({ disabled, theme }) => (disabled === false && theme.color.link)
-  || 'inherit'};
-  border-bottom: ${({ disabled, theme }) => (disabled === false && `1px solid ${theme.color.link}`)
-  || 'none'};
-  cursor: ${({ disabled }) => (disabled === false && 'pointer')
-  || 'not-allowed'};
+  font: 'inherit';
+  text-decoration: ${({ disabled, underline }) => (
+    (!disabled || disabled === false) && underline ? 'underline' : 'none'
+  )};
+  color: ${({ disabled, theme }) => (
+    (!disabled || disabled === false) ? theme.color.link : 'inherit'
+  )};
+  cursor: ${({ disabled }) => (
+    (!disabled || disabled === false) ? 'pointer' : 'not-allowed'
+  )};
 `;
 
 Button.propTypes = {
-  disabled: PropTypes.bool,
   type: PropTypes.oneOf(['button']).isRequired,
-};
-
-Button.defaultProps = {
-  disabled: false,
+  underline: PropTypes.bool.isRequired,
 };
 
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const ButtonLink = ({ children, disabled, ...rest }) => (
+const ButtonLink = ({ children, underline, ...rest }) => (
   <Button
     type="button"
-    disabled={disabled}
+    underline={underline}
     {...rest}
   >
     {children}
@@ -47,11 +45,12 @@ ButtonLink.propTypes = {
     PropTypes.object,
     PropTypes.string,
   ]).isRequired,
-  disabled: PropTypes.bool,
+  underline: PropTypes.bool,
+  // Plus all of the native button props
 };
 
 ButtonLink.defaultProps = {
-  disabled: false,
+  underline: true,
 };
 
 export default ButtonLink;

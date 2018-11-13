@@ -6,6 +6,7 @@ import { FormProps } from '../../render-props';
 // import SEO from '../../components/smart/seo';
 import EmailForm from '../../components/auth/email-form';
 import PassCodeForm from '../../components/auth/pass-code-form';
+import SignupApiCall from '../../components/auth/signup-api-call';
 import SendPassCode from '../../components/auth/send-pass-code';
 import LoginApiCall from '../../components/auth/login-api-call';
 import ResendPassCodeBtn from '../../components/auth/resend-pass-code-btn';
@@ -18,9 +19,9 @@ import ButtonLink from '../../components/common/button-link';
 //------------------------------------------------------------------------------
 // After PassCodeAuthView returns successful, the user logged-in-state will change
 // from 'logged out' to 'logged in' automatically. This will trigger the
-// LoggedOutRoute component's logic (said component wraps the LoginPage component)
+// LoggedOutRoute component's logic (said component wraps the SignupPage component)
 // which will result in redirecting the user to home page automatically.
-class LoginPage extends React.PureComponent {
+class SignupPage extends React.PureComponent {
   state = {
     view: 'emailView',
     email: '',
@@ -30,9 +31,9 @@ class LoginPage extends React.PureComponent {
     const { client, onPageChange } = this.props;
     const { view, email } = this.state;
 
-    const signupLink = (
-      <ButtonLink onClick={() => { onPageChange('signup'); }}>
-        Sign Up
+    const loginLink = (
+      <ButtonLink onClick={() => { onPageChange('login'); }}>
+        Log In
       </ButtonLink>
     );
 
@@ -49,10 +50,10 @@ class LoginPage extends React.PureComponent {
           handleSuccess,
         }) => (
           <AuthPageLayout
-            title={view === 'emailView' ? 'Log In' : 'Enter Pass Code'}
-            subtitle={view === 'emailView' ? 'Don\'t have an account?' : 'Haven\'t received the pass code?'}
+            title={view === 'emailView' ? 'Sign Up' : 'Enter Pass Code'}
+            subtitle={view === 'emailView' ? 'Already have an account?' : 'Haven\'t received the pass code?'}
             link={view === 'emailView'
-              ? signupLink
+              ? loginLink
               : (
                 <ResendPassCodeBtn
                   email={email}
@@ -81,23 +82,33 @@ class LoginPage extends React.PureComponent {
                     setSuccessMessage('A new email has been sent to your inbox!');
                     // Switch to passCodeView view
                     this.setState({ view: 'passCodeView' });
+                    // TODO: need to send passCode
                   });
                 }}
               >
                 {({ sendPassCode }) => (
-                  <EmailForm
-                    btnLabel="Send Pass Code"
-                    disabled={disabled}
-                    onBeforeHook={handleBefore}
-                    onClientErrorHook={handleClientError}
-                    onSuccessHook={(formInput) => {
-                      // Store current user's email and fire signup api call
-                      this.setState(
-                        { email: formInput.email },
-                        () => { sendPassCode({ email: formInput.email }); },
-                      );
+                  <SignupApiCall
+                    onSignupError={handleServerError}
+                    onSignupSuccess={(newUser) => {
+                      sendPassCode({ email: newUser.email });
                     }}
-                  />
+                  >
+                    {({ onFormSuccess }) => (
+                      <EmailForm
+                        btnLabel="Send Pass Code"
+                        disabled={disabled}
+                        onBeforeHook={handleBefore}
+                        onClientErrorHook={handleClientError}
+                        onSuccessHook={(formInput) => {
+                          // Store current user's email and fire signup api call
+                          this.setState(
+                            { email: formInput.email },
+                            () => { onFormSuccess({ email: formInput.email }); },
+                          );
+                        }}
+                      />
+                    )}
+                  </SignupApiCall>
                 )}
               </SendPassCode>
             )}
@@ -141,15 +152,15 @@ class LoginPage extends React.PureComponent {
   }
 }
 
-LoginPage.propTypes = {
+SignupPage.propTypes = {
   client: PropTypes.shape({
     resetStore: PropTypes.func.isRequired,
   }).isRequired,
   onPageChange: PropTypes.func,
 };
 
-LoginPage.defaultProps = {
+SignupPage.defaultProps = {
   onPageChange: () => {},
 };
 
-export default withApollo(LoginPage);
+export default withApollo(SignupPage);
