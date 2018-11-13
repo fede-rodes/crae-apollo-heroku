@@ -26,7 +26,9 @@
     "merge-graphql-schemas": "^1.5.3",
     "mongoose": "^5.2.5",
     "nodemailer": "^4.6.8",
-    "validator": "^10.6.0"
+    "validator": "^10.6.0",
+    "web-push": "^3.3.3",
+    "winston": "^3.1.0"
   },
   "devDependencies": {
     "eslint": "^4.19.1",

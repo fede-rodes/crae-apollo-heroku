@@ -1,5 +1,6 @@
 const Base = require('./base');
 const User = require('./user');
+const Subscription = require('./subscription');
 const Author = require('./author');
 const Post = require('./post');
 
@@ -7,6 +8,7 @@ const Post = require('./post');
 const allSchemas = {
   Base,
   User,
+  Subscription,
   Author,
   Post,
 };
