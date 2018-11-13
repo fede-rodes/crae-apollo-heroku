@@ -4,9 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon -r dotenv/config server.js",
+    "start": "nodemon -r dotenv/config app.js",
     "build": "babel . --ignore node_modules,build --out-dir build",
-    "start:prod": "node -r dotenv/config build/server.js",
+    "start:prod": "node -r dotenv/config build/app.js",
     "lint": "eslint ."
   },
   "dependencies": {
@@ -16,6 +16,7 @@
     "cors": "^2.8.4",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
+    "express-async-errors": "^3.1.1",
     "graphql": "^0.13.2",
     "graphql-tools": "^3.0.5",
     "helmet": "^3.13.0",
@@ -24,6 +25,7 @@
     "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.10",
     "merge-graphql-schemas": "^1.5.3",
+    "moment": "^2.22.2",
     "mongoose": "^5.2.5",
     "nodemailer": "^4.6.8",
     "validator": "^10.6.0",

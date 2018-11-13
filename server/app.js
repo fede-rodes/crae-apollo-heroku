@@ -1,3 +1,6 @@
+require('./src/check-env-vars');
+require('express-async-errors');
+require('./src/services/winston/config'); // logger
 const express = require('express');
 const helmet = require('helmet');
 const path = require('path');
@@ -7,15 +10,35 @@ const { ApolloServer } = require('apollo-server-express');
 const Joi = require('joi');
 const jwt = require('jsonwebtoken');
 const pick = require('lodash/pick');
+const { logger } = require('./src/services/winston/config');
 const schema = require('./src/graphql/exec-schema');
-const login = require('./src/routes/login');
 const initDB = require('./src/init-db');
+const errorHandling = require('./src/middlewares/error');
+const signup = require('./src/routes/signup');
+const login = require('./src/routes/login');
 
 // Extend Joi validator by adding objectId type
 Joi.objectId = require('joi-objectid')(Joi);
 
 //------------------------------------------------------------------------------
-// LOGS
+// UNCAUGHT EXCEPTIONS
+//------------------------------------------------------------------------------
+const handleException = async (exc) => {
+  await logger.error(exc.message || 'No msg field', console.log);
+  // Something bad happened, kill the process and then restart fresh
+  // TODO: use other winston transports
+  process.exit(1);
+};
+
+process.on('uncaughtException', handleException);
+process.on('unhandledRejection', handleException);
+
+
+// const p = Promise.reject(new Error('Ive been rejected :('));
+// p.then(() => { console.log('done'); });
+
+//------------------------------------------------------------------------------
+// ENV VARS
 //------------------------------------------------------------------------------
 // Log env vars
 const {
@@ -32,11 +55,6 @@ console.log(
   '\nprocess.env.PORT', PORT,
   '\nprocess.env.MONGO_URL', MONGO_URL,
 );
-
-if (!JWT_PRIVATE_KEY || JWT_PRIVATE_KEY.length === 0) {
-  console.error('FATAL ERROR: JWT_PRIVATE_KEY env var missing');
-  process.exit(1);
-}
 
 //------------------------------------------------------------------------------
 // INIT EXPRESS SERVER
@@ -82,7 +100,7 @@ app.use(staticFiles);
 // APOLLO SERVER
 //------------------------------------------------------------------------------
 const getUser = async (req) => {
-  const token = req && req.headers && req.headers.authorization;
+  const token = (req && req.headers && req.headers.authorization) || null;
   // console.log('req.headers', req && req.headers);
   // console.log('req.headers', req && req.headers && req.headers.authorization);
 
@@ -102,7 +120,8 @@ const getUser = async (req) => {
 const server = new ApolloServer({
   schema,
   context: async ({ req }) => ({
-    user: await getUser(req),
+    usr: await getUser(req),
+    // usr: { _id: '5b7be6b5f799de5c5ce126a4' },
   }),
   playground: {
     settings: {
@@ -110,13 +129,19 @@ const server = new ApolloServer({
     },
   },
 });
+
 server.applyMiddleware({ app, path: '/graphql' });
 
 //------------------------------------------------------------------------------
 // ROUTES
 //------------------------------------------------------------------------------
+app.use('/api/signup', signup);
 app.use('/api/login', login);
 
+//------------------------------------------------------------------------------
+// ERROR HANDLING MIDDLEWARE
+//------------------------------------------------------------------------------
+app.use(errorHandling);
 
 //------------------------------------------------------------------------------
 // CATCH ALL

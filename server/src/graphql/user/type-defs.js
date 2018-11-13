@@ -3,6 +3,7 @@ const typeDefs = `
     _id: ID!
     createdAt: Date!
     email: String!
+    pinCodeSet: Boolean!
   }
 
   type Query {
