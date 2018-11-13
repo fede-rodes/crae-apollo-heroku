@@ -15,18 +15,20 @@ import userFragment from '../../graphql/user/fragment/user';
  */
 const LoggedInRoute = ({
   curUser,
-  component,
+  component: Component,
   redirectTo,
-  overlay,
+  overlay: Overlay,
   ...rest
 }) => (
   <Route
     {...rest}
     render={(ownProps) => {
+      const childProps = { curUser, ...rest, ...ownProps };
+
       // User NOT logged in resolver
       const resolver = redirectTo.trim().length > 0
         ? <Redirect to={redirectTo.trim()} />
-        : React.createElement(overlay, { curUser, ...rest, ...ownProps });
+        : <Overlay {...childProps} />;
 
       // If user is NOT logged in, resolve
       if (!curUser) {
@@ -34,7 +36,7 @@ const LoggedInRoute = ({
       }
 
       // ...Otherwise, render requested component
-      return React.createElement(component, { curUser, ...rest, ...ownProps });
+      return <Component {...childProps} />;
     }}
   />
 );
