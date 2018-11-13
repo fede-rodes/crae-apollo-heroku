@@ -6,7 +6,7 @@ import './basscss.min.css';
 import './index.css';
 import App from './app';
 import Routes from './routes';
-import registerServiceWorker from './register-service-worker';
+import registerServiceWorker from './register-sw';
 
 ReactDOM.render(<App component={Routes} />, document.getElementById('root'));
 registerServiceWorker();

@@ -1,8 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import Title from '../../components/common/title';
 import Subtitle from '../../components/common/subtitle';
 
+//------------------------------------------------------------------------------
+// STYLE:
+//------------------------------------------------------------------------------
+const MaxWidth = styled.div`
+  max-width: 400px;
+`;
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
@@ -12,11 +19,11 @@ const AuthPageLayout = ({
   subtitle,
   link,
 }) => (
-  <div>
+  <MaxWidth className="mx-auto">
     {title && <Title>{title}</Title>}
     {subtitle && <Subtitle text={subtitle} link={link} />}
     {children}
-  </div>
+  </MaxWidth>
 );
 
 AuthPageLayout.propTypes = {

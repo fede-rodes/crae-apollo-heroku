@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 //------------------------------------------------------------------------------
 // PROPS AND METHODS PROVIDER:
 //------------------------------------------------------------------------------
+// On development, SW won't be registered, see register-sw.js
 class PWABtnProps extends React.PureComponent {
   state = {
     supported: 'loading', // whether or not push notifications are supported
