@@ -30,7 +30,7 @@ const LogoutBtn = ({
   return (
     <ButtonComp
       disabled={disabled}
-      underline={underline}
+      underline={underline} // TODO: fix warning here
       onClick={handleLogout}
     >
       Log out

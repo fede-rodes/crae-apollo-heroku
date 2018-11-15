@@ -99,7 +99,7 @@ const User = mongoose.model('User', schema);
 // JOI:
 //------------------------------------------------------------------------------
 const emailVal = Joi.string().email().min(MIN_STRING_LENGTH).max(MAX_STRING_LENGTH).required(); // eslint-disable-line
-const passCodeVal = Joi.string().length(PASS_CODE_LENGTH).required(); // eslint-disable-line
+const passCodeVal = Joi.number().integer().min(0).max(Math.pow(10, PASS_CODE_LENGTH + 1)).required(); // eslint-disable-line
 
 const validNewUser = (user) => {
   const joiSchema = {

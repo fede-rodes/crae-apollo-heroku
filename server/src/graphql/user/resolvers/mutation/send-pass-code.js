@@ -21,8 +21,7 @@ const sendPassCode = async (root, args) => {
   const user = await User.findOne({ email });
 
   if (!user) {
-    // return { status: 500 };
-    throw new Error('User not found');
+    throw new Error(400, 'User not found'); // Bad request
   }
 
   // Genearte a 6-digit pass code and attach it to the user
@@ -43,12 +42,12 @@ const sendPassCode = async (root, args) => {
     console.log('Message sent: %s', info.messageId);
     // Preview only available when sending through an Ethereal account
     console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-    return { status: 200 };
+    return { status: 200 }; // TODO: return user id or similar
     // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
     // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
   } catch (exc) {
     console.error('ERROR DELIVERYING EMAIL', exc);
-    return { status: 500 };
+    return { status: 500 }; // TODO: shouldn't we throw instead
   }
 };
 
