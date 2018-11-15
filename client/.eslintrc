@@ -1,4 +1,24 @@
-"rules": {
-  "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-  "indent": ["error", 2]
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true
+  },
+  "rules": {
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-one-expression-per-line": "off",
+    "indent": ["error", 2],
+    "no-console": "off",
+    "no-underscore-dangle": [
+      "error",
+      {
+        "allow": [
+          "_id",
+        ]
+      }
+    ]
+  }
 }

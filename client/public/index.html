@@ -20,21 +20,36 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>React App</title>
+
+    <!-- App shell styles -->
+    <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/css/sanitize.css">
+    <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/css/basscss.min.css">
+    <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/css/style.css">
   </head>
   <body>
+    <!-- Handle javascript disabled -->
     <noscript>
-      You need to enable JavaScript to run this app.
+      <p>Please, enable JavaScript in your browser :)</p>
     </noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+    <header class="fixed top-0 z1 flex items-center">
+      <div id="header-left" class="header__btn no--select"></div>
+      <div id="header-title" class="header__title no--select flex-auto center"></div>
+      <div id="header-right" class="header__btn no--select"></div>
+    </header>
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    <div class="flex justify-around app__outer">
+      <div class="app__container px2 pt4">
+        <div class="flex flex-column justify-between">
+          <div id="main"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Offline toast msg -->
+    <div class="fixed toast__container"></div>
+
+    <script src="%PUBLIC_URL%/js/toast.js"></script>
+    <script src="%PUBLIC_URL%/js/offline.js"></script>
   </body>
 </html>
