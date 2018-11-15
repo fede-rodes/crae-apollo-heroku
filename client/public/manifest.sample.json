@@ -1,7 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "gcm_sender_id": "148913051674",
+  "name": "<YOUR_APP_NAME>",
+  "short_name": "<YOUR_APP_SHORT_NAME>",
+  "gcm_sender_id": "<YOUR_GCM_SENDER_ID_FROM_FIREBASE>",
   "icons": [{
     "src": "img/icons/android-chrome-72x72.png",
     "sizes": "72x72",
@@ -51,4 +51,3 @@
       "density": 3
     }]
 }
-
