@@ -9,17 +9,8 @@ import NotFoundPage from './pages/not-found-page';
 const Routes = props => (
   <ScrollToTop>
     <Switch>
-      {/* HOME */}
-      <LoggedInRoute
-        exact
-        path="/"
-        component={HomePage}
-        {...props}
-      />
-      {/* NOT FOUND */}
-      <Route
-        component={NotFoundPage}
-      />
+      <LoggedInRoute path="/" exact component={HomePage} {...props} />
+      <Route component={NotFoundPage} />
     </Switch>
   </ScrollToTop>
 );
