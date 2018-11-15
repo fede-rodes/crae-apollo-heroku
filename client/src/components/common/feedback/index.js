@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import Loading from '../loading';
 import Alert from '../alert';
 
+//------------------------------------------------------------------------------
+// COMPONENT:
+//------------------------------------------------------------------------------
 const Feedback = ({ className, loading, errorMsg, successMsg }) => (
   <div className={className || ''}>
     {loading && <Loading className="center" />}

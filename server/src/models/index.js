@@ -1,14 +1,9 @@
-const { User, validateNewUser, validateLogin } = require('./user');
-const { PassCode, genPassCode } = require('./pass-code');
-const Author = require('./author');
-const Post = require('./post');
+const { User, validNewUser, validLogin } = require('./user');
+const Subscription = require('./subscription');
 
 module.exports = {
   User,
-  validateNewUser,
-  validateLogin,
-  PassCode,
-  genPassCode,
-  Author,
-  Post,
+  validNewUser,
+  validLogin,
+  Subscription,
 };

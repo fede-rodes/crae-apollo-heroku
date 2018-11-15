@@ -1,33 +1,6 @@
-const nodemailer = require('nodemailer');
-const { User, PassCode, genPassCode } = require('../../../../models');
+const { nodemailer, transporter } = require('../../../../services/nodemailer/config');
+const { User } = require('../../../../models');
 
-const {
-  SMTP_HOST,
-  SMTP_USERNAME,
-  SMTP_PASSWORD,
-  SMTP_PORT,
-} = process.env;
-
-if (
-  !SMTP_HOST || SMTP_HOST.length === 0
-  || !SMTP_USERNAME || SMTP_USERNAME.length === 0
-  || !SMTP_PASSWORD || SMTP_PASSWORD.length === 0
-  || !SMTP_PORT || SMTP_PORT.length === 0
-) {
-  console.error('FATAL ERROR: SMTP env vars missing');
-  process.exit(1);
-}
-
-// Create reusable transporter object using the default SMTP transport
-const transporter = nodemailer.createTransport({
-  host: SMTP_HOST,
-  port: SMTP_PORT,
-  secure: false, // true for 465, false for other ports
-  auth: {
-    user: SMTP_USERNAME,
-    pass: SMTP_PASSWORD,
-  },
-});
 //------------------------------------------------------------------------------
 // AUX FUNCTIONS:
 //------------------------------------------------------------------------------
@@ -45,33 +18,14 @@ const sendPassCode = async (root, args) => {
   const { email } = args;
 
   // Is there any user associated to this email?
-  const userExists = !!(await User.findOne({ email }));
+  const user = await User.findOne({ email });
 
-  // If no, create a new user record before sending the pass code
-  if (!userExists) {
-    try {
-      const user = new User({ email });
-      await user.save();
-    } catch (exc) {
-      console.log(exc);
-      return { status: 500 };
-    }
+  if (!user) {
+    throw new Error(400, 'User not found'); // Bad request
   }
 
-  // Genearte a 6-digit pass code and store it into DB
-  const passCode = genPassCode(6);
-  console.log('passCode', passCode);
-
-  try {
-    const record = await PassCode.findOneAndUpdate(
-      { email },
-      { $set: { passCode } },
-      { upsert: true, new: true },
-    );
-    console.log('record', record);
-  } catch (exc) {
-    console.error(exc);
-  }
+  // Genearte a 6-digit pass code and attach it to the user
+  const passCode = await user.genPassCode(6);
 
   // Send pass code to user
   const mailOptions = {
@@ -82,18 +36,18 @@ const sendPassCode = async (root, args) => {
     // html: '<b>Hello world?</b>', // html body
   };
 
-  // Send mail with defined transport object
+  // Send email with defined transport object
   try {
     const info = await transporter.sendMail(mailOptions);
     console.log('Message sent: %s', info.messageId);
     // Preview only available when sending through an Ethereal account
     console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-    return { status: 200 };
+    return { status: 200 }; // TODO: return user id or similar
     // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
     // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
   } catch (exc) {
     console.error('ERROR DELIVERYING EMAIL', exc);
-    return { status: 500 };
+    return { status: 500 }; // TODO: shouldn't we throw instead
   }
 };
 

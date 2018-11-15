@@ -1,16 +1,12 @@
-const casual = require('casual');
-const times = require('lodash/times');
-const { User, Author, Post } = require('./models');
+const { User } = require('./models');
 
 // Clear DB
 const clearAll = async () => {
-  await User.remove({});
-  await Author.remove({});
-  await Post.remove({});
+  await User.deleteMany({});
 };
 
-// Insert a dummy user to simulate current user is logged in
-const initUser = async () => {
+// Populate DB.
+const fixtures = async () => {
   const user = await User.findOne({}).exec();
 
   // Insert a user in case users collection is empty
@@ -20,7 +16,9 @@ const initUser = async () => {
   }
 
   // Insert test user
-  const firstUser = new User({});
+  const firstUser = new User({
+    email: 'federodes@gmail.com',
+  });
 
   try {
     await firstUser.save();
@@ -28,47 +26,11 @@ const initUser = async () => {
   } catch (exc) {
     console.log(exc);
   }
-}
-
-// Populate DB.
-const fixtures = () => {
-  casual.seed(11);
-
-  times(10, async () => {
-    const author = new Author({
-      firstName: casual.first_name,
-      lastName: casual.last_name,
-    });
-
-    try {
-      await author.save();
-      console.log('\nNew author inserted!');
-    } catch (exc) {
-      console.log(exc);
-    }
-
-    const post = new Post({
-      authorId: author._id,
-      title: `A post by ${author.firstName}`,
-      text: casual.sentences(3),
-    });
-
-    try {
-      await post.save();
-      console.log('\nNew post inserted!');
-    } catch (exc) {
-      console.log(exc);
-    }
-  });
 };
 
 const initDB = async () => {
-  // Clear Author and Post collections
-  await clearAll();
-  // Insert current user
-  // await initUser();
-  // Set some initial data
-  await fixtures();
+  // await clearAll();
+  // await fixtures();
 };
 
 module.exports = initDB;

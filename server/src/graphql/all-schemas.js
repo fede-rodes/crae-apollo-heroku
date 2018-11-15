@@ -1,14 +1,12 @@
 const Base = require('./base');
 const User = require('./user');
-const Author = require('./author');
-const Post = require('./post');
+const Subscription = require('./subscription');
 
 // Add all your schemas here!
 const allSchemas = {
   Base,
   User,
-  Author,
-  Post,
+  Subscription,
 };
 
 module.exports = allSchemas;

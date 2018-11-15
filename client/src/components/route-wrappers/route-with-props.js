@@ -8,10 +8,13 @@ import { Route } from 'react-router-dom';
 /**
  * @summary Pass props down to child component.
  */
-const RouteWithProps = ({ component, ...rest }) => (
+const RouteWithProps = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={props => React.createElement(component, { ...rest, ...props })}
+    render={(props) => {
+      const childProps = { ...rest, ...props };
+      return <Component {...childProps} />;
+    }}
   />
 );
 

@@ -2,14 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withApollo } from 'react-apollo';
 import { FormProps } from '../../render-props';
-// import SEO from '../../components/seo';
-import {
-  PassCodeAuthView,
-  EmailAuthView,
-  ResendPassCode,
-} from '../../components/auth';
+// import { FormProps } from 'react-state-helpers-via-render-props';
+// import SEO from '../../components/smart/seo';
+import EmailForm from '../../components/auth/email-form';
+import PassCodeForm from '../../components/auth/pass-code-form';
+import SendPassCode from '../../components/auth/send-pass-code';
+import LoginApiCall from '../../components/auth/login-api-call';
+import ResendPassCodeBtn from '../../components/auth/resend-pass-code-btn';
 import AuthPageLayout from '../../layouts/auth-page';
 import Feedback from '../../components/common/feedback';
+import ButtonLink from '../../components/common/button-link';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -25,8 +27,14 @@ class LoginPage extends React.PureComponent {
   }
 
   render() {
-    const { client } = this.props;
+    const { client, onPageChange } = this.props;
     const { view, email } = this.state;
+
+    const signupLink = (
+      <ButtonLink onClick={() => { onPageChange('signup'); }}>
+        Sign Up
+      </ButtonLink>
+    );
 
     return (
       <FormProps>
@@ -41,17 +49,18 @@ class LoginPage extends React.PureComponent {
           handleSuccess,
         }) => (
           <AuthPageLayout
-            title={view === 'emailView' ? 'Login' : 'Enter Pass Code'}
-            subtitle={view === 'passCodeView' ? 'Haven\'t received the pass code?' : ''}
-            link={view === 'passCodeView'
-              ? (
-                <ResendPassCode
+            title={view === 'emailView' ? 'Log In' : 'Enter Pass Code'}
+            subtitle={view === 'emailView' ? 'Don\'t have an account?' : 'Haven\'t received the pass code?'}
+            link={view === 'emailView'
+              ? signupLink
+              : (
+                <ResendPassCodeBtn
                   email={email}
                   label="Resend it"
                   disabled={disabled}
                   onBeforeHook={handleBefore}
-                  onServerErrorHook={handleServerError}
-                  onSuccessHook={() => {
+                  onSendError={handleServerError}
+                  onSendSuccess={() => {
                     // Extend formProps.handleSuccess' default functionality
                     handleSuccess(() => {
                       // Show success message after action is completed
@@ -60,46 +69,62 @@ class LoginPage extends React.PureComponent {
                   }}
                 />
               )
-              : null
             }
           >
             {view === 'emailView' && (
-              <EmailAuthView
-                btnLabel="Send Pass Code"
-                disabled={disabled}
-                onBeforeHook={handleBefore}
-                onClientErrorHook={handleClientError}
-                onServerErrorHook={handleServerError}
-                onSuccessHook={(obj) => {
+              <SendPassCode
+                onSendError={handleServerError}
+                onSendSuccess={() => {
                   // Extend formProps.handleSuccess' default functionality
                   handleSuccess(() => {
-                    if (obj && obj.email) {
-                      // Show success message after action is completed
-                      setSuccessMessage('A new email has been sent to your inbox!');
-                      // Switch to passCodeView view and store current user's email
-                      this.setState({ view: 'passCodeView', email: obj.email });
-                    }
+                    // Show success message after action is completed
+                    setSuccessMessage('A new email has been sent to your inbox!');
+                    // Switch to passCodeView view
+                    this.setState({ view: 'passCodeView' });
                   });
                 }}
-              />
+              >
+                {({ sendPassCode }) => (
+                  <EmailForm
+                    btnLabel="Send Pass Code"
+                    disabled={disabled}
+                    onBeforeHook={handleBefore}
+                    onClientErrorHook={handleClientError}
+                    onSuccessHook={(inputFields) => {
+                      // Store current user's email and fire signup api call
+                      this.setState(
+                        { email: inputFields.email },
+                        () => { sendPassCode({ email: inputFields.email }); },
+                      );
+                    }}
+                  />
+                )}
+              </SendPassCode>
             )}
             {view === 'passCodeView' && (
-              <PassCodeAuthView
+              <LoginApiCall
                 email={email}
-                btnLabel="Enter"
-                onBeforeHook={handleBefore}
-                onClientErrorHook={handleClientError}
-                onServerErrorHook={handleServerError}
-                onSuccessHook={(obj) => {
+                onLoginError={handleServerError}
+                onLoginSuccess={({ token }) => {
                   // Extend formProps.handleSuccess' default functionality
                   handleSuccess(() => {
-                    if (obj && obj.token) {
-                      localStorage.setItem('x-auth-token', obj.token);
-                      client.resetStore();
-                    }
+                    // Store token into browser and resetStore to update client data
+                    localStorage.setItem('x-auth-token', token);
+                    client.resetStore();
                   });
                 }}
-              />
+              >
+                {({ loginUser }) => (
+                  <PassCodeForm
+                    btnLabel="Enter"
+                    disabled={disabled}
+                    onBeforeHook={handleBefore}
+                    onClientErrorHook={handleClientError}
+                    // Fire signup api call
+                    onSuccessHook={loginUser}
+                  />
+                )}
+              </LoginApiCall>
             )}
             <div className="mb2" />
             <Feedback
@@ -118,6 +143,11 @@ LoginPage.propTypes = {
   client: PropTypes.shape({
     resetStore: PropTypes.func.isRequired,
   }).isRequired,
+  onPageChange: PropTypes.func,
+};
+
+LoginPage.defaultProps = {
+  onPageChange: () => {},
 };
 
 export default withApollo(LoginPage);
