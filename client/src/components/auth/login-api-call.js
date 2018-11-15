@@ -17,7 +17,6 @@ class LoginApiCall extends React.PureComponent {
 
     try {
       const res = await login({ variables: { email, passCode } });
-      console.log('\nRESPONSE', res);
       onLoginSuccess({ token: res.data.login.token });
     } catch (exc) {
       console.log(exc);
@@ -30,7 +29,7 @@ class LoginApiCall extends React.PureComponent {
 
     // Public API
     const api = {
-      onFormSuccess: this.handleSuccess,
+      loginUser: this.handleSuccess,
     };
 
     return children(api);

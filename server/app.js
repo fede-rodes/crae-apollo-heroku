@@ -14,8 +14,8 @@ const { logger } = require('./src/services/winston/config');
 const schema = require('./src/graphql/exec-schema');
 const initDB = require('./src/init-db');
 const errorHandling = require('./src/middlewares/error');
-const signup = require('./src/routes/signup');
-const login = require('./src/routes/login');
+// const signup = require('./src/routes/signup');
+// const login = require('./src/routes/login');
 
 // Extend Joi validator by adding objectId type
 Joi.objectId = require('joi-objectid')(Joi);
@@ -135,7 +135,7 @@ server.applyMiddleware({ app, path: '/graphql' });
 //------------------------------------------------------------------------------
 // ROUTES
 //------------------------------------------------------------------------------
-app.use('/api/signup', signup);
+// app.use('/api/signup', signup);
 // app.use('/api/login', login);
 
 //------------------------------------------------------------------------------

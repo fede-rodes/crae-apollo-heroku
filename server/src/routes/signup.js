@@ -1,4 +1,4 @@
-const express = require('express');
+/* const express = require('express');
 const pick = require('lodash/pick');
 const { User, validNewUser } = require('../models');
 
@@ -33,3 +33,4 @@ router.post('/', async (req, res) => {
 });
 
 module.exports = router;
+*/

@@ -93,17 +93,17 @@ class SignupPage extends React.PureComponent {
                       sendPassCode({ email: newUser.email });
                     }}
                   >
-                    {({ onFormSuccess }) => (
+                    {({ signupUser }) => (
                       <EmailForm
                         btnLabel="Send Pass Code"
                         disabled={disabled}
                         onBeforeHook={handleBefore}
                         onClientErrorHook={handleClientError}
-                        onSuccessHook={(formInput) => {
+                        onSuccessHook={(inputFields) => {
                           // Store current user's email and fire signup api call
                           this.setState(
-                            { email: formInput.email },
-                            () => { onFormSuccess({ email: formInput.email }); },
+                            { email: inputFields.email },
+                            () => { signupUser({ email: inputFields.email }); },
                           );
                         }}
                       />
@@ -125,16 +125,14 @@ class SignupPage extends React.PureComponent {
                   });
                 }}
               >
-                {({ onFormSuccess }) => (
+                {({ loginUser }) => (
                   <PassCodeForm
                     btnLabel="Enter"
                     disabled={disabled}
                     onBeforeHook={handleBefore}
                     onClientErrorHook={handleClientError}
-                    onSuccessHook={(formInput) => {
-                      // Fire signup api call
-                      onFormSuccess({ passCode: formInput.passCode });
-                    }}
+                    // Fire login api call
+                    onSuccessHook={loginUser}
                   />
                 )}
               </LoginApiCall>

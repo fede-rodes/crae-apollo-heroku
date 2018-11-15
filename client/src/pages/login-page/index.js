@@ -114,14 +114,14 @@ class LoginPage extends React.PureComponent {
                   });
                 }}
               >
-                {({ onFormSuccess }) => (
+                {({ loginUser }) => (
                   <PassCodeForm
                     btnLabel="Enter"
                     disabled={disabled}
                     onBeforeHook={handleBefore}
                     onClientErrorHook={handleClientError}
                     // Fire signup api call
-                    onSuccessHook={onFormSuccess}
+                    onSuccessHook={loginUser}
                   />
                 )}
               </LoginApiCall>
