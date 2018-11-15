@@ -136,7 +136,7 @@ server.applyMiddleware({ app, path: '/graphql' });
 // ROUTES
 //------------------------------------------------------------------------------
 app.use('/api/signup', signup);
-app.use('/api/login', login);
+// app.use('/api/login', login);
 
 //------------------------------------------------------------------------------
 // ERROR HANDLING MIDDLEWARE

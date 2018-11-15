@@ -3,7 +3,11 @@ const typeDefs = `
     _id: ID!
     createdAt: Date!
     email: String!
-    pinCodeSet: Boolean!
+  }
+
+  type AuthToken {
+    _id: ID!
+    token: String!
   }
 
   type Query {
@@ -11,6 +15,7 @@ const typeDefs = `
   }
 
   type Mutation {
+    login(email: String!, passCode: Int!): AuthToken!
     sendPassCode(email: String!): Response!
   }
 `;

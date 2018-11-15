@@ -1,4 +1,4 @@
-const express = require('express');
+/* const express = require('express');
 const pick = require('lodash/pick');
 const { User, validLogin } = require('../models');
 
@@ -35,4 +35,4 @@ router.post('/', async (req, res) => {
   res.header('x-auth-token', token).status(200).send(pick(user, ['_id'])); // Success request
 });
 
-module.exports = router;
+module.exports = router; */
