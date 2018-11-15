@@ -11,9 +11,9 @@ import muiTheme from '../theme/mui';
 import GlobalDataProvider from '../global-data-provider';
 
 // Given that we are implementing App Shell Architecture and, therefore,
-// injecting (via reactDOM.render) the Header, Menu and Main components into
+// injecting (via reactDOM.render) the Header and Main components into
 // different HTML elements, we need a way to share the router 'history' among
-// all three mentioned components.
+// all two mentioned components.
 // As a default, for every invocation of 'BrowserRouter', there will be new
 // 'history' instance created. Then, changes in the 'history' object in one
 // component won't be available in the other components. To prevent this, we are
@@ -23,15 +23,13 @@ import GlobalDataProvider from '../global-data-provider';
 // the same 'history' object will be shared among all three mentioned components.
 const history = createBrowserHistory();
 
-const App = ({ component }) => (
+const App = ({ component: Component }) => (
   <ThemeProvider theme={scTheme}>
     <Router history={history}>
       <ApolloProvider client={client}>
         <MuiThemeProvider theme={muiTheme}>
           <GlobalDataProvider>
-            {globalDataProps => (
-              React.createElement(component, { ...globalDataProps })
-            )}
+            {globalDataProps => <Component {...globalDataProps} />}
           </GlobalDataProvider>
         </MuiThemeProvider>
       </ApolloProvider>

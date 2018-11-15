@@ -3,6 +3,7 @@ import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 import { PWABtnProps, FormProps } from '../../render-props';
 import userFragment from '../../graphql/user/fragment/user';
+import LogoutBtn from '../../components/auth/logout-btn';
 import SubscribeBtn from '../../components/pwa/subscribe-btn';
 import UnsubscribeBtn from '../../components/pwa/unsubscribe-btn';
 import PushBtn from '../../components/pwa/push-btn';
@@ -29,6 +30,8 @@ const HomePage = ({ curUser }) => (
     <Json>
       {JSON.stringify(curUser, null, 2)}
     </Json>
+    <div className="mb2" />
+    <LogoutBtn />
     <div className="mb2" />
     <PWABtnProps>
       {(pwaBtnProps) => {
