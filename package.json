@@ -6,7 +6,8 @@
   "license": "MIT",
   "engines": {
     "node": "8.12.0",
-    "npm": "5.6.x"
+    "npm": "5.6.x",
+    "yarn": "1.12.3"
   },
   "scripts": {
     "build": "concurrently \"cd client && yarn build\" \"cd server && yarn build\"",
