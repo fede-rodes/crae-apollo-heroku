@@ -8,7 +8,6 @@ const { User, validNewUser } = require('../../../../models');
 //------------------------------------------------------------------------------
 const signup = async (root, args) => {
   const { email } = args;
-  console.log('SIGNUP', args);
 
   const { error } = validNewUser({ email });
   if (error) {

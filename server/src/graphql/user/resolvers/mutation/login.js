@@ -6,7 +6,6 @@ const { User, validLogin } = require('../../../../models');
 // MUTATION:
 //------------------------------------------------------------------------------
 const login = async (root, args) => {
-  console.log('LOGIN', args);
   const { email, passCode } = args;
 
   const { error } = validLogin({ email, passCode });
