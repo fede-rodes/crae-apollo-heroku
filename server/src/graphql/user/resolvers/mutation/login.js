@@ -32,6 +32,7 @@ const login = async (root, args) => {
 
   const token = user.genAuthToken();
 
+  console.log('LOGIN RESPONSE', { _id: user._id, token });
   // Successful request
   return { _id: user._id, token };
 };

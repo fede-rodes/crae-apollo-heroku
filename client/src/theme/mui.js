@@ -3,6 +3,9 @@ import red from '@material-ui/core/colors/red';
 import green from '@material-ui/core/colors/green';
 
 const theme = createMuiTheme({
+  typography: {
+    useNextVariants: true,
+  },
   switch: {
     colorPrimary: green[500],
     trackOnColor: green[100],

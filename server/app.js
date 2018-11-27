@@ -115,6 +115,12 @@ const getUser = async (req) => {
   }
 };
 
+const { ObjectId } = mongoose.Types;
+
+ObjectId.prototype.valueOf = function () {
+  return this.toString();
+};
+
 const server = new ApolloServer({
   schema,
   context: async ({ req }) => ({
