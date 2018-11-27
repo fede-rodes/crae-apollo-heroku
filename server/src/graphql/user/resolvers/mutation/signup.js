@@ -25,7 +25,6 @@ const signup = async (root, args) => {
   try {
     const newUser = new User({ email });
     await newUser.save();
-    console.log('RESPONSE', pick(newUser, ['_id', 'createdAt', 'email']));
     return pick(newUser, ['_id', 'createdAt', 'email']); // Success request
   } catch (exc) {
     console.log('ERROR REGISTERING NEW USER', exc);
