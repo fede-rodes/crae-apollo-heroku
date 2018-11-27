@@ -99,7 +99,7 @@ app.use(staticFiles);
 //------------------------------------------------------------------------------
 const getUser = async (req) => {
   const token = (req && req.headers && req.headers.authorization) || null;
-  // console.log('req.headers', req && req.headers);
+  console.log('req.headers', req && req.headers);
   // console.log('req.headers', req && req.headers && req.headers.authorization);
 
   if (!token) {
@@ -113,6 +113,12 @@ const getUser = async (req) => {
     console.error('Not authorized');
     return null;
   }
+};
+
+const { ObjectId } = mongoose.Types;
+
+ObjectId.prototype.valueOf = function () {
+  return this.toString();
 };
 
 const server = new ApolloServer({

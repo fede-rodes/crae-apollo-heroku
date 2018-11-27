@@ -16,7 +16,7 @@ class LoginApiCall extends React.PureComponent {
     } = this.props;
 
     try {
-      const res = await login({ variables: { email, passCode } });
+      const res = await login({ variables: { email, passCode: parseInt(passCode, 10) } });
       onLoginSuccess({ token: res.data.login.token });
     } catch (exc) {
       console.log(exc);

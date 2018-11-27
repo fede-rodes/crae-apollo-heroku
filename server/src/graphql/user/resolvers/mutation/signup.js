@@ -8,6 +8,7 @@ const { User, validNewUser } = require('../../../../models');
 //------------------------------------------------------------------------------
 const signup = async (root, args) => {
   const { email } = args;
+  console.log('SIGNUP', args);
 
   const { error } = validNewUser({ email });
   if (error) {
@@ -25,6 +26,7 @@ const signup = async (root, args) => {
   try {
     const newUser = new User({ email });
     await newUser.save();
+    console.log('RESPONSE', pick(newUser, ['_id', 'createdAt', 'email']));
     return pick(newUser, ['_id', 'createdAt', 'email']); // Success request
   } catch (exc) {
     console.log('ERROR REGISTERING NEW USER', exc);
