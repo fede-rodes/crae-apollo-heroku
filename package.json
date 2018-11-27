@@ -5,7 +5,7 @@
   "repository": {},
   "license": "MIT",
   "engines": {
-    "node": "8.10.0",
+    "node": "8.12.0",
     "npm": "5.6.x"
   },
   "scripts": {
@@ -17,7 +17,7 @@
     "start:prod": "cd server && yarn start:prod"
   },
   "dependencies": {
-    "concurrently": "^3.6.1",
+    "concurrently": "^4.1.0",
     "rimraf": "^2.6.2"
   }
 }
