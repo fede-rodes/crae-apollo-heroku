@@ -1,4 +1,4 @@
-// See:
+// See package.json build script
 // https://stackoverflow.com/questions/47636757/add-more-service-worker-functionality-with-create-react-app?rq=1
 // https://medium.freecodecamp.org/how-to-build-a-pwa-with-create-react-app-and-custom-service-workers-376bd1fdc6d3
 module.exports = {

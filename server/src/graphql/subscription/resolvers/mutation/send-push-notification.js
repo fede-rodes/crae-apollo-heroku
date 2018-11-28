@@ -23,7 +23,7 @@ const sendPushNotification = async (root, args, context) => {
   try {
     subscriptions = await Subscription.find({}).select({ endpoint: 1, keys: 1 }).exec();
   } catch (exc) {
-    return { status: 500 };
+    return { status: 500 }; // TODO: throw
   }
   console.log('\nsubscriptions', subscriptions);
 
@@ -38,9 +38,10 @@ const sendPushNotification = async (root, args, context) => {
         // icon,
       });
     } catch (exc) {
-      console.log(exc);
+      console.log(exc); // TODO: throw
     }
 
+    // TODO: move this code to the catch block
     if (response && response.error) {
       // This is probably an old subscription, remove it
       await Subscription.deleteOne({ userId: usr._id, endpoint: subscription.endpoint });

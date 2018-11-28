@@ -1,52 +1,21 @@
-const Joi = require('joi');
 const webPush = require('./config');
+// const { validPush } = require('../../models/subscription');
 
-//------------------------------------------------------------------------------
-// CONSTANTS:
-//------------------------------------------------------------------------------
-const MIN_STRING_LENGTH = 2;
-const MAX_STRING_LENGTH = 155;
-//------------------------------------------------------------------------------
-// JOI:
-//------------------------------------------------------------------------------
-const validateArgs = (args) => {
-  const joiKeys = Joi.object().keys({
-    auth: Joi.string().required(),
-    p256dh: Joi.string().required(),
-  });
-
-  const joiSubscription = Joi.object().keys({
-    endpoint: Joi.string().required(),
-    keys: joiKeys,
-  });
-
-  const joiSchema = {
-    // subscriptions: Joi.array().items(joiSubscription),
-    subscription: joiSubscription,
-    title: Joi.string().min(MIN_STRING_LENGTH).max(MAX_STRING_LENGTH).required(),
-    body: Joi.string().min(MIN_STRING_LENGTH).max(MAX_STRING_LENGTH).required(),
-    icon: Joi.string().min(MIN_STRING_LENGTH).max(MAX_STRING_LENGTH),
-  };
-
-  return Joi.validate(args, joiSchema); // { error, value }
-};
 //------------------------------------------------------------------------------
 // METHOD:
 //------------------------------------------------------------------------------
-const send = async (args) => {
-  console.log('\n\npushAPI.send args', args);
-  /* const { error } = validateArgs(args);
+const send = async ({
+  subscription,
+  title,
+  body,
+  icon,
+}) => {
+  // console.log('\n\npushAPI.send args', args);
+  /* const { error } = validPush({ subscription, title, body, icon });
   if (error) {
     console.log('\n\nerror', error);
     return { error: error.details[0].message };
   } */
-
-  const {
-    subscription,
-    title,
-    body,
-    icon,
-  } = args;
 
   console.log(
     '\n******Send Push Notification******',
