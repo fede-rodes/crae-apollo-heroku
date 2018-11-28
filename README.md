@@ -35,17 +35,17 @@ Mailgun allows you to send emails from your app.
 In order to get started, first access your [Mailgun](https://www.mailgun.com/) account. Then, grab your sandbox domain smtp username and password and copy said values into your /server/.env file. Finally, add your email address to the list of [Auhtorized Recipients](https://help.mailgun.com/hc/en-us/articles/217531258-Authorized-Recipients).
 
 ### 4. Setup Push Notifications Service
-1. create a new file called ```manifest-pwa.json``` based on the provided ```manifest-pwa.sample.json``` (see ```/public``` folder).
+1. create a new file called ```manifest.json``` based on the provided ```manifest.sample.json``` (see ```/public``` folder).
 2. get your Google Cloud Message (GCM) server key and sender id from Firebase as follows:
   * first, got to your Firebase account: https://console.firebase.google.com/;
   * click on 'Add project';
   * click on 'settings' ('gear' icon, top left);
   * move to the 'CLOUD MESSAGING' tab at the top;
   * you should be able to see both server key and sender id;
-3. copy your sender id to your manifest-pwa.json and your server key to your settings.json ("firebase": { "privateKey": ...);
-4. open a terminal and install 'web-push' globally: ```npm i -g web-push```;
+3. copy your sender id to your manifest.json and your server key to GCM_PRIVATE_KEY (/server/.env);
+4. open a terminal and install 'web-push' globally: ```sudo npm i -g web-push```;
 5. generate VAPID keys: ```web-push generate-vapid-keys --json```;
-6. copy-paste your VAPID keys into your settings.json file;
+6. copy-paste your VAPID keys into your VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY (/server/.env) and REACT_APP_VAPID_PUBLIC_KEY (/client/.env);
 
 ### 5. Running the app locally in dev mode
 Once we have our Mongo provider, these are the next steps that we need to follow to run the app locally in dev mode:
