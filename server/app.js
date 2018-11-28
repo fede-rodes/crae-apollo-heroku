@@ -3,6 +3,7 @@ require('express-async-errors');
 require('./src/services/winston/config'); // logger
 const express = require('express');
 const helmet = require('helmet');
+const morgan = require('morgan');
 const path = require('path');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -69,9 +70,11 @@ app.set('port', (PORT || 3001));
 app.use(helmet());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// Enable the app to receive requests from the React app when running locally.
+
 if (isNotProduction) {
+  // Enable the app to receive requests from the React app when running locally.
   app.use('*', cors({ origin: 'http://localhost:3000' }));
+  app.use(morgan('tiny'));
 }
 
 //------------------------------------------------------------------------------

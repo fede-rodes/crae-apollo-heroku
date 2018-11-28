@@ -27,9 +27,9 @@ const typeDefs = `
   }
 
   type Mutation {
-    saveSubscription(subscription: SubscriptionInput!): Response
-    deleteSubscription(endpoint: String!): Response
-    sendPushNotification: Response
+    saveSubscription(subscription: SubscriptionInput!): Response # TODO: return subscription
+    deleteSubscription(endpoint: String!): Response # TODO: return subscription
+    sendPushNotification: Response # TODO: return Void or Boolean (nullable)
   }
 `;
 
