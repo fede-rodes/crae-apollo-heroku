@@ -9,9 +9,7 @@ const user = async (root, args, context) => {
 
   // Query current logged in user
   try {
-    const curUser = await User.findOne({ _id: usr._id }).exec();
-    console.log('curUser', curUser);
-    return curUser;
+    return await User.findOne({ _id: usr._id }).exec();
   } catch (exc) {
     console.log(exc);
     return null;

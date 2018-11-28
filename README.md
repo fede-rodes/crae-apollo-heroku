@@ -34,7 +34,20 @@ Mailgun allows you to send emails from your app.
 
 In order to get started, first access your [Mailgun](https://www.mailgun.com/) account. Then, grab your sandbox domain smtp username and password and copy said values into your /server/.env file. Finally, add your email address to the list of [Auhtorized Recipients](https://help.mailgun.com/hc/en-us/articles/217531258-Authorized-Recipients).
 
-### 4. Running the app locally in dev mode
+### 4. Setup Push Notifications Service
+1. create a new file called ```manifest-pwa.json``` based on the provided ```manifest-pwa.sample.json``` (see ```/public``` folder).
+2. get your Google Cloud Message (GCM) server key and sender id from Firebase as follows:
+  * first, got to your Firebase account: https://console.firebase.google.com/;
+  * click on 'Add project';
+  * click on 'settings' ('gear' icon, top left);
+  * move to the 'CLOUD MESSAGING' tab at the top;
+  * you should be able to see both server key and sender id;
+3. copy your sender id to your manifest-pwa.json and your server key to your settings.json ("firebase": { "privateKey": ...);
+4. open a terminal and install 'web-push' globally: ```npm i -g web-push```;
+5. generate VAPID keys: ```web-push generate-vapid-keys --json```;
+6. copy-paste your VAPID keys into your settings.json file;
+
+### 5. Running the app locally in dev mode
 Once we have our Mongo provider, these are the next steps that we need to follow to run the app locally in dev mode:
 
 1. Clone the project and move to the project's folder
@@ -54,7 +67,7 @@ The app should be running on port 3000 --> http://localhost:3000
 
 Please notice, when running the app locally, there will be two servers running simultaneously: one for serving the create-react-app (CRA) and another one for the Express app. The CRA should be accessible via [http://localhost:3000/](http://localhost:3000/), and the Express app via [http://localhost:3001/](http://localhost:3001/). The GraphQL playground should be running on [http://localhost:3001/graphql](http://localhost:3001/graphql) (only accessible in dev mode).
 
-### 5. Running the app locally in production mode
+### 6. Running the app locally in production mode
 1. Follow the steps above to setup your Mongo service.
 
 2. Install heroku cli: [https://devcenter.heroku.com/articles/heroku-cli](https://devcenter.heroku.com/articles/heroku-cli)
@@ -76,7 +89,7 @@ This should launch the app on port 5000 --> http://localhost:5000. As far as I u
 
 Please notice, during the build process the CRA is converted into a static asset and injected into the Express app, in this way, there will be only one server running (the one hosting the Express app).
 
-### 6. Deploy to heroku
+### 7. Deploy to heroku
 1. Follow the steps above to setup a Mongo service on mLab.
 
 2. Install heroku cli: [https://devcenter.heroku.com/articles/heroku-cli](https://devcenter.heroku.com/articles/heroku-cli)

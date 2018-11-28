@@ -12,14 +12,14 @@ const signup = async (root, args) => {
   const { error } = validNewUser({ email });
   if (error) {
     console.log('INVALID SIGNUP', error);
-    throw new Error(400, error.details[0].message); // Bad request
+    throw new Error(error.details[0].message); // Bad request - 400
   }
 
   // Make sure user doesn't exist already
   const user = await User.findOne({ email });
   if (user) {
     console.log('USER ALREADY REGISTERED', user);
-    throw new Error(400, 'Email registered already'); // Bad request
+    throw new Error('Email registered already'); // Bad request - 400
   }
 
   try {
@@ -28,7 +28,7 @@ const signup = async (root, args) => {
     return pick(newUser, ['_id', 'createdAt', 'email']); // Success request
   } catch (exc) {
     console.log('ERROR REGISTERING NEW USER', exc);
-    throw new Error(500, exc); // Server error
+    throw new Error(exc); // Server error
   }
 };
 

@@ -27,6 +27,7 @@
     "merge-graphql-schemas": "^1.5.8",
     "moment": "^2.22.2",
     "mongoose": "^5.3.13",
+    "morgan": "^1.9.1",
     "nodemailer": "^4.7.0",
     "validator": "^10.9.0",
     "web-push": "^3.3.3",
