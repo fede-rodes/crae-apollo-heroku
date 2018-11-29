@@ -1,15 +1,21 @@
 const { Subscription } = require('../../../../models');
 
+//------------------------------------------------------------------------------
+// QUERY:
+//------------------------------------------------------------------------------
+/**
+* @summary Query subscriptions associated to current user
+*/
+// TODO: are we using this query?
 const subscriptions = async (root, args, context) => {
   const { userId } = args;
   const { usr } = context;
 
   // TODO: use middleware
   if (!usr || !usr._id) {
-    return null;
+    return [];
   }
 
-  // Query subscriptions associated to current user
   try {
     // TODO: do we need exec()?
     const subs = await Subscription.find({ userId }).exec();
@@ -17,9 +23,9 @@ const subscriptions = async (root, args, context) => {
     return subs;
   } catch (exc) {
     console.log(exc);
-    return [];
+    throw new Error(exc);
   }
 };
+//------------------------------------------------------------------------------
 
 module.exports = subscriptions;
-

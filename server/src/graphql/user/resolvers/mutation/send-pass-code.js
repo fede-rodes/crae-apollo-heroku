@@ -42,7 +42,7 @@ const sendPassCode = async (root, args) => {
     console.log('Message sent: %s', info.messageId);
     // Preview only available when sending through an Ethereal account
     console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-    return { status: 200 }; // TODO: return user id or similar
+    return user;
   } catch (exc) {
     console.error('ERROR DELIVERYING EMAIL', exc);
     throw new Error(exc);

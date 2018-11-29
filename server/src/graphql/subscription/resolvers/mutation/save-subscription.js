@@ -13,19 +13,14 @@ const saveSubscription = async (root, args, context) => {
   // TODO: use middleware
   // Users.utils.checkLoggedInAndVerified(userId);
 
-  const subs = new Subscription({
-    userId: usr._id,
-    // ...subscription,
-    endpoint,
-    keys,
-  });
-
   try {
-    await subs.save();
-    return { status: 200 };
+    const sub = new Subscription({ userId: usr._id, endpoint, keys });
+    await sub.save();
+    console.log('sub', sub);
+    return sub;
   } catch (exc) {
     console.error(exc);
-    return { status: 500 };
+    throw new Error(exc);
   }
 };
 //------------------------------------------------------------------------------

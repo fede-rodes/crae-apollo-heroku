@@ -125,6 +125,13 @@ Comment: if you want to deploy from a branch different than master run:
 
 Please notice, similar to the previous case, when the app is deployed to heroku, the CRA is converted into a static asset during the build process and injected into the Express app, ie, there will be only one server running; the port is randomly chosen by heroku and, as far as I understand, this behavior cannot be changed.
 
+### 8. Heroku deploy troubleshooting
+
+In case your build fails with an error ```/bin/sh: 1: <SOME-DEP>: not found``` and you are building the project with yarn, try setting the following env variable:
+```
+heroku config:set NPM_CONFIG_PRODUCTION=false
+```
+
 ## Further reading
 1. https://originmaster.com/running-create-react-app-and-express-crae-on-heroku-c39a39fe7851
 2. https://dev-blog.apollodata.com/full-stack-react-graphql-tutorial-582ac8d24e3b

@@ -6,10 +6,10 @@ const typeDefs = `
 
   type Subscription {
     _id: ID!
-    createdAt: Date!
-    userId: ID!
-    endpoint: String!
-    keys: Keys!
+    createdAt: Date
+    userId: ID
+    endpoint: String
+    keys: Keys
   }
 
   input KeysInput {
@@ -27,9 +27,9 @@ const typeDefs = `
   }
 
   type Mutation {
-    saveSubscription(subscription: SubscriptionInput!): Response # TODO: return subscription
-    deleteSubscription(endpoint: String!): Response # TODO: return subscription
-    sendPushNotification: Response # TODO: return Void or Boolean (nullable)
+    saveSubscription(subscription: SubscriptionInput!): Subscription
+    deleteSubscription(endpoint: String!): Subscription
+    sendPushNotification: [Subscription]
   }
 `;
 

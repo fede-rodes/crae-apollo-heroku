@@ -13,12 +13,17 @@ const deleteSubscription = async (root, args, context) => {
   // TODO: use middleware
   // Users.utils.checkLoggedInAndVerified(userId);
 
+  const sub = await Subscription.findOne({ userId: usr._id, endpoint }).exec();
+  if (!sub) {
+    return null;
+  }
+
   try {
-    await Subscription.deleteOne({ userId: usr._id, endpoint });
-    return { status: 200 };
+    await Subscription.deleteOne({ _id: sub._id });
+    return sub;
   } catch (exc) {
     console.error(exc);
-    return { status: 500 };
+    throw new Error(exc);
   }
 };
 //------------------------------------------------------------------------------

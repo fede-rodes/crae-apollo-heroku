@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 const sendPushNotificationMutation = gql`
   mutation {
     sendPushNotification {
-      status
+      _id
     }
   }
 `;
