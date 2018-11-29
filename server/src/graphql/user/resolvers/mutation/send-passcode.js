@@ -4,17 +4,17 @@ const { User } = require('../../../../models');
 //------------------------------------------------------------------------------
 // AUX FUNCTIONS:
 //------------------------------------------------------------------------------
-const getText = ({ passCode }) => (`
+const getText = ({ passcode }) => (`
 Hello,
 
-Your verification code is ${passCode}.
+Your verification code is ${passcode}.
 
 Thanks.
 `);
 //------------------------------------------------------------------------------
 // MUTATION:
 //------------------------------------------------------------------------------
-const sendPassCode = async (root, args) => {
+const sendPasscode = async (root, args) => {
   const { email } = args;
 
   // Is there any user associated to this email?
@@ -25,14 +25,14 @@ const sendPassCode = async (root, args) => {
   }
 
   // Genearte a 6-digit pass code and attach it to the user
-  const passCode = await user.genPassCode(6);
+  const passcode = await user.genPasscode(6);
 
   // Send pass code to user
   const mailOptions = {
     from: 'email@example.com', // sender address
     to: email, // list of receivers
-    subject: `Your pass code is ${passCode} for <siteName>`, // subject line
-    text: getText({ passCode }), // plain text body
+    subject: `Your pass code is ${passcode} for <siteName>`, // subject line
+    text: getText({ passcode }), // plain text body
     // html: '<b>Hello world?</b>', // html body
   };
 
@@ -49,4 +49,4 @@ const sendPassCode = async (root, args) => {
   }
 };
 
-module.exports = sendPassCode;
+module.exports = sendPasscode;

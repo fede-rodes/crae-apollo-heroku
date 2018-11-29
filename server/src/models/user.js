@@ -1,4 +1,6 @@
+/* eslint-disable func-names */
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 const { isEmail } = require('validator');
 const Joi = require('joi');
 const jwt = require('jsonwebtoken');
@@ -11,7 +13,7 @@ const { JWT_PRIVATE_KEY } = process.env;
 
 const MIN_STRING_LENGTH = 2;
 const MAX_STRING_LENGTH = 255;
-const PASS_CODE_LENGTH = 6;
+const PASS_CODE_LENGTH = 6; // plain text passcode length
 //------------------------------------------------------------------------------
 // AUX FUNCTIONS:
 //------------------------------------------------------------------------------
@@ -42,46 +44,50 @@ const schema = mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  passCode: {
-    type: Number,
-    minlength: PASS_CODE_LENGTH,
-    maxlength: PASS_CODE_LENGTH,
+  passcode: {
+    type: String,
+    maxlength: 1024, // hashed passcode
   },
   expirationDate: { // pass code expiration date
     type: Date,
   },
 });
 
-schema.methods.validPassCode = function ({ passCode }) {
+schema.methods.validatePasscode = function ({ passcode }) {
   return (
-    passCode
-    && this.passCode
-    && parseInt(passCode, 10) === parseInt(this.passCode, 10)
+    passcode
+    && this.passcode
+    && bcrypt.compare(passcode.toString(), this.passcode)
   );
 };
 
-schema.methods.passCodeExpired = function () {
+schema.methods.passcodeExpired = function () {
   if (!this.expirationDate) {
     return true; // expired
   }
 
   const now = moment();
-  console.log('NOW', now.clone().toISOString());
+  // console.log('NOW', now.clone().toISOString());
   const expDate = moment(this.expirationDate);
-  console.log('EXP_DATE', expDate.clone().toISOString());
-  console.log('DIFF', expDate.diff(now));
+  // console.log('EXP_DATE', expDate.clone().toISOString());
+  // console.log('DIFF', expDate.diff(now));
   return expDate.diff(now) < 0;
 };
 
-schema.methods.genPassCode = async function (digits) {
+schema.methods.genPasscode = async function (digits) {
   // TODO: Math.random() does not provide cryptographically secure random numbers.
   // Do not use them for anything related to security. Use the Web Crypto API
   // instead, and more precisely the window.crypto.getRandomValues() method.
-  const passCode = Math.floor(Math.random() * (10 ** digits));
-  this.passCode = passCode;
+  const passcode = Math.floor(Math.random() * (10 ** digits));
+
+  const salt = await bcrypt.genSalt(10);
+  const hash = await bcrypt.hash(passcode.toString(), salt);
+
+  this.passcode = hash;
   this.expirationDate = getExpDate();
   await this.save();
-  return passCode;
+
+  return passcode; // plain text passcode
 };
 
 schema.methods.setEmailToVerified = async function () {
@@ -99,7 +105,7 @@ const User = mongoose.model('User', schema);
 // JOI:
 //------------------------------------------------------------------------------
 const emailVal = Joi.string().email().min(MIN_STRING_LENGTH).max(MAX_STRING_LENGTH).required(); // eslint-disable-line
-const passCodeVal = Joi.number().integer().min(0).max(Math.pow(10, PASS_CODE_LENGTH + 1)).required(); // eslint-disable-line
+const passcodeVal = Joi.number().integer().min(0).max(Math.pow(10, PASS_CODE_LENGTH + 1)).required(); // eslint-disable-line
 
 const validNewUser = (user) => {
   const joiSchema = {
@@ -112,7 +118,7 @@ const validNewUser = (user) => {
 const validLogin = (credentials) => {
   const joiSchema = {
     email: emailVal,
-    passCode: passCodeVal,
+    passcode: passcodeVal,
   };
 
   return Joi.validate(credentials, joiSchema); // { error, value }

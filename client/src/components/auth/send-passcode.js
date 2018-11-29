@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
-import sendPassCodeMutation from '../../graphql/user/mutation/send-pass-code';
+import sendPasscodeMutation from '../../graphql/user/mutation/send-passcode';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-class SendPassCode extends React.PureComponent {
+class SendPasscode extends React.PureComponent {
   handleSend = async ({ email }) => {
-    const { onSendError, onSendSuccess, sendPassCode } = this.props;
+    const { onSendError, onSendSuccess, sendPasscode } = this.props;
 
     try {
-      await sendPassCode({ variables: { email } });
+      await sendPasscode({ variables: { email } });
       onSendSuccess();
     } catch (exc) {
       onSendError(exc);
@@ -23,29 +23,29 @@ class SendPassCode extends React.PureComponent {
 
     // Public API
     const api = {
-      sendPassCode: this.handleSend,
+      sendPasscode: this.handleSend,
     };
 
     return children(api);
   }
 }
 
-SendPassCode.propTypes = {
+SendPasscode.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.object,
   ]).isRequired,
   onSendError: PropTypes.func,
   onSendSuccess: PropTypes.func,
-  sendPassCode: PropTypes.func.isRequired,
+  sendPasscode: PropTypes.func.isRequired,
 };
 
-SendPassCode.defaultProps = {
+SendPasscode.defaultProps = {
   onSendError: () => {},
   onSendSuccess: () => {},
 };
 
 // Apollo integration
-const withMutation = graphql(sendPassCodeMutation, { name: 'sendPassCode' });
+const withMutation = graphql(sendPasscodeMutation, { name: 'sendPasscode' });
 
-export default withMutation(SendPassCode);
+export default withMutation(SendPasscode);

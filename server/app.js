@@ -47,8 +47,6 @@ const {
   JWT_PRIVATE_KEY,
 } = process.env;
 
-const isNotProduction = NODE_ENV !== 'production';
-
 console.log(
   '\nprocess.env.NODE_ENV', NODE_ENV,
   '\nprocess.env.PORT', PORT,
@@ -71,7 +69,7 @@ app.use(helmet());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-if (isNotProduction) {
+if (app.get('env') === 'development') {
   // Enable the app to receive requests from the React app when running locally.
   app.use('*', cors({ origin: 'http://localhost:3000' }));
   app.use(morgan('tiny'));

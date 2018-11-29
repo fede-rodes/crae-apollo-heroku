@@ -5,10 +5,10 @@ import { FormProps } from '../../render-props';
 // import { FormProps } from 'react-state-helpers-via-render-props';
 // import SEO from '../../components/smart/seo';
 import EmailForm from '../../components/auth/email-form';
-import PassCodeForm from '../../components/auth/pass-code-form';
-import SendPassCode from '../../components/auth/send-pass-code';
+import PasscodeForm from '../../components/auth/passcode-form';
+import SendPasscode from '../../components/auth/send-passcode';
 import LoginApiCall from '../../components/auth/login-api-call';
-import ResendPassCodeBtn from '../../components/auth/resend-pass-code-btn';
+import ResendPasscodeBtn from '../../components/auth/resend-passcode-btn';
 import AuthPageLayout from '../../layouts/auth-page';
 import Feedback from '../../components/common/feedback';
 import ButtonLink from '../../components/common/button-link';
@@ -16,7 +16,7 @@ import ButtonLink from '../../components/common/button-link';
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-// After PassCodeAuthView returns successful, the user logged-in-state will change
+// After PasscodeAuthView returns successful, the user logged-in-state will change
 // from 'logged out' to 'logged in' automatically. This will trigger the
 // LoggedOutRoute component's logic (said component wraps the LoginPage component)
 // which will result in redirecting the user to home page automatically.
@@ -54,7 +54,7 @@ class LoginPage extends React.PureComponent {
             link={view === 'emailView'
               ? signupLink
               : (
-                <ResendPassCodeBtn
+                <ResendPasscodeBtn
                   email={email}
                   label="Resend it"
                   disabled={disabled}
@@ -72,19 +72,19 @@ class LoginPage extends React.PureComponent {
             }
           >
             {view === 'emailView' && (
-              <SendPassCode
+              <SendPasscode
                 onSendError={handleServerError}
                 onSendSuccess={() => {
                   // Extend formProps.handleSuccess' default functionality
                   handleSuccess(() => {
                     // Show success message after action is completed
                     setSuccessMessage('A new email has been sent to your inbox!');
-                    // Switch to passCodeView view
-                    this.setState({ view: 'passCodeView' });
+                    // Switch to passcodeView view
+                    this.setState({ view: 'passcodeView' });
                   });
                 }}
               >
-                {({ sendPassCode }) => (
+                {({ sendPasscode }) => (
                   <EmailForm
                     btnLabel="Send Pass Code"
                     disabled={disabled}
@@ -94,14 +94,14 @@ class LoginPage extends React.PureComponent {
                       // Store current user's email and fire signup api call
                       this.setState(
                         { email: inputFields.email },
-                        () => { sendPassCode({ email: inputFields.email }); },
+                        () => { sendPasscode({ email: inputFields.email }); },
                       );
                     }}
                   />
                 )}
-              </SendPassCode>
+              </SendPasscode>
             )}
-            {view === 'passCodeView' && (
+            {view === 'passcodeView' && (
               <LoginApiCall
                 email={email}
                 onLoginError={handleServerError}
@@ -115,7 +115,7 @@ class LoginPage extends React.PureComponent {
                 }}
               >
                 {({ loginUser }) => (
-                  <PassCodeForm
+                  <PasscodeForm
                     btnLabel="Enter"
                     disabled={disabled}
                     onBeforeHook={handleBefore}

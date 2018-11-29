@@ -1,7 +1,7 @@
 const pick = require('lodash/pick');
 const { User, validNewUser } = require('../../../../models');
 
-// TODO: name change from validNewUser to validSignup
+// TODO: name change from validNewUser to validateSignup
 // TODO: log to winston
 //------------------------------------------------------------------------------
 // MUTATION:

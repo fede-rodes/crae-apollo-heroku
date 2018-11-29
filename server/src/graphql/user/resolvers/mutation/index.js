@@ -1,11 +1,11 @@
 const signup = require('./signup');
 const login = require('./login');
-const sendPassCode = require('./send-pass-code');
+const sendPasscode = require('./send-passcode');
 
 const Mutation = {
   signup,
   login,
-  sendPassCode,
+  sendPasscode,
 };
 
 module.exports = Mutation;

@@ -1,0 +1,1 @@
+{"level":"error","message":"data must be a string and salt must either be a salt string or a number of rounds","timestamp":"2018-11-29T17:49:32.261Z"}

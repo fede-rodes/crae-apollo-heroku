@@ -5,11 +5,11 @@ import { FormProps } from '../../render-props';
 // import { FormProps } from 'react-state-helpers-via-render-props';
 // import SEO from '../../components/smart/seo';
 import EmailForm from '../../components/auth/email-form';
-import PassCodeForm from '../../components/auth/pass-code-form';
+import PasscodeForm from '../../components/auth/passcode-form';
 import SignupApiCall from '../../components/auth/signup-api-call';
-import SendPassCode from '../../components/auth/send-pass-code';
+import SendPasscode from '../../components/auth/send-passcode';
 import LoginApiCall from '../../components/auth/login-api-call';
-import ResendPassCodeBtn from '../../components/auth/resend-pass-code-btn';
+import ResendPasscodeBtn from '../../components/auth/resend-passcode-btn';
 import AuthPageLayout from '../../layouts/auth-page';
 import Feedback from '../../components/common/feedback';
 import ButtonLink from '../../components/common/button-link';
@@ -17,7 +17,7 @@ import ButtonLink from '../../components/common/button-link';
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-// After PassCodeAuthView returns successful, the user logged-in-state will change
+// After PasscodeAuthView returns successful, the user logged-in-state will change
 // from 'logged out' to 'logged in' automatically. This will trigger the
 // LoggedOutRoute component's logic (said component wraps the SignupPage component)
 // which will result in redirecting the user to home page automatically.
@@ -55,7 +55,7 @@ class SignupPage extends React.PureComponent {
             link={view === 'emailView'
               ? loginLink
               : (
-                <ResendPassCodeBtn
+                <ResendPasscodeBtn
                   email={email}
                   label="Resend it"
                   disabled={disabled}
@@ -73,24 +73,24 @@ class SignupPage extends React.PureComponent {
             }
           >
             {view === 'emailView' && (
-              <SendPassCode
+              <SendPasscode
                 onSendError={handleServerError}
                 onSendSuccess={() => {
                   // Extend formProps.handleSuccess' default functionality
                   handleSuccess(() => {
                     // Show success message after action is completed
                     setSuccessMessage('A new email has been sent to your inbox!');
-                    // Switch to passCodeView view
-                    this.setState({ view: 'passCodeView' });
-                    // TODO: need to send passCode
+                    // Switch to passcodeView view
+                    this.setState({ view: 'passcodeView' });
+                    // TODO: need to send passcode
                   });
                 }}
               >
-                {({ sendPassCode }) => (
+                {({ sendPasscode }) => (
                   <SignupApiCall
                     onSignupError={handleServerError}
                     onSignupSuccess={(newUser) => {
-                      sendPassCode({ email: newUser.email });
+                      sendPasscode({ email: newUser.email });
                     }}
                   >
                     {({ signupUser }) => (
@@ -110,9 +110,9 @@ class SignupPage extends React.PureComponent {
                     )}
                   </SignupApiCall>
                 )}
-              </SendPassCode>
+              </SendPasscode>
             )}
-            {view === 'passCodeView' && (
+            {view === 'passcodeView' && (
               <LoginApiCall
                 email={email}
                 onLoginError={handleServerError}
@@ -126,7 +126,7 @@ class SignupPage extends React.PureComponent {
                 }}
               >
                 {({ loginUser }) => (
-                  <PassCodeForm
+                  <PasscodeForm
                     btnLabel="Enter"
                     disabled={disabled}
                     onBeforeHook={handleBefore}

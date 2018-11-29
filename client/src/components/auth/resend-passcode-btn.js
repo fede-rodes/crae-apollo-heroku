@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ButtonLink from '../common/button-link';
-import SendPassCode from './send-pass-code';
+import SendPasscode from './send-passcode';
 
 //------------------------------------------------------------------------------
 // COMPONENT:
@@ -51,7 +51,7 @@ Button.defaultProps = {
 // COMPONENT
 //------------------------------------------------------------------------------
 
-const ResendPassCodeBtn = ({
+const ResendPasscodeBtn = ({
   email,
   label,
   disabled,
@@ -59,22 +59,22 @@ const ResendPassCodeBtn = ({
   onSendError,
   onSendSuccess,
 }) => (
-  <SendPassCode
+  <SendPasscode
     onSendError={onSendError}
     onSendSuccess={onSendSuccess}
   >
-    {({ sendPassCode }) => (
+    {({ sendPasscode }) => (
       <Button
         label={label}
         disabled={disabled}
         onBeforeHook={onBeforeHook}
-        onClick={() => { sendPassCode({ email }); }}
+        onClick={() => { sendPasscode({ email }); }}
       />
     )}
-  </SendPassCode>
+  </SendPasscode>
 );
 
-ResendPassCodeBtn.propTypes = {
+ResendPasscodeBtn.propTypes = {
   email: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
@@ -83,11 +83,11 @@ ResendPassCodeBtn.propTypes = {
   onSendSuccess: PropTypes.func,
 };
 
-ResendPassCodeBtn.defaultProps = {
+ResendPasscodeBtn.defaultProps = {
   disabled: false,
   onBeforeHook: () => {},
   onSendError: () => {},
   onSendSuccess: () => {},
 };
 
-export default ResendPassCodeBtn;
+export default ResendPasscodeBtn;
