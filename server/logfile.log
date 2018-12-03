@@ -5,3 +5,4 @@
 {"level":"error","message":"invalid token","timestamp":"2018-12-03T11:52:27.355Z"}
 {"level":"error","message":"Format is Authorization: Bearer [token]","timestamp":"2018-12-03T11:54:23.280Z"}
 {"level":"error","message":"Format is Authorization: Bearer [token]","timestamp":"2018-12-03T11:54:24.718Z"}
+{"level":"error","message":"Can't set headers after they are sent.","timestamp":"2018-12-03T16:08:34.583Z"}

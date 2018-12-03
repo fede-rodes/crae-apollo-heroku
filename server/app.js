@@ -14,6 +14,7 @@ const { logger } = require('./src/services/winston/config');
 const schema = require('./src/graphql/exec-schema');
 const initDB = require('./src/init-db');
 const errorHandling = require('./src/middlewares/error');
+const { User } = require('./src/models');
 
 // Extend Joi validator by adding objectId type
 Joi.objectId = require('joi-objectid')(Joi);
@@ -98,13 +99,26 @@ app.use(staticFiles);
 // APOLLO SERVER
 //------------------------------------------------------------------------------
 // See: https://blog.pusher.com/handling-authentication-in-graphql/
-// Decode jwt and get user data (_id). Then reset req.user to decoded data.
+// Decode jwt and get user data (_id, version). Then reset req.user to decoded data.
 const authMiddleware = jwt({
   secret: JWT_PRIVATE_KEY,
   credentialsRequired: false, // allow non-authenticated requests to pass through the middleware
 });
 
+const queryUser = async (req, res, next) => {
+  if (req.user) {
+    try {
+      req.user = await User.findOne({ _id: req.user._id, version: req.user.version }).exec();
+    } catch (exc) {
+      // Invalid/expired token
+      req.user = null;
+    }
+  }
+  next();
+};
+
 app.use(authMiddleware);
+app.use(queryUser);
 
 const { ObjectId } = mongoose.Types;
 

@@ -51,6 +51,10 @@ const schema = mongoose.Schema({
   expirationDate: { // pass code expiration date
     type: Date,
   },
+  version: { // add version so that old jwt can't be reused
+    type: Number,
+    default: 1,
+  },
 });
 
 schema.methods.validatePasscode = function ({ passcode }) {
@@ -85,6 +89,7 @@ schema.methods.genPasscode = async function (digits) {
 
   this.passcode = hash;
   this.expirationDate = getExpDate();
+  this.version = this.version + 1;
   await this.save();
 
   return passcode; // plain text passcode
@@ -96,7 +101,9 @@ schema.methods.setEmailToVerified = async function () {
 };
 
 schema.methods.genAuthToken = function () {
-  return jwt.sign({ _id: this._id }, JWT_PRIVATE_KEY);
+  // Apply versioning to JWT auth
+  // See: https://medium.com/react-native-training/building-chatty-part-7-authentication-in-graphql-cd37770e5ab3
+  return jwt.sign({ _id: this._id, version: this.version }, JWT_PRIVATE_KEY);
 };
 
 const User = mongoose.model('User', schema);
