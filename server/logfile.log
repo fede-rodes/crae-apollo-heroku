@@ -1,1 +1,7 @@
 {"level":"error","message":"data must be a string and salt must either be a salt string or a number of rounds","timestamp":"2018-11-29T17:49:32.261Z"}
+{"level":"error","message":"invalid token","timestamp":"2018-12-03T11:50:18.058Z"}
+{"level":"error","message":"invalid token","timestamp":"2018-12-03T11:50:50.749Z"}
+{"level":"error","message":"invalid token","timestamp":"2018-12-03T11:52:10.070Z"}
+{"level":"error","message":"invalid token","timestamp":"2018-12-03T11:52:27.355Z"}
+{"level":"error","message":"Format is Authorization: Bearer [token]","timestamp":"2018-12-03T11:54:23.280Z"}
+{"level":"error","message":"Format is Authorization: Bearer [token]","timestamp":"2018-12-03T11:54:24.718Z"}

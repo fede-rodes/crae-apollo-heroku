@@ -9,8 +9,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const { ApolloServer } = require('apollo-server-express');
 const Joi = require('joi');
-const jwt = require('jsonwebtoken');
-const pick = require('lodash/pick');
+const jwt = require('express-jwt');
 const { logger } = require('./src/services/winston/config');
 const schema = require('./src/graphql/exec-schema');
 const initDB = require('./src/init-db');
@@ -98,23 +97,14 @@ app.use(staticFiles);
 //------------------------------------------------------------------------------
 // APOLLO SERVER
 //------------------------------------------------------------------------------
-const getUser = async (req) => {
-  const token = (req && req.headers && req.headers.authorization) || null;
-  // console.log('req.headers', req && req.headers);
-  // console.log('req.headers', req && req.headers && req.headers.authorization);
+// See: https://blog.pusher.com/handling-authentication-in-graphql/
+// Decode jwt and get user data (_id). Then reset req.user to decoded data.
+const authMiddleware = jwt({
+  secret: JWT_PRIVATE_KEY,
+  credentialsRequired: false, // allow non-authenticated requests to pass through the middleware
+});
 
-  if (!token) {
-    return null;
-  }
-
-  try {
-    const json = await jwt.verify(token, JWT_PRIVATE_KEY);
-    return pick(json, '_id');
-  } catch (exc) {
-    console.error('Not authorized');
-    return null;
-  }
-};
+app.use(authMiddleware);
 
 const { ObjectId } = mongoose.Types;
 
@@ -125,7 +115,8 @@ ObjectId.prototype.valueOf = function () {
 const server = new ApolloServer({
   schema,
   context: async ({ req }) => ({
-    usr: await getUser(req),
+    usr: req.user, // user data is decoded on the authMiddleware
+    // usr: await getUser(req),
     // usr: { _id: '5b7be6b5f799de5c5ce126a4' },
   }),
   playground: {
