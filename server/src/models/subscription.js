@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 const mongoose = require('mongoose');
 const Joi = require('joi');
 
@@ -7,7 +8,7 @@ const Joi = require('joi');
 const MIN_STRING_LENGTH = 2;
 const MAX_STRING_LENGTH = 155;
 //------------------------------------------------------------------------------
-// MONGOOSE:
+// MONGOOSE SCHEMA:
 //------------------------------------------------------------------------------
 const schema = mongoose.Schema({
   createdAt: {
@@ -31,13 +32,39 @@ const schema = mongoose.Schema({
     },
   },
 });
-
+//------------------------------------------------------------------------------
+// INSTANCE METHODS:
+//------------------------------------------------------------------------------
+schema.methods.delete = async function () {
+  await this.deleteOne({ _id: this._id });
+};
+//------------------------------------------------------------------------------
+// STATIC METHODS:
+//------------------------------------------------------------------------------
+schema.statics.findByEndpoint = async function ({ user, endpoint }) {
+  if (!user || user._id) {
+    return null;
+  }
+  return this.findOne({ userId: user._id, endpoint });
+};
+//------------------------------------------------------------------------------
+schema.statics.createSubscription = async function ({ user, endpoint, keys }) {
+  if (!user || user._id) {
+    return null;
+  }
+  const newSub = new this({ userId: user._id, endpoint, keys });
+  await newSub.save();
+  return newSub;
+};
+//------------------------------------------------------------------------------
+// MONGOOSE MODEL:
+//------------------------------------------------------------------------------
 const Subscription = mongoose.model('Subscription', schema);
 
 //------------------------------------------------------------------------------
 // JOI:
 //------------------------------------------------------------------------------
-const validPush = (args) => {
+const validatePush = (args) => {
   const joiKeys = Joi.object().keys({
     auth: Joi.string().required(),
     p256dh: Joi.string().required(),
@@ -61,5 +88,5 @@ const validPush = (args) => {
 
 module.exports = {
   Subscription,
-  validPush,
+  validatePush,
 };

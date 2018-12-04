@@ -18,10 +18,9 @@ const sendPasscode = async (root, args) => {
   const { email } = args;
 
   // Is there any user associated to this email?
-  const user = await User.findOne({ email });
-
+  const user = await User.findByEmail({ email });
   if (!user) {
-    throw new Error('User not found'); // Bad request - 400
+    throw new Error('User is not registered'); // Bad request - 400
   }
 
   // Genearte a 6-digit pass code and attach it to the user
@@ -37,16 +36,11 @@ const sendPasscode = async (root, args) => {
   };
 
   // Send email with defined transport object
-  try {
-    const info = await transporter.sendMail(mailOptions);
-    console.log('Message sent: %s', info.messageId);
-    // Preview only available when sending through an Ethereal account
-    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-    return user;
-  } catch (exc) {
-    console.error('ERROR DELIVERYING EMAIL', exc);
-    throw new Error(exc);
-  }
+  const info = await transporter.sendMail(mailOptions);
+  console.log('Message sent: %s', info.messageId);
+  // Preview only available when sending through an Ethereal account
+  console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+  return user;
 };
 
 module.exports = sendPasscode;

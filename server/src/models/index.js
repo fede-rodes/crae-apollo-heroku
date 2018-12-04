@@ -1,10 +1,10 @@
-const { User, validNewUser, validLogin } = require('./user');
-const { Subscription, validPush } = require('./subscription');
+const { User, validateSignup, validateLogin } = require('./user');
+const { Subscription, validatePush } = require('./subscription');
 
 module.exports = {
   User,
-  validNewUser,
-  validLogin,
+  validateSignup,
+  validateLogin,
   Subscription,
-  validPush,
+  validatePush,
 };

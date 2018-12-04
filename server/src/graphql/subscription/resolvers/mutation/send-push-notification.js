@@ -2,7 +2,6 @@ const pick = require('lodash/pick');
 const { Subscription } = require('../../../../models');
 const pushAPI = require('../../../../services/push');
 const asyncForEach = require('../../../../utils/async-for-each');
-// import utils from '../../utils';
 
 //------------------------------------------------------------------------------
 // MUTATION:
@@ -10,17 +9,14 @@ const asyncForEach = require('../../../../utils/async-for-each');
 /**
 * @summary Send push notification to all subscribed users.
 */
-const sendPushNotification = async (root, args, context) => {
+const sendPushNotification = async (root, args, ctx) => {
   const { title = 'Hey!', body = 'This is a push notification' } = args; // TODO: add (default) icon
-  const { usr } = context;
+  const { usr } = ctx;
   console.log('\nSend push notification');
 
-  // TODO: use middleware
-  // Users.utils.checkLoggedInAndVerified(userId);
-
   // Gather all subscriptions from all subscribed users
-  const subs = await Subscription.find({}).select({ endpoint: 1, keys: 1 }).exec();
-  console.log('\nsubs', subs);
+  // User logged in state validation was moved to Subscription model
+  const subs = await Subscription.findAll({ user: usr });
 
   // Send the messages
   asyncForEach(subs, async (sub) => {
@@ -34,7 +30,8 @@ const sendPushNotification = async (root, args, context) => {
     } catch (exc) {
       console.log(exc);
       // This is probably an old subscription, remove it
-      await Subscription.deleteOne({ userId: usr._id, endpoint: sub.endpoint }).exec();
+      // await Subscription.deleteOne({ userId: usr._id, endpoint: sub.endpoint }).exec();
+      await sub.delete();
     }
   });
 
