@@ -35,26 +35,48 @@ const schema = mongoose.Schema({
 //------------------------------------------------------------------------------
 // INSTANCE METHODS:
 //------------------------------------------------------------------------------
-schema.methods.delete = async function () {
-  await this.deleteOne({ _id: this._id });
-};
+
 //------------------------------------------------------------------------------
 // STATIC METHODS:
 //------------------------------------------------------------------------------
 schema.statics.findByEndpoint = async function ({ user, endpoint }) {
-  if (!user || user._id) {
+  if (!user || !user._id) {
     return null;
   }
   return this.findOne({ userId: user._id, endpoint });
 };
 //------------------------------------------------------------------------------
 schema.statics.createSubscription = async function ({ user, endpoint, keys }) {
-  if (!user || user._id) {
+  if (!user || !user._id) {
     return null;
   }
   const newSub = new this({ userId: user._id, endpoint, keys });
   await newSub.save();
   return newSub;
+};
+//------------------------------------------------------------------------------
+schema.statics.findAll = async function ({ user }) {
+  if (!user || !user._id) {
+    return [];
+  }
+  return this.find({}).select({ endpoint: 1, keys: 1 });
+};
+//------------------------------------------------------------------------------
+schema.statics.deleteByEndpoint = async function ({ user, endpoint }) {
+  if (!user || !user._id) {
+    return null;
+  }
+
+  // Make sure the user has permission
+  const sub = await this.findOne({ userId: user._id, endpoint });
+  if (!sub) {
+    return null;
+  }
+
+  await this.deleteOne({ _id: sub._id });
+
+  // Return the deleted subscription
+  return sub;
 };
 //------------------------------------------------------------------------------
 // MONGOOSE MODEL:

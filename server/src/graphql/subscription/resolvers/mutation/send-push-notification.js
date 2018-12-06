@@ -12,7 +12,6 @@ const asyncForEach = require('../../../../utils/async-for-each');
 const sendPushNotification = async (root, args, ctx) => {
   const { title = 'Hey!', body = 'This is a push notification' } = args; // TODO: add (default) icon
   const { usr } = ctx;
-  console.log('\nSend push notification');
 
   // Gather all subscriptions from all subscribed users
   // User logged in state validation was moved to Subscription model
@@ -30,8 +29,7 @@ const sendPushNotification = async (root, args, ctx) => {
     } catch (exc) {
       console.log(exc);
       // This is probably an old subscription, remove it
-      // await Subscription.deleteOne({ userId: usr._id, endpoint: sub.endpoint }).exec();
-      await sub.delete();
+      await Subscription.deleteByEndpoint({ user: usr, endpoint: sub.endpoint });
     }
   });
 

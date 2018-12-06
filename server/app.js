@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 require('./src/check-env-vars');
 require('express-async-errors');
 require('./src/services/winston/config'); // logger
@@ -23,6 +24,8 @@ Joi.objectId = require('joi-objectid')(Joi);
 //------------------------------------------------------------------------------
 const handleException = async (exc) => {
   await logger.error(exc.message || 'No msg field', console.log);
+  // TODO: send me an email
+  console.log('TODO: SEND EMAIL TO OWNER');
   // Something bad happened, kill the process and then restart fresh
   // TODO: use other winston transports
   process.exit(1);

@@ -15,7 +15,9 @@
     "heroku-postbuild": "yarn build",
     "install": "(cd client && yarn) && (cd server && yarn)",
     "start": "concurrently \"cd client && yarn start\" \"cd server && yarn start\"",
-    "start:prod": "cd server && yarn start:prod"
+    "start:prod": "cd server && yarn start:prod",
+    "local-prod": "yarn clean && yarn install && yarn build && heroku local",
+    "local": "yarn clean && yarn install && yarn start"
   },
   "dependencies": {
     "concurrently": "^4.1.0",
