@@ -1,25 +1,15 @@
 const { Subscription } = require('../../../../models');
-// import utils from '../../utils';
 
-// TODO: use try-catch or find a lib that implements this
 //------------------------------------------------------------------------------
-/**
-* @summary Remove subscription from user's record.
-*/
-const deleteSubscription = async (root, args, context) => {
+const deleteSubscription = async (root, args, ctx) => {
   const { endpoint } = args;
-  const { usr } = context;
+  const { usr } = ctx;
 
-  // TODO: use middleware
-  // Users.utils.checkLoggedInAndVerified(userId);
+  // User logged in state validation was moved to Subscription model
+  const sub = await Subscription.deleteByEndpoint({ user: usr, endpoint });
 
-  try {
-    await Subscription.deleteOne({ userId: usr._id, endpoint });
-    return { status: 200 };
-  } catch (exc) {
-    console.error(exc);
-    return { status: 500 };
-  }
+  // Return the deleted subscription
+  return sub;
 };
 //------------------------------------------------------------------------------
 

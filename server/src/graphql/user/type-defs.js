@@ -16,8 +16,8 @@ const typeDefs = `
 
   type Mutation {
     signup(email: String!): User!
-    login(email: String!, passCode: Int!): AuthToken!
-    sendPassCode(email: String!): Response!
+    login(email: String!, passcode: Int!): AuthToken!
+    sendPasscode(email: String!): User!
   }
 `;
 

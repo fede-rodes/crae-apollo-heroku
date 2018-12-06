@@ -1,32 +1,16 @@
 const { Subscription } = require('../../../../models');
-// import utils from '../../utils';
 
 //------------------------------------------------------------------------------
-/**
-* @summary Save subscription into user's record.
-*/
-const saveSubscription = async (root, args, context) => {
+const saveSubscription = async (root, args, ctx) => {
   const { subscription } = args;
   const { endpoint, keys } = subscription;
-  const { usr } = context;
+  const { usr } = ctx;
 
-  // TODO: use middleware
-  // Users.utils.checkLoggedInAndVerified(userId);
+  // User logged in state validation was moved to Subscription model
+  const newSub = await Subscription.createSubscription({ user: usr, endpoint, keys });
 
-  const subs = new Subscription({
-    userId: usr._id,
-    // ...subscription,
-    endpoint,
-    keys,
-  });
-
-  try {
-    await subs.save();
-    return { status: 200 };
-  } catch (exc) {
-    console.error(exc);
-    return { status: 500 };
-  }
+  // Return the recently created subscription
+  return newSub;
 };
 //------------------------------------------------------------------------------
 

@@ -12,6 +12,7 @@ import userQuery from './graphql/user/query/user';
  * @summary Injects global data (current user, global settings, whatever) into
  * child components.
  */
+// TODO: make it a real provider
 const GlobalDataProvider = ({ userData, children }) => {
   const { error, loading, user } = userData;
 

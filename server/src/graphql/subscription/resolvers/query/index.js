@@ -1,7 +1,3 @@
-const subscriptions = require('./subscriptions');
-
-const Query = {
-  subscriptions,
-};
+const Query = {};
 
 module.exports = Query;

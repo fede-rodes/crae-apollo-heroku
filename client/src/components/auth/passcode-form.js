@@ -7,10 +7,10 @@ import ErrorHandling from 'error-handling-utils';
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-class PassCodeForm extends React.Component {
+class PasscodeForm extends React.Component {
   state = {
-    passCode: '',
-    errors: { passCode: [] },
+    passcode: '',
+    errors: { passcode: [] },
   }
 
   handleChange = ({ target }) => {
@@ -24,32 +24,32 @@ class PassCodeForm extends React.Component {
     });
   }
 
-  validateFields = ({ passCode }) => {
+  validateFields = ({ passcode }) => {
     // Initialize errors
     const errors = {
-      passCode: [],
+      passcode: [],
     };
 
     const PASS_CODE_LENGTH = 6;
 
     // Sanitize input
-    const _passCode = passCode && passCode.trim(); // eslint-disable-line no-underscore-dangle
+    const _passcode = passcode && passcode.trim(); // eslint-disable-line no-underscore-dangle
 
-    if (!_passCode) {
-      errors.passCode.push('Pass code is required!');
-    } else if (_passCode.length !== PASS_CODE_LENGTH) {
-      errors.passCode.push(`Pass code must be ${PASS_CODE_LENGTH} characters long`);
+    if (!_passcode) {
+      errors.passcode.push('Pass code is required!');
+    } else if (_passcode.length !== PASS_CODE_LENGTH) {
+      errors.passcode.push(`Pass code must be ${PASS_CODE_LENGTH} characters long`);
     }
 
     return errors;
   }
 
   clearFields = () => {
-    this.setState({ passCode: '' });
+    this.setState({ passcode: '' });
   }
 
   clearErrors = () => {
-    this.setState({ errors: { passCode: [] } });
+    this.setState({ errors: { passcode: [] } });
   }
 
   handleSubmit = async (evt) => {
@@ -65,13 +65,13 @@ class PassCodeForm extends React.Component {
     }
 
     // Get field values
-    const { passCode } = this.state;
+    const { passcode } = this.state;
 
     // Clear previous errors if any
     this.clearErrors();
 
     // Validate fields
-    const errors = this.validateFields({ passCode });
+    const errors = this.validateFields({ passcode });
 
     // In case of errors, display on UI and return handler to parent component
     if (ErrorHandling.hasErrors(errors)) {
@@ -81,14 +81,14 @@ class PassCodeForm extends React.Component {
     }
 
     // Pass event up to parent component
-    onSuccessHook({ passCode });
+    onSuccessHook({ passcode });
   }
 
   render() {
     const { btnLabel, disabled } = this.props;
-    const { passCode, errors } = this.state;
+    const { passcode, errors } = this.state;
 
-    const passCodeErrors = ErrorHandling.getFieldErrors(errors, 'passCode');
+    const passcodeErrors = ErrorHandling.getFieldErrors(errors, 'passcode');
 
     return (
       <form
@@ -97,15 +97,15 @@ class PassCodeForm extends React.Component {
         autoComplete="off"
       >
         <TextField
-          id="passCode"
+          id="passcode"
           type="text"
           label="Pass Code"
-          value={passCode}
+          value={passcode}
           onChange={this.handleChange}
           margin="normal"
           fullWidth
-          error={passCodeErrors.length > 0}
-          helperText={passCodeErrors || ''}
+          error={passcodeErrors.length > 0}
+          helperText={passcodeErrors || ''}
         />
         <div className="mb2" />
         <Button
@@ -122,7 +122,7 @@ class PassCodeForm extends React.Component {
   }
 }
 
-PassCodeForm.propTypes = {
+PasscodeForm.propTypes = {
   btnLabel: PropTypes.string,
   disabled: PropTypes.bool,
   onBeforeHook: PropTypes.func,
@@ -130,7 +130,7 @@ PassCodeForm.propTypes = {
   onSuccessHook: PropTypes.func,
 };
 
-PassCodeForm.defaultProps = {
+PasscodeForm.defaultProps = {
   btnLabel: 'Submit',
   disabled: false,
   onBeforeHook: () => {},
@@ -138,4 +138,4 @@ PassCodeForm.defaultProps = {
   onSuccessHook: () => {},
 };
 
-export default PassCodeForm;
+export default PasscodeForm;

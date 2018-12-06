@@ -4,49 +4,43 @@ const { User } = require('../../../../models');
 //------------------------------------------------------------------------------
 // AUX FUNCTIONS:
 //------------------------------------------------------------------------------
-const getText = ({ passCode }) => (`
+const getText = ({ passcode }) => (`
 Hello,
 
-Your verification code is ${passCode}.
+Your verification code is ${passcode}.
 
 Thanks.
 `);
 //------------------------------------------------------------------------------
 // MUTATION:
 //------------------------------------------------------------------------------
-const sendPassCode = async (root, args) => {
+const sendPasscode = async (root, args) => {
   const { email } = args;
 
   // Is there any user associated to this email?
-  const user = await User.findOne({ email });
-
+  const user = await User.findByEmail({ email });
   if (!user) {
-    throw new Error('User not found'); // Bad request - 400
+    throw new Error('User is not registered'); // Bad request - 400
   }
 
   // Genearte a 6-digit pass code and attach it to the user
-  const passCode = await user.genPassCode(6);
+  const passcode = await user.genPasscode(6);
 
   // Send pass code to user
   const mailOptions = {
     from: 'email@example.com', // sender address
     to: email, // list of receivers
-    subject: `Your pass code is ${passCode} for <siteName>`, // subject line
-    text: getText({ passCode }), // plain text body
+    subject: `Your pass code is ${passcode} for <siteName>`, // subject line
+    text: getText({ passcode }), // plain text body
     // html: '<b>Hello world?</b>', // html body
   };
 
   // Send email with defined transport object
-  try {
-    const info = await transporter.sendMail(mailOptions);
-    console.log('Message sent: %s', info.messageId);
-    // Preview only available when sending through an Ethereal account
-    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-    return { status: 200 }; // TODO: return user id or similar
-  } catch (exc) {
-    console.error('ERROR DELIVERYING EMAIL', exc);
-    throw new Error(exc);
-  }
+  const info = await transporter.sendMail(mailOptions);
+  console.log('Message sent: %s', info.messageId);
+  // Preview only available when sending through an Ethereal account
+  console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+  return user;
 };
 
-module.exports = sendPassCode;
+module.exports = sendPasscode;

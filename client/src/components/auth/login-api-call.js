@@ -7,7 +7,7 @@ import loginMutation from '../../graphql/user/mutation/login';
 // COMPONENT:
 //------------------------------------------------------------------------------
 class LoginApiCall extends React.PureComponent {
-  handleSuccess = async ({ passCode }) => {
+  handleSuccess = async ({ passcode }) => {
     const {
       email,
       onLoginError,
@@ -16,7 +16,7 @@ class LoginApiCall extends React.PureComponent {
     } = this.props;
 
     try {
-      const res = await login({ variables: { email, passCode: parseInt(passCode, 10) } });
+      const res = await login({ variables: { email, passcode: parseInt(passcode, 10) } });
       onLoginSuccess({ token: res.data.login.token });
     } catch (exc) {
       console.log(exc);

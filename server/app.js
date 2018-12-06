@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 require('./src/check-env-vars');
 require('express-async-errors');
 require('./src/services/winston/config'); // logger
@@ -9,8 +10,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const { ApolloServer } = require('apollo-server-express');
 const Joi = require('joi');
-const jwt = require('jsonwebtoken');
-const pick = require('lodash/pick');
+const jwt = require('express-jwt');
 const { logger } = require('./src/services/winston/config');
 const schema = require('./src/graphql/exec-schema');
 const initDB = require('./src/init-db');
@@ -24,6 +24,8 @@ Joi.objectId = require('joi-objectid')(Joi);
 //------------------------------------------------------------------------------
 const handleException = async (exc) => {
   await logger.error(exc.message || 'No msg field', console.log);
+  // TODO: send me an email
+  console.log('TODO: SEND EMAIL TO OWNER');
   // Something bad happened, kill the process and then restart fresh
   // TODO: use other winston transports
   process.exit(1);
@@ -47,8 +49,6 @@ const {
   JWT_PRIVATE_KEY,
 } = process.env;
 
-const isNotProduction = NODE_ENV !== 'production';
-
 console.log(
   '\nprocess.env.NODE_ENV', NODE_ENV,
   '\nprocess.env.PORT', PORT,
@@ -71,7 +71,7 @@ app.use(helmet());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-if (isNotProduction) {
+if (app.get('env') === 'development') {
   // Enable the app to receive requests from the React app when running locally.
   app.use('*', cors({ origin: 'http://localhost:3000' }));
   app.use(morgan('tiny'));
@@ -100,23 +100,14 @@ app.use(staticFiles);
 //------------------------------------------------------------------------------
 // APOLLO SERVER
 //------------------------------------------------------------------------------
-const getUser = async (req) => {
-  const token = (req && req.headers && req.headers.authorization) || null;
-  // console.log('req.headers', req && req.headers);
-  // console.log('req.headers', req && req.headers && req.headers.authorization);
+// See: https://blog.pusher.com/handling-authentication-in-graphql/
+// Decode jwt and get user data (_id). Then reset req.user to decoded data.
+const authMiddleware = jwt({
+  secret: JWT_PRIVATE_KEY,
+  credentialsRequired: false, // allow non-authenticated requests to pass through the middleware
+});
 
-  if (!token) {
-    return null;
-  }
-
-  try {
-    const json = await jwt.verify(token, JWT_PRIVATE_KEY);
-    return pick(json, '_id');
-  } catch (exc) {
-    console.error('Not authorized');
-    return null;
-  }
-};
+app.use(authMiddleware);
 
 const { ObjectId } = mongoose.Types;
 
@@ -127,9 +118,10 @@ ObjectId.prototype.valueOf = function () {
 const server = new ApolloServer({
   schema,
   context: async ({ req }) => ({
-    usr: await getUser(req),
-    // usr: { _id: '5b7be6b5f799de5c5ce126a4' },
+    // TODO: change name to 'me' or 'curUser'
+    usr: req.user, // user data is decoded on the authMiddleware
   }),
+  // TODO" log errors to winston
   playground: {
     settings: {
       'editor.theme': 'light',

@@ -1,5 +1,5 @@
 const webPush = require('./config');
-// const { validPush } = require('../../models/subscription');
+// const { validatePush } = require('../../models/subscription');
 
 //------------------------------------------------------------------------------
 // METHOD:
@@ -11,7 +11,7 @@ const send = async ({
   icon,
 }) => {
   // console.log('\n\npushAPI.send args', args);
-  /* const { error } = validPush({ subscription, title, body, icon });
+  /* const { error } = validatePush({ subscription, title, body, icon });
   if (error) {
     console.log('\n\nerror', error);
     return { error: error.details[0].message };
@@ -34,10 +34,9 @@ const send = async ({
   try {
     await webPush.sendNotification(subscription, payload, options);
     console.log('\nPUSH NOTIFICATION DELIVERED SUCCESSFULLY!');
-    return { error: null };
   } catch (exc) {
     console.log(`\nError when trying to deliver PUSH NOTIFICATION for ${subscription.endpoint}`, exc);
-    return { error: exc };
+    throw new Error(exc);
   }
 };
 

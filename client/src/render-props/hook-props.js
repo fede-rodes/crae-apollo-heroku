@@ -24,7 +24,12 @@ class HookProps extends React.PureComponent {
   handleServerError = (err) => {
     const { disabledProps, messageProps } = this.props;
     // console.log(err);
-    messageProps.setErrorMessage(err.reason || err.message || 'Unexpected error');
+    const errorMsg = (
+      err.reason
+      || (err.message && err.message.replace('GraphQL error: ', ''))
+      || 'Unexpected error'
+    );
+    messageProps.setErrorMessage(errorMsg);
     disabledProps.enableBtn();
   }
 
