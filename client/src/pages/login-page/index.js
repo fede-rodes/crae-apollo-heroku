@@ -44,6 +44,7 @@ class LoginPage extends React.PureComponent {
           successMsg,
           setSuccessMessage,
           handleBefore,
+          handleClientCancel,
           handleClientError,
           handleServerError,
           handleSuccess,
@@ -59,6 +60,7 @@ class LoginPage extends React.PureComponent {
                   label="Resend it"
                   disabled={disabled}
                   onBeforeHook={handleBefore}
+                  onClientCancelHook={handleClientCancel}
                   onSendError={handleServerError}
                   onSendSuccess={() => {
                     // Extend formProps.handleSuccess' default functionality
@@ -89,6 +91,7 @@ class LoginPage extends React.PureComponent {
                     btnLabel="Send Pass Code"
                     disabled={disabled}
                     onBeforeHook={handleBefore}
+                    onClientCancelHook={handleClientCancel}
                     onClientErrorHook={handleClientError}
                     onSuccessHook={(inputFields) => {
                       // Store current user's email and fire signup api call
@@ -119,6 +122,7 @@ class LoginPage extends React.PureComponent {
                     btnLabel="Enter"
                     disabled={disabled}
                     onBeforeHook={handleBefore}
+                    onClientCancelHook={handleClientCancel}
                     onClientErrorHook={handleClientError}
                     // Fire signup api call
                     onSuccessHook={loginUser}

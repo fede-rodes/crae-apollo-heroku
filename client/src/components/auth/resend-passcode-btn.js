@@ -8,12 +8,13 @@ import SendPasscode from './send-passcode';
 //------------------------------------------------------------------------------
 class Button extends React.PureComponent {
   handleClick = async () => {
-    const { onBeforeHook, onClick } = this.props;
+    const { onBeforeHook, onClientCancelHook, onClick } = this.props;
 
     // Run before logic if provided and return on error
     try {
       onBeforeHook();
     } catch (exc) {
+      onClientCancelHook();
       return; // return silently
     }
 
@@ -39,12 +40,14 @@ Button.propTypes = {
   label: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   onBeforeHook: PropTypes.func,
+  onClientCancelHook: PropTypes.func,
   onClick: PropTypes.func,
 };
 
 Button.defaultProps = {
   disabled: false,
   onBeforeHook: () => {},
+  onClientCancelHook: () => {},
   onClick: () => {},
 };
 //------------------------------------------------------------------------------
@@ -56,6 +59,7 @@ const ResendPasscodeBtn = ({
   label,
   disabled,
   onBeforeHook,
+  onClientCancelHook,
   onSendError,
   onSendSuccess,
 }) => (
@@ -68,6 +72,7 @@ const ResendPasscodeBtn = ({
         label={label}
         disabled={disabled}
         onBeforeHook={onBeforeHook}
+        onClientCancelHook={onClientCancelHook}
         onClick={() => { sendPasscode({ email }); }}
       />
     )}
@@ -79,6 +84,7 @@ ResendPasscodeBtn.propTypes = {
   label: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   onBeforeHook: PropTypes.func,
+  onClientCancelHook: PropTypes.func,
   onSendError: PropTypes.func,
   onSendSuccess: PropTypes.func,
 };
@@ -86,6 +92,7 @@ ResendPasscodeBtn.propTypes = {
 ResendPasscodeBtn.defaultProps = {
   disabled: false,
   onBeforeHook: () => {},
+  onClientCancelHook: () => {},
   onSendError: () => {},
   onSendSuccess: () => {},
 };

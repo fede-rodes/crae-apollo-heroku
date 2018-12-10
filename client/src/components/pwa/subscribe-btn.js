@@ -41,6 +41,7 @@ class SubscribeBtn extends React.PureComponent {
     const {
       saveSubscription,
       onBeforeHook,
+      onClientCancelHook,
       onClientErrorHook,
       onServerErrorHook,
       onSuccessHook,
@@ -50,6 +51,7 @@ class SubscribeBtn extends React.PureComponent {
     try {
       onBeforeHook();
     } catch (exc) {
+      onClientCancelHook();
       return; // return silently
     }
 
@@ -128,6 +130,7 @@ SubscribeBtn.propTypes = {
   disabled: PropTypes.bool,
   saveSubscription: PropTypes.func.isRequired,
   onBeforeHook: PropTypes.func,
+  onClientCancelHook: PropTypes.func,
   onClientErrorHook: PropTypes.func,
   onServerErrorHook: PropTypes.func,
   onSuccessHook: PropTypes.func,
@@ -137,6 +140,7 @@ SubscribeBtn.defaultProps = {
   btnLabel: 'Enable Push Messages',
   disabled: false,
   onBeforeHook: () => {},
+  onClientCancelHook: () => {},
   onClientErrorHook: () => {},
   onServerErrorHook: () => {},
   onSuccessHook: () => {},

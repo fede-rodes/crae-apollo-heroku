@@ -12,6 +12,7 @@ class PushBtn extends React.PureComponent {
     const {
       sendPushNotification,
       onBeforeHook,
+      onClientCancelHook,
       onServerErrorHook,
       onSuccessHook,
     } = this.props;
@@ -20,6 +21,7 @@ class PushBtn extends React.PureComponent {
     try {
       onBeforeHook();
     } catch (exc) {
+      onClientCancelHook();
       return; // return silently
     }
 
@@ -52,6 +54,7 @@ PushBtn.propTypes = {
   disabled: PropTypes.bool,
   sendPushNotification: PropTypes.func.isRequired,
   onBeforeHook: PropTypes.func,
+  onClientCancelHook: PropTypes.func,
   onServerErrorHook: PropTypes.func,
   onSuccessHook: PropTypes.func,
 };
@@ -60,6 +63,7 @@ PushBtn.defaultProps = {
   btnLabel: 'Send Push Notification',
   disabled: false,
   onBeforeHook: () => {},
+  onClientCancelHook: () => {},
   onServerErrorHook: () => {},
   onSuccessHook: () => {},
 };

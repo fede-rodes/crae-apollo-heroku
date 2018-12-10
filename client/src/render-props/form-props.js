@@ -25,6 +25,7 @@ const FormProps = ({ children }) => (
                 setSuccessMessage: messageProps.setSuccessMessage,
                 clearMessages: messageProps.clearMessages,
                 handleBefore: hookProps.handleBefore,
+                handleClientCancel: hookProps.handleClientCancel,
                 handleClientError: hookProps.handleClientError,
                 handleServerError: hookProps.handleServerError,
                 handleSuccess: hookProps.handleSuccess,

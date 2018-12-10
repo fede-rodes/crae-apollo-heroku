@@ -15,6 +15,11 @@ class HookProps extends React.PureComponent {
     if (cb && typeof cb === 'function') { cb(); }
   }
 
+  handleClientCancel = () => {
+    const { disabledProps } = this.props;
+    disabledProps.enableBtn();
+  }
+
   handleClientError = (err) => { // eslint-disable-line no-unused-vars
     const { disabledProps } = this.props;
     // console.log(err);
@@ -47,6 +52,7 @@ class HookProps extends React.PureComponent {
     // Public API
     const api = {
       handleBefore: this.handleBefore,
+      handleClientCancel: this.handleClientCancel,
       handleClientError: this.handleClientError,
       handleServerError: this.handleServerError,
       handleSuccess: this.handleSuccess,
@@ -72,6 +78,7 @@ export default HookProps;
 //------------------------------------------------------------------------------
 export const hookPropTypes = {
   handleBefore: PropTypes.func.isRequired,
+  handleClientCancel: PropTypes.func.isRequired,
   handleClientError: PropTypes.func.isRequired,
   handleServerError: PropTypes.func.isRequired,
   handleSuccess: PropTypes.func.isRequired,

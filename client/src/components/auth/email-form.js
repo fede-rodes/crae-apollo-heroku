@@ -58,12 +58,18 @@ class EmailForm extends React.Component {
   handleSubmit = async (evt) => {
     evt.preventDefault();
 
-    const { onBeforeHook, onClientErrorHook, onSuccessHook } = this.props;
+    const {
+      onBeforeHook,
+      onClientCancelHook,
+      onClientErrorHook,
+      onSuccessHook,
+    } = this.props;
 
     // Run before logic if provided and return on error
     try {
       onBeforeHook();
     } catch (exc) {
+      onClientCancelHook();
       return; // return silently
     }
 
@@ -129,6 +135,7 @@ EmailForm.propTypes = {
   btnLabel: PropTypes.string,
   disabled: PropTypes.bool,
   onBeforeHook: PropTypes.func,
+  onClientCancelHook: PropTypes.func,
   onClientErrorHook: PropTypes.func,
   onSuccessHook: PropTypes.func,
 };
@@ -137,6 +144,7 @@ EmailForm.defaultProps = {
   btnLabel: 'Submit',
   disabled: false,
   onBeforeHook: () => {},
+  onClientCancelHook: () => {},
   onClientErrorHook: () => {},
   onSuccessHook: () => {},
 };

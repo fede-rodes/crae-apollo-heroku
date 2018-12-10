@@ -55,12 +55,18 @@ class PasscodeForm extends React.Component {
   handleSubmit = async (evt) => {
     evt.preventDefault();
 
-    const { onBeforeHook, onClientErrorHook, onSuccessHook } = this.props;
+    const {
+      onBeforeHook,
+      onClientErrorHook,
+      onClientCancelHook,
+      onSuccessHook,
+    } = this.props;
 
     // Run before logic if provided and return on error
     try {
       onBeforeHook();
     } catch (exc) {
+      onClientCancelHook();
       return; // return silently
     }
 
@@ -126,6 +132,7 @@ PasscodeForm.propTypes = {
   btnLabel: PropTypes.string,
   disabled: PropTypes.bool,
   onBeforeHook: PropTypes.func,
+  onClientCancelHook: PropTypes.func,
   onClientErrorHook: PropTypes.func,
   onSuccessHook: PropTypes.func,
 };
@@ -134,6 +141,7 @@ PasscodeForm.defaultProps = {
   btnLabel: 'Submit',
   disabled: false,
   onBeforeHook: () => {},
+  onClientCancelHook: () => {},
   onClientErrorHook: () => {},
   onSuccessHook: () => {},
 };

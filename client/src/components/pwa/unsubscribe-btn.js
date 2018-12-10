@@ -14,6 +14,7 @@ class UnsubscribeBtn extends React.PureComponent {
     const {
       deleteSubscription,
       onBeforeHook,
+      onClientCancelHook,
       onClientErrorHook,
       onServerErrorHook,
       onSuccessHook,
@@ -23,6 +24,7 @@ class UnsubscribeBtn extends React.PureComponent {
     try {
       onBeforeHook();
     } catch (exc) {
+      onClientCancelHook();
       return; // return silently
     }
 
@@ -93,6 +95,7 @@ UnsubscribeBtn.propTypes = {
   disabled: PropTypes.bool,
   deleteSubscription: PropTypes.func.isRequired,
   onBeforeHook: PropTypes.func,
+  onClientCancelHook: PropTypes.func,
   onServerErrorHook: PropTypes.func,
   onSuccessHook: PropTypes.func,
 };
@@ -101,6 +104,7 @@ UnsubscribeBtn.defaultProps = {
   btnLabel: 'Disable Push Messages',
   disabled: false,
   onBeforeHook: () => {},
+  onClientCancelHook: () => {},
   onServerErrorHook: () => {},
   onSuccessHook: () => {},
 };
