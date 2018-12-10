@@ -44,16 +44,15 @@ const HomePage = ({ curUser }) => (
 
         return (
           <FormProps>
-            {(formProps) => {
-              const {
-                disabled,
-                errorMsg,
-                successMsg,
-                handleBefore,
-                handleServerError,
-                handleSuccess,
-              } = formProps;
-
+            {({
+              disabled,
+              errorMsg,
+              successMsg,
+              handleBefore,
+              handleClientCancel,
+              handleServerError,
+              handleSuccess,
+            }) => {
               // Display loading indicator while checking for push support
               if (supported === 'loading') {
                 return <Loading />;
@@ -77,6 +76,7 @@ const HomePage = ({ curUser }) => (
                     <UnsubscribeBtn
                       disabled={disabled}
                       onBeforeHook={handleBefore}
+                      onClientCancelHook={handleClientCancel}
                       onServerErrorHook={handleServerError}
                       onSuccessHook={() => {
                         handleSubscriptionChange({ subscribed: false });
@@ -87,6 +87,7 @@ const HomePage = ({ curUser }) => (
                     <SubscribeBtn
                       disabled={disabled}
                       onBeforeHook={handleBefore}
+                      onClientCancelHook={handleClientCancel}
                       onServerErrorHook={handleServerError}
                       onSuccessHook={() => {
                         handleSubscriptionChange({ subscribed: true });
@@ -99,6 +100,7 @@ const HomePage = ({ curUser }) => (
                     <PushBtn
                       disabled={disabled}
                       onBeforeHook={handleBefore}
+                      onClientCancelHook={handleClientCancel}
                       onServerErrorHook={handleServerError}
                       onSuccessHook={handleSuccess}
                     />
