@@ -8,13 +8,13 @@ import SendPasscode from './send-passcode';
 //------------------------------------------------------------------------------
 class Button extends React.PureComponent {
   handleClick = async () => {
-    const { onBeforeHook, onCancelClientHook, onClick } = this.props;
+    const { onBeforeHook, onClientCancelHook, onClick } = this.props;
 
     // Run before logic if provided and return on error
     try {
       onBeforeHook();
     } catch (exc) {
-      onCancelClientHook();
+      onClientCancelHook();
       return; // return silently
     }
 
@@ -40,14 +40,14 @@ Button.propTypes = {
   label: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   onBeforeHook: PropTypes.func,
-  onCancelClientHook: PropTypes.func,
+  onClientCancelHook: PropTypes.func,
   onClick: PropTypes.func,
 };
 
 Button.defaultProps = {
   disabled: false,
   onBeforeHook: () => {},
-  onCancelClientHook: () => {},
+  onClientCancelHook: () => {},
   onClick: () => {},
 };
 //------------------------------------------------------------------------------
