@@ -1,9 +1,12 @@
 const winston = require('winston');
+require('winston-mongodb');
 
 /**
  * @see {@link }
  * @see {@link }
  */
+
+const { MONGO_URL } = process.env;
 
 const logger = winston.createLogger({
   level: 'error',
@@ -14,6 +17,7 @@ const logger = winston.createLogger({
   transports: [
     new winston.transports.Console(),
     new winston.transports.File({ filename: 'logfile.log' }),
+    new winston.transports.MongoDB({ db: MONGO_URL }),
   ],
 });
 

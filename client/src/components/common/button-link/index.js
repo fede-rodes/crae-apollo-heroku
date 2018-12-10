@@ -8,11 +8,11 @@ import styled from 'styled-components';
 const Button = styled.button`
   /* reset button style */
   background: none !important;
-  border: none; 
+  border: none;
   padding: 0 !important;
   font: 'inherit';
   text-decoration: ${({ disabled, underline }) => (
-    (!disabled || disabled === false) && underline ? 'underline' : 'none'
+    (!disabled || disabled === false) ? underline : 'none'
   )};
   color: ${({ disabled, theme }) => (
     (!disabled || disabled === false) ? theme.color.link : 'inherit'
@@ -24,7 +24,7 @@ const Button = styled.button`
 
 Button.propTypes = {
   type: PropTypes.oneOf(['button']).isRequired,
-  underline: PropTypes.bool.isRequired,
+  underline: PropTypes.oneOf(['underline', 'none']).isRequired,
 };
 
 //------------------------------------------------------------------------------
@@ -45,12 +45,12 @@ ButtonLink.propTypes = {
     PropTypes.object,
     PropTypes.string,
   ]).isRequired,
-  underline: PropTypes.bool,
+  underline: PropTypes.oneOf(['underline', 'none']),
   // Plus all of the native button props
 };
 
 ButtonLink.defaultProps = {
-  underline: true,
+  underline: 'underline',
 };
 
 export default ButtonLink;

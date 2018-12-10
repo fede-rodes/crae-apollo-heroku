@@ -30,7 +30,7 @@ const LogoutBtn = ({
   return (
     <ButtonComp
       disabled={disabled}
-      underline={underline} // TODO: fix warning here
+      underline={underline}
       onClick={handleLogout}
     >
       Log out
@@ -44,14 +44,14 @@ LogoutBtn.propTypes = {
   }).isRequired,
   btnType: PropTypes.oneOf(['button', 'link']),
   disabled: PropTypes.bool,
-  underline: PropTypes.bool,
+  underline: PropTypes.oneOf(['underline', 'none']),
   onLogoutHook: PropTypes.func,
 };
 
 LogoutBtn.defaultProps = {
   btnType: 'button',
   disabled: false,
-  underline: true,
+  underline: 'underline',
   onLogoutHook: () => {},
 };
 
