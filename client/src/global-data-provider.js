@@ -5,14 +5,15 @@ import { propType } from 'graphql-anywhere';
 import userFragment from './graphql/user/fragment/user';
 import userQuery from './graphql/user/query/user';
 
+const Context = React.createContext();
+
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
 /**
  * @summary Injects global data (current user, global settings, whatever) into
- * child components.
+ * app's context.
  */
-// TODO: make it a real provider
 const GlobalDataProvider = ({ userData, children }) => {
   const { error, loading, user } = userData;
 
@@ -23,11 +24,13 @@ const GlobalDataProvider = ({ userData, children }) => {
     return <p>{error.message}</p>;
   }
 
-  const api = {
-    curUser: user,
-  };
-
-  return children(api);
+  return (
+    <Context.Provider
+      value={{ curUser: user }}
+    >
+      {children}
+    </Context.Provider>
+  );
 };
 
 GlobalDataProvider.propTypes = {
@@ -47,3 +50,9 @@ GlobalDataProvider.propTypes = {
 const withData = graphql(userQuery, { name: 'userData' });
 
 export default withData(GlobalDataProvider);
+
+export const withUser = Component => props => (
+  <Context.Consumer>
+    {userProps => <Component {...props} {...userProps} />}
+  </Context.Consumer>
+);

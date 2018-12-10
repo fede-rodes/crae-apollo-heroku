@@ -113,7 +113,7 @@ class EmailForm extends React.Component {
         <div className="mb2" />
         <Button
           type="submit"
-          variant="raised"
+          variant="contained"
           color="primary"
           fullWidth
           disabled={disabled}
