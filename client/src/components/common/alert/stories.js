@@ -1,13 +1,8 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { host } from 'storybook-host';
 import Alert from './index';
 
 storiesOf('Alert', module)
-  .addDecorator(host({
-    align: 'center middle',
-    width: '60%',
-  }))
   .add('Alert success', () => (
     <Alert type="success" content="I'm the content" />
   ))
