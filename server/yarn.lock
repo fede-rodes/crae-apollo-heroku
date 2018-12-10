@@ -3095,9 +3095,9 @@ minipass@^2.2.1, minipass@^2.3.4:
     yallist "^3.0.0"
 
 minizlib@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/minizlib/-/minizlib-1.1.1.tgz#6734acc045a46e61d596a43bb9d9cd326e19cc42"
-  integrity sha512-TrfjCjk4jLhcJyGMYymBH6oTXcWjYbUAXTHDbtnWHjZC25h0cdajHuPE1zxb4DVmu8crfh+HwH/WMuyLG0nHBg==
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/minizlib/-/minizlib-1.2.0.tgz#59517387478fd98d8017ed0299c6cb16cbd12da3"
+  integrity sha512-vQhkoouK/oKRVuFJynustmW3wrqZEXOrfbVVirvOVeglH4TNvIkcqiyojlIbbZYYDJZSbEKEXmDudg+tyRkm6g==
   dependencies:
     minipass "^2.2.1"
 
@@ -3132,7 +3132,7 @@ mongodb-core@3.1.9:
   optionalDependencies:
     saslprep "^1.0.0"
 
-mongodb@3.1.10:
+mongodb@3.1.10, mongodb@^3.1.0:
   version "3.1.10"
   resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.1.10.tgz#45ad9b74ea376f4122d0881b75e5489b9e504ed7"
   integrity sha512-Uml42GeFxhTGQVml1XQ4cD0o/rp7J2ROy0fdYUcVitoE7vFqEhKH4TYVqRDpQr/bXtCJVxJdNQC1ntRxNREkPQ==
@@ -4682,6 +4682,13 @@ widest-line@^2.0.0:
   integrity sha512-Ba5m9/Fa4Xt9eb2ELXt77JxVDV8w7qQrH0zS/TWSJdLyAwQjWoOzpzj5lwVftDz6n/EOu3tNACS84v509qwnJA==
   dependencies:
     string-width "^2.1.1"
+
+winston-mongodb@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/winston-mongodb/-/winston-mongodb-4.0.3.tgz#a0cf9f1291dc2f7b4d2f7dcaad6c5222ff287085"
+  integrity sha512-fc0XK8qw3tsnC09HSUzqqijmxI4S/XWfC1iBv4UulsJIn8RWZEXOzAmvk7k1Nyt8g0YewhTjwi8+AzN1ZbFIlQ==
+  dependencies:
+    mongodb "^3.1.0"
 
 winston-transport@^4.2.0:
   version "4.2.0"

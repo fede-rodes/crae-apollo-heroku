@@ -34,7 +34,6 @@ const handleException = async (exc) => {
 process.on('uncaughtException', handleException);
 process.on('unhandledRejection', handleException);
 
-
 // const p = Promise.reject(new Error('Ive been rejected :('));
 // p.then(() => { console.log('done'); });
 
