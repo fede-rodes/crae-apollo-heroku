@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { propType } from 'graphql-anywhere';
+import { withUser } from './global-data-provider';
 import userFragment from './graphql/user/fragment/user';
 import { ScrollToTop, LoggedInRoute } from './components/route-wrappers';
 import HomePage from './pages/home-page';
@@ -23,4 +24,4 @@ Routes.defaultProps = {
   curUser: null,
 };
 
-export default Routes;
+export default withUser(Routes);

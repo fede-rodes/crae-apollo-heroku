@@ -29,7 +29,7 @@ const App = ({ component: Component }) => (
       <ApolloProvider client={client}>
         <MuiThemeProvider theme={muiTheme}>
           <GlobalDataProvider>
-            {globalDataProps => <Component {...globalDataProps} />}
+            <Component />
           </GlobalDataProvider>
         </MuiThemeProvider>
       </ApolloProvider>

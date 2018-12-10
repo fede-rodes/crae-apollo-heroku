@@ -2,6 +2,7 @@ import React from 'react';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 import { PWABtnProps, FormProps } from '../../render-props';
+import { withUser } from '../../global-data-provider';
 import userFragment from '../../graphql/user/fragment/user';
 import LogoutBtn from '../../components/auth/logout-btn';
 import SubscribeBtn from '../../components/pwa/subscribe-btn';
@@ -123,4 +124,4 @@ HomePage.propTypes = {
   curUser: propType(userFragment).isRequired,
 };
 
-export default HomePage;
+export default withUser(HomePage);
