@@ -1,6 +1,9 @@
+require('dotenv').config();
+
 /**
  * @summary Makes sure all env vars are set
  */
+
 const {
   MONGO_URL,
   JWT_PRIVATE_KEY,
