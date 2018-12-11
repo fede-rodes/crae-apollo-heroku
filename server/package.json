@@ -4,11 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon -r dotenv/config app.js",
+    "start": "nodemon app.js",
     "build": "babel . --ignore node_modules,build --out-dir build",
-    "start:prod": "node -r dotenv/config build/app.js",
+    "start:prod": "node build/app.js",
     "lint": "eslint .",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll --verbose false"
   },
   "dependencies": {
     "apollo-server-express": "^2.2.3",

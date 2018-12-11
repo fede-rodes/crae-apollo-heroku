@@ -1,4 +1,5 @@
 /* eslint-disable func-names */
+require('dotenv').config();
 require('./src/check-env-vars');
 require('express-async-errors');
 require('./src/services/winston/config'); // logger
