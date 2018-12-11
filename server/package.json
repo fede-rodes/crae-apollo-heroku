@@ -7,7 +7,8 @@
     "start": "nodemon -r dotenv/config app.js",
     "build": "babel . --ignore node_modules,build --out-dir build",
     "start:prod": "node -r dotenv/config build/app.js",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "jest --watchAll"
   },
   "dependencies": {
     "apollo-server-express": "^2.2.3",
@@ -42,6 +43,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
+    "jest": "^23.6.0",
     "nodemon": "^1.18.6"
   }
 }
