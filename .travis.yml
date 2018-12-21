@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - 8
+cache:
+  directories:
+    - node_modules
+script:
+  - yarn run build
+  - (cd client && yarn) && (cd server && yarn)
