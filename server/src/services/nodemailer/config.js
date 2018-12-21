@@ -1,10 +1,5 @@
 const nodemailer = require('nodemailer');
 
-/**
- * @see {@link }
- * @see {@link }
- */
-
 const {
   SMTP_HOST,
   SMTP_USERNAME,

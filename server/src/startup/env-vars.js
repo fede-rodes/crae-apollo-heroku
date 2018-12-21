@@ -5,7 +5,9 @@ require('dotenv').config();
  */
 
 const {
+  // NODE_ENV,
   MONGO_URL,
+  // MONGO_URL_TEST,
   JWT_PRIVATE_KEY,
   SMTP_HOST,
   SMTP_USERNAME,
@@ -16,6 +18,11 @@ const {
   VAPID_PUBLIC_KEY,
   VAPID_PRIVATE_KEY,
 } = process.env;
+
+// if (NODE_ENV && NODE_ENV === 'test' && (!MONGO_URL_TEST || MONGO_URL_TEST.trim().length === 0)) {
+//   console.error('FATAL ERROR: MONGO_URL_TEST env var missing');
+//   process.exit(1);
+// }
 
 if (!MONGO_URL || MONGO_URL.trim().length === 0) {
   console.error('FATAL ERROR: MONGO_URL env var missing');

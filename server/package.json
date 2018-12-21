@@ -8,7 +8,7 @@
     "build": "babel . --ignore node_modules,build --out-dir build",
     "start:prod": "node build/app.js",
     "lint": "eslint .",
-    "test": "jest --watchAll --verbose false"
+    "test": "jest --watchAll --verbose false --coverage"
   },
   "dependencies": {
     "apollo-server-express": "^2.2.3",

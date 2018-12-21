@@ -84,7 +84,6 @@ class SignupPage extends React.PureComponent {
                     setSuccessMessage('A new email has been sent to your inbox!');
                     // Switch to passcodeView view
                     this.setState({ view: 'passcodeView' });
-                    // TODO: need to send passcode
                   });
                 }}
               >
