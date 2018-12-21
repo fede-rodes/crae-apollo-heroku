@@ -1,9 +1,1 @@
 language: node_js
-node_js:
-  - 8.12.0
-cache:
-  directories:
-    - node_modules
-script:
-  - yarn run build
-  - (cd client && yarn) && (cd server && yarn)
