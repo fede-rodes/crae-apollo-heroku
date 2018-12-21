@@ -1,8 +1,15 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
+// import renderer from 'react-test-renderer';
 import Alert from '.';
 
 describe('Alert', () => {
+  it('renders without crashing', () => {
+    const div = document.createElement('div');
+    ReactDOM.render(<Alert type="success" />, div);
+  });
+
   it('renders null when no content is provided', () => {
     const wrapper = shallow(<Alert type="success" />);
     expect(wrapper.html()).toBeNull();

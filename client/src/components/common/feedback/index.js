@@ -6,7 +6,12 @@ import Alert from '../alert';
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
-const Feedback = ({ className, loading, errorMsg, successMsg }) => (
+const Feedback = ({
+  className,
+  loading,
+  errorMsg,
+  successMsg,
+}) => (
   <div className={className || ''}>
     {loading && <Loading className="center" />}
     <Alert type="error" content={errorMsg} />
@@ -16,13 +21,14 @@ const Feedback = ({ className, loading, errorMsg, successMsg }) => (
 
 Feedback.propTypes = {
   className: PropTypes.string,
-  loading: PropTypes.bool.isRequired,
+  loading: PropTypes.bool,
   errorMsg: PropTypes.string,
   successMsg: PropTypes.string,
 };
 
 Feedback.defaultProps = {
   className: '',
+  loading: false,
   errorMsg: '',
   successMsg: '',
 };
