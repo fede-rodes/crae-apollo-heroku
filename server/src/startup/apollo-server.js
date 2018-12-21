@@ -17,7 +17,6 @@ module.exports = (app) => {
   const server = new ApolloServer({
     schema,
     context: async ({ req }) => ({
-      // TODO: change name to 'me' or 'curUser'
       usr: req.user, // user data is decoded on the authMiddleware
     }),
     // TODO" log errors to winston

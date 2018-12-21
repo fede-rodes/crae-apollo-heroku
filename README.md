@@ -111,7 +111,6 @@ Please notice, during the build process the CRA is converted into a static asset
 heroku buildpacks:set https://github.com/heroku/heroku-buildpack-nodejs#yarn
 heroku config:set MONGO_URL=mongodb://<dbuser>:<dbpassword>@<something>.mlab.com:<port>/<dbname>
 ```
-TODO: we should been able to define .env.production and make Heroku to pick the env variables from there.
 
 6. Push the code to Heroku.
 ```
