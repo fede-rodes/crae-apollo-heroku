@@ -1,4 +1,4 @@
-const { User, validateLogin } = require('../../../../models');
+const { User, validateLogin } = require('../../../../../models');
 
 //------------------------------------------------------------------------------
 // MUTATION:

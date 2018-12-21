@@ -57,6 +57,7 @@ const schema = mongoose.Schema({
 //------------------------------------------------------------------------------
 // INSTANCE METHODS:
 //------------------------------------------------------------------------------
+// TODO: async is not needed
 schema.methods.validatePasscode = async function ({ passcode }) {
   return (
     passcode
@@ -105,6 +106,7 @@ schema.methods.genAuthToken = function () {
 //------------------------------------------------------------------------------
 // STATIC METHODS:
 //------------------------------------------------------------------------------
+// TODO: async is not needed
 schema.statics.findByEmail = async function ({ email }) {
   return this.findOne({ email });
 };

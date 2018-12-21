@@ -6,13 +6,13 @@ import PropTypes from 'prop-types';
 //------------------------------------------------------------------------------
 const Subtitle = ({ text, link }) => (
   <p className="center">
-    <span dangerouslySetInnerHTML={{ __html: text }} /> {link || null}
+    <span>{text}</span> {link || null}
   </p>
 );
 
 Subtitle.propTypes = {
   text: PropTypes.string.isRequired,
-  link: PropTypes.object, // eslint-disable-line
+  link: PropTypes.node,
 };
 
 Subtitle.defaultProps = {
