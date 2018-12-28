@@ -1,4 +1,4 @@
-https://travis-ci.org/travis-ci/travis-web.svg?branch=master
+[![Build Status](https://travis-ci.org/travis-ci/travis-web.svg?branch=master)](https://travis-ci.org/travis-ci/travis-web)
 
 # Node - Express - Mongoose - GraphQL (Apollo) - Create React App boilerplate ready to be deployed to Heroku
 
