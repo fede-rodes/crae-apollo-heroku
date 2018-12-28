@@ -55,7 +55,7 @@ class EmailForm extends React.Component {
     this.setState({ errors: { email: [] } });
   }
 
-  handleSubmit = async (evt) => {
+  handleSubmit = (evt) => {
     evt.preventDefault();
 
     const {
