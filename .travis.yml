@@ -1,1 +1,9 @@
 language: node_js
+node_js:
+  - 8.12.0
+cache:
+  directories:
+    - node_modules
+script:
+  - npm run build
+  - npm test
