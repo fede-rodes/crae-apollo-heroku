@@ -52,7 +52,7 @@ class PasscodeForm extends React.Component {
     this.setState({ errors: { passcode: [] } });
   }
 
-  handleSubmit = async (evt) => {
+  handleSubmit = (evt) => {
     evt.preventDefault();
 
     const {
