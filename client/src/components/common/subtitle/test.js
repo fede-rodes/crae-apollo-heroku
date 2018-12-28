@@ -1,8 +1,14 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 import Subtitle from '.';
 
 describe('Subtitle', () => {
+  it('renders without crashing', () => {
+    const div = document.createElement('div');
+    ReactDOM.render(<Subtitle text="Some text" />, div);
+  });
+
   it('renders text and link', () => {
     const wrapper = shallow(
       <Subtitle
