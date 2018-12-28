@@ -1,3 +1,5 @@
+https://travis-ci.org/travis-ci/travis-web.svg?branch=master
+
 # Node - Express - Mongoose - GraphQL (Apollo) - Create React App boilerplate ready to be deployed to Heroku
 
 This project is the result of putting together some really nice articles ([see](#further-reading)) to create a dead simple Node - Express - Mongoose - GraphQL (Apollo) - Create React App boilerplate. The app is deployed to Heroku:
