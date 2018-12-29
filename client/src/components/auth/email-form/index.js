@@ -31,24 +31,17 @@ class EmailForm extends React.Component {
       email: [],
     };
 
-    const MAX_CHARS = 155;
-
     // Sanitize input
     const _email = email && email.trim(); // eslint-disable-line no-underscore-dangle
 
     if (!_email) {
       errors.email.push('Email is required!');
     } else if (!isEmail(_email)) {
+      // OBS: max chars is handled by isEmail function
       errors.email.push('Please, provide a valid email address!');
-    } else if (_email.length > MAX_CHARS) {
-      errors.email.push(`Must be no more than ${MAX_CHARS} characters!`);
     }
 
     return errors;
-  }
-
-  clearFields = () => {
-    this.setState({ email: '' });
   }
 
   clearErrors = () => {

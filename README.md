@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/travis-ci/travis-web.svg?branch=master)](https://travis-ci.org/travis-ci/travis-web) [![Greenkeeper badge](https://badges.greenkeeper.io/fede-rodes/crae-apollo-heroku.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.org/travis-ci/travis-web.svg?branch=master)](https://travis-ci.org/travis-ci/travis-web) [![Greenkeeper badge](https://badges.greenkeeper.io/fede-rodes/crae-apollo-heroku.svg)](https://greenkeeper.io/) [![Maintainability](https://api.codeclimate.com/v1/badges/5129dc03085d3d84c537/maintainability)](https://codeclimate.com/github/fede-rodes/crae-apollo-heroku/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/5129dc03085d3d84c537/test_coverage)](https://codeclimate.com/github/fede-rodes/crae-apollo-heroku/test_coverage)
 
 # Node - Express - Mongoose - GraphQL (Apollo) - Create React App boilerplate ready to be deployed to Heroku
 
