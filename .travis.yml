@@ -19,6 +19,5 @@ before_script:
 script:
   - yarn run build
   - yarn test
-  - bundle exec rspec
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
