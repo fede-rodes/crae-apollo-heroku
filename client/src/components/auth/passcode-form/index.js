@@ -7,6 +7,11 @@ import ErrorHandling from 'error-handling-utils';
 //------------------------------------------------------------------------------
 // COMPONENT:
 //------------------------------------------------------------------------------
+// export const PASS_CODE_LENGTH = 6;
+
+//------------------------------------------------------------------------------
+// COMPONENT:
+//------------------------------------------------------------------------------
 class PasscodeForm extends React.Component {
   state = {
     passcode: '',
@@ -30,22 +35,16 @@ class PasscodeForm extends React.Component {
       passcode: [],
     };
 
-    const PASS_CODE_LENGTH = 6;
-
     // Sanitize input
     const _passcode = passcode && passcode.trim(); // eslint-disable-line no-underscore-dangle
 
     if (!_passcode) {
       errors.passcode.push('Pass code is required!');
-    } else if (_passcode.length !== PASS_CODE_LENGTH) {
+    } /* else if (_passcode.length !== PASS_CODE_LENGTH) {
       errors.passcode.push(`Pass code must be ${PASS_CODE_LENGTH} characters long`);
-    }
+    } */
 
     return errors;
-  }
-
-  clearFields = () => {
-    this.setState({ passcode: '' });
   }
 
   clearErrors = () => {
