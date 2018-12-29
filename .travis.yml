@@ -8,8 +8,17 @@ cache:
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.12.3
   - export PATH="$HOME/.yarn/bin:$PATH"
+env:
+  global:
+    - CC_TEST_REPORTER_ID=baa0f13cfba0659a9712adf7e6bbf51dd47061804e20ec71156aea22417b8590
 before_script:
-  - cd client && echo "SKIP_PREFLIGHT_CHECK=true" > .env
+  - cd /client && echo "SKIP_PREFLIGHT_CHECK=true" > .env
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 script:
   - yarn run build
   - yarn test
+  - bundle exec rspec
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
