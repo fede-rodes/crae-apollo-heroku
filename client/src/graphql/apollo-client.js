@@ -19,7 +19,7 @@ console.log(
   '\nGRAPHQL_URI', uri,
 );
 
-const httpLink = createHttpLink({ uri });
+export const httpLink = createHttpLink({ uri });
 
 const authLink = setContext((_, { headers }) => {
   // Get the authentication token from local storage if it exists
@@ -33,9 +33,9 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-const client = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
-});
+const link = authLink.concat(httpLink);
+export const cache = new InMemoryCache();
+
+const client = new ApolloClient({ link, cache });
 
 export default client;

@@ -5,7 +5,7 @@ import { Router } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
 import { ThemeProvider } from 'styled-components';
 import { MuiThemeProvider } from '@material-ui/core/styles';
-import client from '../graphql/config';
+import client from '../graphql/apollo-client';
 import scTheme from '../theme/sc';
 import muiTheme from '../theme/mui';
 import GlobalDataProvider from '../global-data-provider';
