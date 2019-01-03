@@ -4,21 +4,12 @@ import { mount, shallow } from 'enzyme';
 import { ApolloProvider } from 'react-apollo';
 import { MockedProvider } from 'react-apollo/test-utils';
 import wait from 'waait';
-// import createMockClient from '../../../graphql/apollo-mock-client';
 import mockClient from '../../../graphql/apollo-mock-client';
-import loginMutation from '../../../graphql/user/mutation/login';
 import LoginApiCall from '.';
 
 // TODO: before all to mount/shallow component
 
-// jest.mock('../../../graphql/user/mutation/login');
-
 describe('LoginApiCall', () => {
-  // let mockClient;
-  // beforeEach(async () => {
-  //   mockClient = await createMockClient();
-  // });
-
   it('renders without crashing', () => {
     const div = document.createElement('div');
 
@@ -33,6 +24,7 @@ describe('LoginApiCall', () => {
   });
 
   it('calls login mutation passing email and passcode', async () => {
+    jest.spyOn(mockClient, 'mutate');
     const handleLoginSuccess = jest.fn();
     const handleLoginError = jest.fn();
 
@@ -60,112 +52,19 @@ describe('LoginApiCall', () => {
     // await new Promise(resolve => setTimeout(resolve));
     // wrapper.update();
 
+    console.log(mockClient.mutate);
+
+    expect(mockClient.mutate).toBeCalled();
+    expect(mockClient.mutate.mock.calls[0][0].variables).toMatchObject({
+      email: 'email@example.com',
+      passcode: parseInt('123456', 10),
+    });
+
     expect(handleLoginSuccess).toBeCalled();
     expect(handleLoginSuccess).toBeCalledWith(
       expect.objectContaining({ token: 'xyz123' }),
     );
   });
-
-
-  // it('calls login mutation passing email and passcode', async (done) => {
-  //   const mocks = [
-  //     {
-  //       request: {
-  //         query: loginMutation,
-  //         variables: {
-  //           email: 'email@example.com',
-  //           passcode: '123456',
-  //         },
-  //       },
-  //       result: {
-  //         data: {
-  //           login: { _id: '123', token: 'xyz123' },
-  //         },
-  //       },
-  //     },
-  //   ];
-  //   const handleLoginSuccess = jest.fn();
-  //   const handleLoginError = jest.fn();
-
-  //   const wrapper = mount(
-  //     <MockedProvider mocks={mocks} addTypename={false}>
-  //       <LoginApiCall
-  //         email="email@example.com"
-  //         onLoginError={handleLoginError}
-  //         onLoginSuccess={handleLoginSuccess}
-  //       >
-  //         {({ loginUser }) => (
-  //           <button
-  //             type="button"
-  //             onClick={() => { loginUser({ passcode: '123456' }); }}
-  //           >
-  //             Click
-  //           </button>
-  //         )}
-  //       </LoginApiCall>
-  //     </MockedProvider>,
-  //   );
-
-  //   console.log(wrapper.debug());
-
-  //   wrapper.find('button').simulate('click');
-  //   await wait(0);
-  //   // await new Promise(resolve => setTimeout(resolve));
-  //   // wrapper.update();
-
-  //   expect(handleLoginSuccess).toBeCalled();
-  //   done();
-  // });
-
-  // it('calls login mutation passing email and passcode', () => {
-  //   const res = { data: { login: { token: '123' } } };
-  //   const loginMutation = require('../../../graphql/user/mutation/login');
-  //   loginMutation.mockImplementation(() => res);
-
-  //   const wrapper = mount(
-  //     <ApolloProvider client={mockClient}>
-  //       <LoginApiCall email="email@example.com">
-  //         {({ loginUser }) => (
-  //           <button
-  //             type="button"
-  //             onClick={() => { loginUser({ password: '123456' }); }}
-  //           >
-  //             Click
-  //           </button>
-  //         )}
-  //       </LoginApiCall>
-  //     </ApolloProvider>,
-  //   );
-
-  //   wrapper.find('button').simulate('click');
-
-  //   expect(loginMutation).toBeCalled();
-  // });
-
-  // it('calls login mutation passing email and passcode', () => {
-  //   const res = { data: { login: { token: '123' } } };
-  //   const loginMutation = require('../../../graphql/user/mutation/login');
-  //   loginMutation.mockResolvedValue(res);
-
-  //   const wrapper = mount(
-  //     <ApolloProvider client={mockClient}>
-  //       <LoginApiCall email="email@example.com">
-  //         {({ loginUser }) => (
-  //           <button
-  //             type="button"
-  //             onClick={() => { loginUser({ password: '123456' }); }}
-  //           >
-  //             Click
-  //           </button>
-  //         )}
-  //       </LoginApiCall>
-  //     </ApolloProvider>,
-  //   );
-
-  //   wrapper.find('button').simulate('click');
-
-  //   expect(loginMutation).toBeCalled();
-  // });
 
   it('calls onLoginSuccess when passing valid email and passcode', () => {
 

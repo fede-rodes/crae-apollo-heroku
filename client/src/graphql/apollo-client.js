@@ -14,12 +14,9 @@ const isNotProduction = NODE_ENV !== 'production';
 const uri = isNotProduction ? 'http://localhost:3001/graphql' : REACT_APP_GRAPHQL_URI;
 
 // Log
-console.log(
-  '\nNODE_ENV', NODE_ENV,
-  '\nGRAPHQL_URI', uri,
-);
+console.log('\nNODE_ENV', NODE_ENV, '\nGRAPHQL_URI', uri);
 
-export const httpLink = createHttpLink({ uri });
+const httpLink = createHttpLink({ uri });
 
 const authLink = setContext((_, { headers }) => {
   // Get the authentication token from local storage if it exists
@@ -33,9 +30,9 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-const link = authLink.concat(httpLink);
-export const cache = new InMemoryCache();
-
-const client = new ApolloClient({ link, cache });
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
 
 export default client;
