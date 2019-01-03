@@ -39,8 +39,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 if (app.get('env') === 'development') {
-  // Enable the app to receive requests from the React app when running locally.
-  app.use('*', cors({ origin: 'http://localhost:3000' }));
+  // Enable the app to receive requests from the React app and Storybook when running locally.
+  app.use('*', cors({ origin: ['http://localhost:3000', 'http://localhost:9009'] }));
   app.use(morgan('tiny'));
 }
 

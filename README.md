@@ -134,11 +134,60 @@ heroku config:set NPM_CONFIG_PRODUCTION=false
 ```
 
 ## Further reading
-1. https://originmaster.com/running-create-react-app-and-express-crae-on-heroku-c39a39fe7851
-2. https://dev-blog.apollodata.com/full-stack-react-graphql-tutorial-582ac8d24e3b
-3. https://dev-blog.apollodata.com/react-graphql-tutorial-part-2-server-99d0528c7928
-4. https://dev-blog.apollodata.com/react-graphql-tutorial-mutations-764d7ec23c15
-5. https://dev-blog.apollodata.com/tutorial-building-a-graphql-server-cddaa023c035
-6. https://caveofcode.com/2016/10/apollo-server-using-the-graphql-schema-language/
-7. https://caveofcode.com/2016/11/the-connector-and-model-layer-in-your-graphql-apollo-server/
-8. https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/deployment
+
+### GraphQL / Apollo
+- https://www.apollographql.com/docs
+- https://dev-blog.apollodata.com/full-stack-react-graphql-tutorial-582ac8d24e3b
+- https://dev-blog.apollodata.com/react-graphql-tutorial-part-2-server-99d0528c7928
+- https://dev-blog.apollodata.com/react-graphql-tutorial-mutations-764d7ec23c15
+- https://dev-blog.apollodata.com/tutorial-building-a-graphql-server-cddaa023c035
+- https://caveofcode.com/2016/10/apollo-server-using-the-graphql-schema-language/
+- https://caveofcode.com/2016/11/the-connector-and-model-layer-in-your-graphql-apollo-server/
+- https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/deployment
+- https://www.robinwieruch.de
+- https://codewithmosh.com/p/the-complete-node-js-course
+
+### Progressive Web Apps / Service Workers
+- https://medium.com/@addyosmani/progressive-web-apps-with-react-js-part-i-introduction-50679aef2b12
+- https://dzone.com/articles/introduction-to-progressive-web-apps-offline-first
+- https://dzone.com/articles/introduction-to-progressive-web-apps-instant-loadi
+- https://dzone.com/articles/introduction-to-progressive-web-apps-push-notifica
+- https://medium.com/@addyosmani/a-tinder-progressive-web-app-performance-case-study-78919d98ece0
+- https://www.made-on-mars.com/blog/how-to-pwa-an-introduction-on-progressive-web-app-and-a-tutorial-to-create-one-with-full-features-push-notification-service-worker-offline-mode/
+- https://jakearchibald.com/2014/offline-cookbook/
+- https://youtu.be/cmGr0RszHc8
+- https://classroom.udacity.com/courses/ud899
+- https://developers.google.com/web/fundamentals/codelabs/push-notifications/
+- https://dzone.com/articles/web-push-notifications-1
+- https://medium.com/@firt/pwas-are-coming-to-ios-11-3-cupertino-we-have-a-problem-2ff49fd7d6ea
+- https://serviceworke.rs
+- https://ada.is/progressive-web-apps-talk/
+- https://web-push-book.gauntface.com
+- https://developers.google.com/web/ilt/pwa/introduction-to-push-notifications
+- https://developers.google.com/web/fundamentals/app-install-banners/?hl=en#deferring_or_cancelling_the_prompt
+- https://developers.google.com/web/tools/workbox/
+
+### PWA off-line support
+- https://medium.com/@addyosmani/progressive-web-apps-with-react-js-part-3-offline-support-and-network-resilience-c84db889162c
+- https://codelabs.developers.google.com/codelabs/your-first-pwapp/#1
+- https://googlechrome.github.io/samples/service-worker/custom-offline-page/index.html
+
+### Service Workers Scripts
+- https://github.com/mozilla/serviceworker-cookbook
+- https://github.com/GoogleChrome/samples/tree/gh-pages/service-worker
+- https://github.com/jakearchibald/isserviceworkerready/tree/gh-pages/demos
+- https://github.com/NitroBAY/meteor-service-worker
+- https://github.com/saurshaz/pwa-meteor/blob/master/client/serviceWorker.js
+
+### styled-components
+- https://youtu.be/qu4U7lwZTRI
+
+
+### React / Render Props
+- https://www.youtube.com/watch?v=BcVAq3YFiuc
+
+### Deployment / Heroku
+- https://originmaster.com/running-create-react-app-and-express-crae-on-heroku-c39a39fe7851
+
+### Testing on real devices
+- https://developers.google.com/web/tools/chrome-devtools/remote-debugging/?hl=en

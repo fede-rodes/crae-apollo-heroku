@@ -11,7 +11,8 @@
     "eject": "react-scripts eject",
     "lint": "eslint .",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "get-graphql-schema": "get-graphql-schema http://localhost:3001/graphql > schema.json --json && mv schema.json ./src/graphql/schema.json"
   },
   "dependencies": {
     "@material-ui/core": "^3.6.0",
@@ -20,10 +21,12 @@
     "apollo-client": "^2.4.7",
     "apollo-link-context": "^1.0.10",
     "apollo-link-http": "^1.5.7",
+    "apollo-link-schema": "^1.1.4",
     "error-handling-utils": "^1.1.0",
     "graphql": "^14.0.2",
     "graphql-anywhere": "^4.1.23",
     "graphql-tag": "^2.10.0",
+    "graphql-tools": "^4.0.3",
     "history": "^4.7.2",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
@@ -51,9 +54,11 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
+    "get-graphql-schema": "^2.1.2",
     "jest-dom": "^3.0.0",
     "react-testing-library": "^5.4.2",
-    "sw-precache": "^5.2.1"
+    "sw-precache": "^5.2.1",
+    "waait": "^1.0.2"
   },
   "browserslist": [
     ">0.2%",

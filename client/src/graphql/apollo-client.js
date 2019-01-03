@@ -14,10 +14,7 @@ const isNotProduction = NODE_ENV !== 'production';
 const uri = isNotProduction ? 'http://localhost:3001/graphql' : REACT_APP_GRAPHQL_URI;
 
 // Log
-console.log(
-  '\nNODE_ENV', NODE_ENV,
-  '\nGRAPHQL_URI', uri,
-);
+console.log('\nNODE_ENV', NODE_ENV, '\nGRAPHQL_URI', uri);
 
 const httpLink = createHttpLink({ uri });
 
