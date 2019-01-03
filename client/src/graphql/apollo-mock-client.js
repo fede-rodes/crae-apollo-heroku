@@ -65,9 +65,11 @@
  */
 import { ApolloClient } from 'apollo-client';
 import { SchemaLink } from 'apollo-link-schema';
-import { printSchema } from 'graphql/utilities/schemaPrinter';
-import { makeExecutableSchema, introspectSchema } from 'graphql-tools';
+// import { printSchema } from 'graphql/utilities/schemaPrinter';
+import { buildClientSchema } from 'graphql/utilities/buildClientSchema';
+import { makeExecutableSchema, introspectSchema, addResolveFunctionsToSchema } from 'graphql-tools';
 import { httpLink, cache } from './apollo-client';
+// import schema from './schema.json';
 
 const resolvers = {
   Mutation: {
@@ -75,31 +77,38 @@ const resolvers = {
   },
 };
 
-async function createMockClient() {
+// async function createMockClient() {
   // Query schema from server
-  const schemaJSON = await introspectSchema(httpLink);
+  // const schemaJSON = await introspectSchema(httpLink);
 
   // Stringify schema.json coming from the server
-  const typeDefs = printSchema(schemaJSON);
+  // const typeDefs = printSchema(schemaJSON);
+  // const executableSchema = buildClientSchema(schema);
+  const schema = buildClientSchema(require('./schema.json'));
+
+
+  addResolveFunctionsToSchema({ schema, resolvers });
 
   // Make a GraphQL schema with mocked resolvers
-  const executableSchema = makeExecutableSchema({
+  /* const executableSchema = makeExecutableSchema({
     typeDefs,
     resolvers,
     resolverValidationOptions: {
       requireResolversForResolveType: false,
     },
-  });
+  }); */
 
   const mockClient = new ApolloClient({
-    link: new SchemaLink({ schema: executableSchema }),
+    link: new SchemaLink({ schema }),
     cache,
   });
 
-  return mockClient;
-}
+  // return mockClient;
+// }
 
-export default createMockClient;
+export default mockClient;
+
+// export default createMockClient;
 
 /*
 import { ApolloClient } from 'apollo-client';

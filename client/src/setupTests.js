@@ -14,5 +14,3 @@ const localStorageMock = {
   clear: jest.fn(),
 };
 global.localStorage = localStorageMock;
-
-// jest.mock('./graphql/user/mutation/login');

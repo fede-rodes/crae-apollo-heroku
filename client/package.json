@@ -11,7 +11,8 @@
     "eject": "react-scripts eject",
     "lint": "eslint .",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "get-graphql-schema": "get-graphql-schema http://localhost:3001/graphql > schema.json --json && mv schema.json ./src/graphql/schema.json"
   },
   "dependencies": {
     "@material-ui/core": "^3.6.0",
@@ -53,6 +54,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
+    "get-graphql-schema": "^2.1.2",
     "jest-dom": "^3.0.0",
     "react-testing-library": "^5.4.2",
     "sw-precache": "^5.2.1",

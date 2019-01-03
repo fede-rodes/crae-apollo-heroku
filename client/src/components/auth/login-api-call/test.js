@@ -4,7 +4,8 @@ import { mount, shallow } from 'enzyme';
 import { ApolloProvider } from 'react-apollo';
 import { MockedProvider } from 'react-apollo/test-utils';
 import wait from 'waait';
-import createMockClient from '../../../graphql/apollo-mock-client';
+// import createMockClient from '../../../graphql/apollo-mock-client';
+import mockClient from '../../../graphql/apollo-mock-client';
 import loginMutation from '../../../graphql/user/mutation/login';
 import LoginApiCall from '.';
 
@@ -13,9 +14,13 @@ import LoginApiCall from '.';
 // jest.mock('../../../graphql/user/mutation/login');
 
 describe('LoginApiCall', () => {
-  it('renders without crashing', async () => {
+  // let mockClient;
+  // beforeEach(async () => {
+  //   mockClient = await createMockClient();
+  // });
+
+  it('renders without crashing', () => {
     const div = document.createElement('div');
-    const mockClient = await createMockClient();
 
     ReactDOM.render(
       <ApolloProvider client={mockClient}>
@@ -30,8 +35,6 @@ describe('LoginApiCall', () => {
   it('calls login mutation passing email and passcode', async () => {
     const handleLoginSuccess = jest.fn();
     const handleLoginError = jest.fn();
-
-    const mockClient = await createMockClient();
 
     const wrapper = mount(
       <ApolloProvider client={mockClient} addTypename={false}>
@@ -52,14 +55,15 @@ describe('LoginApiCall', () => {
       </ApolloProvider>,
     );
 
-    console.log(wrapper.debug());
-
     wrapper.find('button').simulate('click');
     await wait(0);
     // await new Promise(resolve => setTimeout(resolve));
     // wrapper.update();
 
     expect(handleLoginSuccess).toBeCalled();
+    expect(handleLoginSuccess).toBeCalledWith(
+      expect.objectContaining({ token: 'xyz123' }),
+    );
   });
 
 
