@@ -3,7 +3,8 @@ import { ThemeProvider } from 'styled-components';
 import { ApolloProvider } from 'react-apollo';
 import { configure, addDecorator } from '@storybook/react';
 import { MuiThemeProvider } from '@material-ui/core/styles';
-import createMockClient from '../src/graphql/apollo-mock-client';
+// import createMockClient from '../src/graphql/apollo-mock-client';
+import mockClient from '../src/graphql/apollo-mock-client';
 import scTheme from '../src/theme/sc';
 import muiTheme from '../src/theme/mui';
 
@@ -13,8 +14,8 @@ function loadStories() {
   req.keys().forEach(req);
 }
 
-async function configStorybook() {
-  const mockClient = await createMockClient();
+// async function configStorybook() {
+  // const mockClient = await createMockClient();
 
   addDecorator((story) => (
     <ThemeProvider theme={scTheme}>
@@ -27,9 +28,9 @@ async function configStorybook() {
   ));
 
   configure(loadStories, module);
-}
+// }
 
-configStorybook();
+// configStorybook();
 
 
 // import React from 'react';
