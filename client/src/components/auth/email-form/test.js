@@ -23,6 +23,7 @@ describe('EmailForm', () => {
     const handleClientError = jest.fn();
     const wrapper = shallow(<EmailForm onClientErrorHook={handleClientError} />);
 
+    // Sanity check
     expect(wrapper.find({ id: 'email' }).props().value).toBe('');
 
     wrapper.find('form').simulate('submit', { preventDefault: () => {} });
@@ -105,6 +106,9 @@ describe('EmailForm', () => {
     expect(wrapper.find({ id: 'email' }).props().value).toBe('');
 
     wrapper.find({ id: 'email' }).simulate('change', { target: { id: 'email', value: 'valid@email.com' } });
+
+    expect(wrapper.state().email).toBe('valid@email.com');
+
     wrapper.find('form').simulate('submit', { preventDefault: () => {} });
 
     expect(handleBefore).toBeCalled();
