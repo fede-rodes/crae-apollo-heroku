@@ -4,6 +4,7 @@ import { mount } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import HeaderTitle from '.';
 
+// TODO: why are we using mount instead of shallow?
 const renderTitle = path => mount(
   <MemoryRouter initialEntries={[path]}>
     <HeaderTitle />
