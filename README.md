@@ -6,16 +6,26 @@ This project is the result of putting together some really nice articles ([see](
 [https://crae-apollo-heroku.herokuapp.com/](https://crae-apollo-heroku.herokuapp.com/)
 
 This project includes the following libraries/functionality
-- Express
+- React 16 (Create React App)
 - Apollo 2
-- React 16
+- Express
+- Mongoose
 - Authentication: passwordless via JWT
 - ES6 syntax
-- material-ui
-- styled components
-- jest-enzyme
-- basscss
 - service workers
+
+Testing:
+- Apollo Client Mock
+- jest
+- enzyme
+- storybook
+- storyshots
+
+Styling:
+- material-ui
+- styled-components
+- storybook
+- basscss
 
 ## Step by step guide to get started with this boilerplate
 
