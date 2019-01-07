@@ -12,7 +12,7 @@ env:
   global:
     - CC_TEST_REPORTER_ID=baa0f13cfba0659a9712adf7e6bbf51dd47061804e20ec71156aea22417b8590
 before_script:
-  - cd client && echo "SKIP_PREFLIGHT_CHECK=true" > .env && echo "REACT_APP_VAPID_PUBLIC_KEY=xxx" > .env
+  - cd client && echo "SKIP_PREFLIGHT_CHECK=true\nREACT_APP_VAPID_PUBLIC_KEY=xxx" > .env
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
