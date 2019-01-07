@@ -1,0 +1,146 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Alert Alert error 1`] = `
+<div
+  className="sc-bdVaJa hpRNIi"
+  type="error"
+>
+  I'm the content
+</div>
+`;
+
+exports[`Storyshots Alert Alert no content 1`] = `null`;
+
+exports[`Storyshots Alert Alert success 1`] = `
+<div
+  className="sc-bdVaJa hYbELy"
+  type="success"
+>
+  I'm the content
+</div>
+`;
+
+exports[`Storyshots ButtonLink ButtonLink default 1`] = `
+<button
+  className="sc-bwzfXH kcEXvM"
+  type="button"
+>
+  I'm the content
+</button>
+`;
+
+exports[`Storyshots ButtonLink ButtonLink disabled 1`] = `
+<button
+  className="sc-bwzfXH gOKVPy"
+  disabled={true}
+  type="button"
+>
+  I'm the content
+</button>
+`;
+
+exports[`Storyshots ButtonLink ButtonLink no underline 1`] = `
+<button
+  className="sc-bwzfXH cfMBPB"
+  type="button"
+>
+  I'm the content
+</button>
+`;
+
+exports[`Storyshots ButtonLink ButtonLink no underline disabled 1`] = `
+<button
+  className="sc-bwzfXH gOKVPy"
+  disabled={true}
+  type="button"
+>
+  I'm the content
+</button>
+`;
+
+exports[`Storyshots Divider Divider 1`] = `
+<div
+  className="sc-htpNat eFAgQT"
+/>
+`;
+
+exports[`Storyshots Feedback Error 1`] = `
+<div
+  className=""
+>
+  <div
+    className="sc-bdVaJa hpRNIi"
+    type="error"
+  >
+    I'm an error msg
+  </div>
+</div>
+`;
+
+exports[`Storyshots Feedback Loading 1`] = `
+<div
+  className=""
+>
+  <div
+    className="center sc-bxivhb dhgYHr"
+  >
+    <div
+      className="inline-block sc-ifAKCX dlVqMw"
+    />
+    <div
+      className="inline-block sc-ifAKCX gqsWgi"
+    />
+    <div
+      className="inline-block sc-ifAKCX hynpqH"
+    />
+  </div>
+</div>
+`;
+
+exports[`Storyshots Feedback Success 1`] = `
+<div
+  className=""
+>
+  <div
+    className="sc-bdVaJa hYbELy"
+    type="success"
+  >
+    I'm a success msg
+  </div>
+</div>
+`;
+
+exports[`Storyshots Loading Loading 1`] = `
+<div
+  className="flex justify-center items-center sc-bxivhb dhgYHr"
+>
+  <div
+    className="inline-block sc-ifAKCX dlVqMw"
+  />
+  <div
+    className="inline-block sc-ifAKCX gqsWgi"
+  />
+  <div
+    className="inline-block sc-ifAKCX hynpqH"
+  />
+</div>
+`;
+
+exports[`Storyshots Subtitle Subtitle 1`] = `
+<p
+  className="center"
+>
+  <span>
+    I'm the Subtitle 
+  </span>
+   
+</p>
+`;
+
+exports[`Storyshots Title Title 1`] = `
+<h1
+  className="center"
+>
+  I'm the Title
+</h1>
+`;

@@ -43,6 +43,7 @@
     "@babel/core": "^7.2.0",
     "@storybook/addon-actions": "^4.0.12",
     "@storybook/addon-links": "^4.0.12",
+    "@storybook/addon-storyshots": "^4.1.4",
     "@storybook/addons": "^4.0.12",
     "@storybook/react": "^4.0.12",
     "babel-loader": "^8.0.4",
@@ -57,6 +58,7 @@
     "get-graphql-schema": "^2.1.2",
     "jest-dom": "^3.0.0",
     "react-testing-library": "^5.4.2",
+    "require-context.macro": "^1.0.4",
     "sw-precache": "^5.2.1",
     "waait": "^1.0.2"
   },
