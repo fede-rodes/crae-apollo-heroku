@@ -1,16 +1,21 @@
 import React from 'react';
-import { Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { ScrollToTop, LoggedInRoute } from '../components/route-wrappers';
 import AuthPage from '../pages/auth-page';
 import AuthRoutes from './auth';
 
 /**
- * @summary Renders log in screen to all unauthorized users.
+ * @summary Entry point for logged in routes.
  */
 
 const Routes = () => (
   <ScrollToTop>
     <Switch>
+      <Route
+        path="/auth/facebook"
+        exact
+        component={() => (<div>Hola</div>)}
+      />
       <LoggedInRoute
         path="/"
         component={AuthRoutes} // in case user IS logged in, display this component
