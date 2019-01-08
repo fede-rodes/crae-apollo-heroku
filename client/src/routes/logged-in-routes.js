@@ -4,14 +4,14 @@ import HomePage from '../pages/home-page';
 import NotFoundPage from '../pages/not-found-page';
 
 /**
- * @summary List of all authenticated routes.
+ * @summary List of all logged in routes.
  */
 
-const AuthRoutes = () => (
+const LoggedInRoutes = () => (
   <Switch>
     <Route path="/" exact component={HomePage} />
     <Route component={NotFoundPage} />
   </Switch>
 );
 
-export default AuthRoutes;
+export default LoggedInRoutes;

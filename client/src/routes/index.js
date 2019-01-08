@@ -1,8 +1,13 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import { ScrollToTop, LoggedInRoute } from '../components/route-wrappers';
+import { Switch } from 'react-router-dom';
+import {
+  ScrollToTop,
+  LoggedOutRoute,
+  LoggedInRoute,
+} from '../components/route-wrappers';
 import AuthPage from '../pages/auth-page';
-import AuthRoutes from './auth';
+import AuthFacebookRoutes from './auth-facebook-routes';
+import LoggedInRoutes from './logged-in-routes';
 
 /**
  * @summary Entry point for logged in routes.
@@ -11,14 +16,14 @@ import AuthRoutes from './auth';
 const Routes = () => (
   <ScrollToTop>
     <Switch>
-      <Route
+      <LoggedOutRoute
         path="/auth/facebook"
-        exact
-        component={() => (<div>Hola</div>)}
+        component={AuthFacebookRoutes}
+        redirectTo="/" // in case user IS logged in, redirect to home page
       />
       <LoggedInRoute
         path="/"
-        component={AuthRoutes} // in case user IS logged in, display this component
+        component={LoggedInRoutes} // in case user IS logged in, display this component
         authComponent={AuthPage} // in case user is NOT logged in, display the auth component
       />
     </Switch>

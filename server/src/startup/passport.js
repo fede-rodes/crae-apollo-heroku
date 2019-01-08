@@ -73,12 +73,14 @@ module.exports = (app) => {
     //   token: req.token,
     // });
     // TODO: replace port with app.get('port') in production OR remove domain and port
-    res.status(200).redirect(`http://localhost:3000/auth/facebook/success?t=${req.token}`);
+    res.status(200).redirect(`http://localhost:${app.get('port')}/auth/facebook/success/${req.token}`);
     // res.redirect('/');
   };
 
   app.get('/auth/facebook/callback',
-    passport.authenticate('facebook', { session: false, failureRedirect: '/login' }),
-    serialize, genToken, respond,
+    passport.authenticate('facebook', { session: false, failureRedirect: '/auth/facebook/fail' }),
+    serialize,
+    genToken,
+    respond,
   );
 };

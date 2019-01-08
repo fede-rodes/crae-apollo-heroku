@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import { propType } from 'graphql-anywhere';
 import { withUser } from '../../../global-data-provider';
 import userFragment from '../../../graphql/user/fragment/user';
@@ -9,14 +9,14 @@ import userFragment from '../../../graphql/user/fragment/user';
 // COMPONENT:
 //------------------------------------------------------------------------------
 /**
- * @summary Makes sure that the user that is trying to access the wrapped route
- * is authenticated. If not, the LoggedInRoute component renders the provided
- * the authComponent on top of the current route.
+ * @summary Makes sure that the user that is trying to access the wraped route
+ * is not authenticated. If not, the LoggedOutRoute component redirectsthe user
+ * to the given route.
  */
-const LoggedInRoute = ({
+const LoggedOutRoute = ({
   curUser,
   component: Component,
-  authComponent: AuthComponent,
+  redirectTo,
   ...rest
 }) => (
   <Route
@@ -24,25 +24,25 @@ const LoggedInRoute = ({
     render={(ownProps) => {
       const childProps = { ...rest, ...ownProps };
 
-      // If user is NOT logged in, resolve
-      if (!curUser) {
-        return <AuthComponent {...childProps} />;
+      // If user IS logged in, redirect
+      if (curUser) {
+        return <Redirect to={redirectTo} />;
       }
 
-      // Otherwise, render the requested component
+      // Otherwise, render requested component
       return <Component {...childProps} />;
     }}
   />
 );
 
-LoggedInRoute.propTypes = {
+LoggedOutRoute.propTypes = {
   curUser: propType(userFragment),
   component: PropTypes.func.isRequired,
-  authComponent: PropTypes.func.isRequired,
+  redirectTo: PropTypes.string.isRequired,
 };
 
-LoggedInRoute.defaultProps = {
+LoggedOutRoute.defaultProps = {
   curUser: null,
 };
 
-export default withUser(LoggedInRoute);
+export default withUser(LoggedOutRoute);
