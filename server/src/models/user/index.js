@@ -5,6 +5,7 @@ const { isEmail } = require('validator');
 const Joi = require('joi');
 const jwt = require('jsonwebtoken');
 const moment = require('moment');
+const extend = require('lodash/extend');
 
 //------------------------------------------------------------------------------
 // CONSTANTS:
@@ -30,6 +31,11 @@ const schema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  facebookId: {
+    type: String,
+    unique: true,
+    required: [true, 'Facebook ID is required'],
+  },
   email: {
     type: String,
     trim: true,
@@ -37,7 +43,7 @@ const schema = mongoose.Schema({
     minlength: MIN_STRING_LENGTH,
     maxlength: MAX_STRING_LENGTH,
     unique: true,
-    required: [true, 'Email address is required'],
+    // required: [true, 'Email address is required'],
     validate: [isEmail, 'Please fill a valid email address'],
   },
   emailVerified: {
@@ -113,9 +119,40 @@ schema.statics.findByEmail = function ({ email }) {
   return this.findOne({ email });
 };
 //------------------------------------------------------------------------------
+// TODO: change name to 'create'
 schema.statics.createUser = async function ({ email }) {
   const newUser = new this({ email });
   await newUser.save();
+  return newUser;
+};
+//------------------------------------------------------------------------------
+schema.statics.findOrCreate = async function ({ profile }) {
+  console.log('FIND OR CREATE', profile);
+  const { id: facebookId, emails } = profile;
+
+  // In case user already exists, return it
+  const user = await this.findOne({ facebookId });
+  if (user) {
+    console.log('FB ID EXISTS', user);
+    return user;
+  }
+
+  // Otherwise, create a new record
+  const record = {
+    facebookId,
+    // TODO: add remaining fields and also update DB schema
+  };
+
+  if (emails && emails.length > 0) {
+    extend(record, {
+      email: emails[0].value,
+      emailVerified: true,
+    });
+  }
+
+  const newUser = new this(record);
+  await newUser.save();
+  console.log('FB ID DOES NOT EXIST', newUser);
   return newUser;
 };
 //------------------------------------------------------------------------------
