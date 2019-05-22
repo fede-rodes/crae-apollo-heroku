@@ -56,7 +56,7 @@
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
     "get-graphql-schema": "^2.1.2",
-    "jest-dom": "^3.0.0",
+    "jest-dom": "^3.3.0",
     "react-testing-library": "^5.4.2",
     "require-context.macro": "^1.0.4",
     "sw-precache": "^5.2.1",
