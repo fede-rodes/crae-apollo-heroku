@@ -24,7 +24,7 @@
     "apollo-link-schema": "^1.1.4",
     "error-handling-utils": "^1.1.0",
     "graphql": "^14.0.2",
-    "graphql-anywhere": "^4.1.23",
+    "graphql-anywhere": "^4.2.4",
     "graphql-tag": "^2.10.0",
     "graphql-tools": "^4.0.3",
     "history": "^4.7.2",
