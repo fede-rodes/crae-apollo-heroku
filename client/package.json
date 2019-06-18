@@ -18,7 +18,7 @@
     "@material-ui/core": "^3.6.0",
     "@material-ui/icons": "^3.0.1",
     "apollo-cache-inmemory": "^1.6.2",
-    "apollo-client": "^2.4.7",
+    "apollo-client": "^2.6.3",
     "apollo-link-context": "^1.0.10",
     "apollo-link-http": "^1.5.7",
     "apollo-link-schema": "^1.1.4",
