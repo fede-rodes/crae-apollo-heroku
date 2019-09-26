@@ -24,7 +24,7 @@
     "graphql-tools": "^4.0.3",
     "helmet": "^3.15.0",
     "joi": "^14.3.0",
-    "joi-objectid": "^2.0.0",
+    "joi-objectid": "^3.0.1",
     "jsonwebtoken": "^8.4.0",
     "lodash": "^4.17.11",
     "merge-graphql-schemas": "^1.5.8",
