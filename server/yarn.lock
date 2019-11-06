@@ -943,6 +943,11 @@ bson@^1.1.0, bson@~1.1.0:
   resolved "https://registry.yarnpkg.com/bson/-/bson-1.1.0.tgz#bee57d1fb6a87713471af4e32bcae36de814b5b0"
   integrity sha512-9Aeai9TacfNtWXOYarkFJRW2CWo+dRon+fuLZYJmvLV3+MiUp0bEI6IAZfXEIg7/Pl/7IWlLaDnhzTsD81etQA==
 
+bson@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/bson/-/bson-1.1.1.tgz#4330f5e99104c4e751e7351859e2d408279f2f13"
+  integrity sha512-jCGVYLoYMHDkOsbwJZBCqwMHyH4c+wzgI9hG7Z6SZJRXWr+x58pdIbm2i9a/jFGCkRJqRUr8eoI7lDWa0hTkxg==
+
 buffer-equal-constant-time@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/buffer-equal-constant-time/-/buffer-equal-constant-time-1.0.1.tgz#f8e71132f7ffe6e01a5c9697a4c6f3e48d5cc819"
@@ -4076,13 +4081,24 @@ mongodb-core@3.1.9:
   optionalDependencies:
     saslprep "^1.0.0"
 
-mongodb@3.1.10, mongodb@^3.1.0:
+mongodb@3.1.10:
   version "3.1.10"
   resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.1.10.tgz#45ad9b74ea376f4122d0881b75e5489b9e504ed7"
   integrity sha512-Uml42GeFxhTGQVml1XQ4cD0o/rp7J2ROy0fdYUcVitoE7vFqEhKH4TYVqRDpQr/bXtCJVxJdNQC1ntRxNREkPQ==
   dependencies:
     mongodb-core "3.1.9"
     safe-buffer "^5.1.2"
+
+mongodb@^3.3.3:
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.3.3.tgz#509cad2225a1c56c65a331ed73a0d5d4ed5cbe67"
+  integrity sha512-MdRnoOjstmnrKJsK8PY0PjP6fyF/SBS4R8coxmhsfEU7tQ46/J6j+aSHF2n4c2/H8B+Hc/Klbfp8vggZfI0mmA==
+  dependencies:
+    bson "^1.1.1"
+    require_optional "^1.0.1"
+    safe-buffer "^5.1.2"
+  optionalDependencies:
+    saslprep "^1.0.0"
 
 mongoose-legacy-pluralize@1.0.2:
   version "1.0.2"
@@ -6060,14 +6076,15 @@ widest-line@^2.0.0:
   dependencies:
     string-width "^2.1.1"
 
-winston-mongodb@^4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/winston-mongodb/-/winston-mongodb-4.0.3.tgz#a0cf9f1291dc2f7b4d2f7dcaad6c5222ff287085"
-  integrity sha512-fc0XK8qw3tsnC09HSUzqqijmxI4S/XWfC1iBv4UulsJIn8RWZEXOzAmvk7k1Nyt8g0YewhTjwi8+AzN1ZbFIlQ==
+winston-mongodb@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/winston-mongodb/-/winston-mongodb-5.0.1.tgz#c2819e9e39d4c601b43de92f10a6a791f957c686"
+  integrity sha512-ZLwAqh8DO9JrZYOjhbjvRKZU7v+X3qgPEp75uEVvYZPsV6LxgcR0xWlleCpc5hN+AakEMo7klO/WZoUhsmeDqw==
   dependencies:
-    mongodb "^3.1.0"
+    mongodb "^3.3.3"
+    winston-transport "^4.3.0"
 
-winston-transport@^4.2.0:
+winston-transport@^4.2.0, winston-transport@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/winston-transport/-/winston-transport-4.3.0.tgz#df68c0c202482c448d9b47313c07304c2d7c2c66"
   integrity sha512-B2wPuwUi3vhzn/51Uukcao4dIduEiPOcOt9HJ3QeaXgkJ5Z7UwpBzxS4ZGNHtrxrUvTwemsQiSys0ihOf8Mp1A==
