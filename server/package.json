@@ -13,7 +13,7 @@
   "dependencies": {
     "apollo-server-express": "^2.2.3",
     "babel-cli": "^6.26.0",
-    "bcrypt": "^3.0.2",
+    "bcrypt": "^4.0.0",
     "casual": "^1.5.19",
     "cors": "^2.8.5",
     "dotenv": "^6.1.0",
