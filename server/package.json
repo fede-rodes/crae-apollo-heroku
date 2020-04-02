@@ -20,7 +20,7 @@
     "express": "^4.16.4",
     "express-async-errors": "^3.1.1",
     "express-jwt": "^5.3.1",
-    "graphql": "^14.0.2",
+    "graphql": "^15.0.0",
     "graphql-tools": "^4.0.3",
     "helmet": "^3.15.0",
     "joi": "^14.3.0",
