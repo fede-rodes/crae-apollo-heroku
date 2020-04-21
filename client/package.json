@@ -47,7 +47,7 @@
     "@storybook/addons": "^4.0.12",
     "@storybook/react": "^4.0.12",
     "babel-loader": "^8.0.4",
-    "enzyme": "^3.7.0",
+    "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "enzyme-to-json": "^3.3.4",
     "eslint": "^5.9.0",
