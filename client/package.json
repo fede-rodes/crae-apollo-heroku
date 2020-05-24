@@ -43,7 +43,7 @@
     "@babel/core": "^7.2.0",
     "@storybook/addon-actions": "^5.3.19",
     "@storybook/addon-links": "^5.3.19",
-    "@storybook/addon-storyshots": "^4.1.4",
+    "@storybook/addon-storyshots": "^5.3.19",
     "@storybook/addons": "^4.0.12",
     "@storybook/react": "^4.0.12",
     "babel-loader": "^8.0.4",
