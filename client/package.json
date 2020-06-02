@@ -26,7 +26,7 @@
     "graphql": "^14.0.2",
     "graphql-anywhere": "^4.1.23",
     "graphql-tag": "^2.10.0",
-    "graphql-tools": "^4.0.3",
+    "graphql-tools": "^6.0.6",
     "history": "^4.7.2",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
